@@ -34,10 +34,22 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #fc4103;
-        }
+  display: flex;
+  align-items: center;
+  margin-right: 100px;
+}
+
+.logo img {
+  height: 40px; /* adjust to your logo’s natural size */
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
 
         .nav-links {
             display: flex;
@@ -606,7 +618,9 @@
 </head>
 <body>
     <nav class="nav">
-        <div class="logo"></div>
+        <div class="logo">
+            <img src="./RKM Branding Logotype.svg" alt="" srcset="">
+        </div>
         <div class="nav-links">
             <a href="#services">Services</a>
             <a href="#process">Process</a>
