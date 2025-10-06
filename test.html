@@ -1,10 +1,11 @@
-///sidou frh claud
+<!-- ///sidou frh claud -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Future-Driven Architecture</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -21,10 +22,14 @@
 
         .nav {
             position: fixed;
+            border: 1px solid #fc4103;
+            border-radius: 80px;
+            width: auto;
             top: 0;
-            left: 0;
-            right: 0;
-            padding: 2rem 4rem;
+            margin-top: 10px;
+            left: 150px;
+            right: 150px;
+            padding: 0.5rem 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -94,7 +99,7 @@
         }
 
         .scroll-text {
-            font-size: clamp(2rem, 8vw, 6rem);
+            font-size: clamp(2rem, 3vw, 6rem);
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 2rem;
@@ -319,13 +324,6 @@
             box-shadow: 0 5px 60px #fc4103;
         }
 
-        .footer {
-            padding: 4rem;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #666;
-        }
-
         .overlay-cards-section {
             min-height: 200vh;
             position: relative;
@@ -519,6 +517,25 @@
             line-height: 1.8;
         }
 
+        .full-width-image {
+  width: 100vw; /* take full viewport width */
+  height: 50vh; /* or use a smaller height like 80vh if you prefer */
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.full-width-image img {
+  width: 80%;
+  object-fit: cover; /* ensures image fills section without distortion */
+  display: block;
+  margin: auto;
+}
+
+
         .footer {
             padding: 4rem;
             text-align: center;
@@ -547,7 +564,7 @@
         }
 
         @keyframes marquee {
-            0% { transform: translateX(0); }
+            0% { transform: translateX(0)  ; }
             100% { transform: translateX(-50%); }
         }
 
@@ -810,6 +827,11 @@
         </div>
     </section>
 
+    <section data-aos="fade-up" data-aos-duration="3000" class="full-width-image">
+        <img src="./RKM Signature Colored.svg" alt="" srcset="">
+    </section>
+
+
     <section class="cta-section" id="contact">
         <h2 class="cta-title">Got a project in mind?</h2>
         <p class="section-subtitle">Let's revolutionize architecture through technology together.</p>
@@ -821,6 +843,10 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+  AOS.init();
+</script>
     <script>
         // Three.js Scene Setup
         const container = document.getElementById('canvas-container');
