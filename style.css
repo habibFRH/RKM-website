@@ -330,7 +330,7 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    margin-bottom: 115px;
+    margin-bottom: 15px;
 }
 
 .scroll-text {
@@ -379,7 +379,7 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
 /* Hero Image Animation */
 .hero-image {
     position: absolute;
-    bottom: 50px;
+    bottom: 0px;
     left: 0;
     width: 100vw;
     height: auto;
@@ -2052,6 +2052,19 @@ canvas.service-fill-layer {
         margin-bottom: 160px;
     }
 
+    .stats-flipper {
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 2rem;
+        width: 100%;
+    }
+
+    .stat-flip-item {
+        text-align: center;
+        white-space: normal;
+        line-height: 1.2;
+    }
+
     .scroll-text {
         font-size: clamp(1.8rem, 4vw, 4rem);
         text-align: center;
@@ -3205,4 +3218,87 @@ body.is-loading {
     height: 0;
     background: var(--accent);
     z-index: 2;
+}
+
+/* HERO STATS FLIPPER */
+.stats-flipper {
+    height: 2rem;
+    overflow: hidden;
+    position: relative;
+    margin-top: -0.5rem;
+    margin-bottom: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-family: 'iA Writer Duospace', monospace;
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0;
+}
+
+.stat-flip-item {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    white-space: nowrap;
+    width: 100%;
+}
+
+.stat-flip-item.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stat-flip-item.exit {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+/* CUSTOM CURSOR */
+.custom-cursor-dot,
+.custom-cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    background-color: var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.custom-cursor-dot {
+    width: 6px;
+    height: 6px;
+}
+
+.custom-cursor-outline {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid var(--accent);
+}
+
+@media (max-width: 1024px) {
+    .custom-cursor-dot,
+    .custom-cursor-outline {
+        display: none;
+    }
+}
+
+body:hover .custom-cursor-dot,
+body:hover .custom-cursor-outline {
+    opacity: 1;
+}
+
+/* Hide default cursor on desktop */
+@media (min-width: 1025px) {
+    body, a, button, .cta-btn, .nav-links a {
+        cursor: none !important;
+    }
 }

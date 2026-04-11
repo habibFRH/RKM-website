@@ -1,12 +1,49 @@
-  // ===== INTERACTIVE SHAPED BACKGROUND FOR HERO =====
         const canvasContainer = document.getElementById('canvas-container');
-        
+        const cursorDot = document.querySelector('.custom-cursor-dot');
+        const cursorOutline = document.querySelector('.custom-cursor-outline');
+
         document.addEventListener('mousemove', (e) => {
             const x = (e.clientX / window.innerWidth) * 100;
             const y = (e.clientY / window.innerHeight) * 100;
-            canvasContainer.style.setProperty('--mouse-x', x + '%');
-            canvasContainer.style.setProperty('--mouse-y', y + '%');
+            if (canvasContainer) {
+                canvasContainer.style.setProperty('--mouse-x', x + '%');
+                canvasContainer.style.setProperty('--mouse-y', y + '%');
+            }
+
+            // Custom cursor move
+            if (cursorDot && cursorOutline) {
+                gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0 });
+                gsap.to(cursorOutline, { x: e.clientX, y: e.clientY, duration: 0.15 });
+            }
         });
+
+        // Magnetic and hover effects for links & buttons
+        document.querySelectorAll('a, button, .rkms-slider, .rkm-stack-section').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                if (cursorOutline) gsap.to(cursorOutline, { scale: 1.5, duration: 0.3 });
+            });
+            el.addEventListener('mouseleave', () => {
+                if (cursorOutline) gsap.to(cursorOutline, { scale: 1, duration: 0.3 });
+            });
+        });
+
+        const ctaBtn = document.querySelector('.hero .cta-btn');
+        if (ctaBtn) {
+            ctaBtn.addEventListener('mousemove', (e) => {
+                const rect = ctaBtn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(ctaBtn, {
+                    x: x * 0.35,
+                    y: y * 0.35,
+                    duration: 0.4,
+                    ease: "power2.out"
+                });
+            });
+            ctaBtn.addEventListener('mouseleave', () => {
+                gsap.to(ctaBtn, { x: 0, y: 0, duration: 0.4, ease: "power2.out" });
+            });
+        }
 
         // ===== THREE.JS SHAPES CODE - COMMENTED OUT FOR REMAKE =====
         /*
@@ -107,11 +144,13 @@ function updateCardOverlay() {
 window.addEventListener('scroll', updateCardOverlay);
 updateCardOverlay(); // Initial call
 
-// Handle window resize
+// Handle window resize for Three.js (if it's active)
 window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    if (typeof camera !== 'undefined' && typeof renderer !== 'undefined') {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
 });
 
 // Smooth scroll animations
@@ -545,6 +584,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     duration: 1.2,
                     ease: "power4.inOut"
                 }, "split")
+                .to(".loader-split-line.left", {
+                    x: "-50vw",
+                    duration: 1.2,
+                    ease: "power4.inOut"
+                }, "split")
+                .to(".loader-split-line.right", {
+                    x: "50vw",
+                    duration: 1.2,
+                    ease: "power4.inOut"
+                }, "split")
                 .to(".loader-split-line", {
                     opacity: 0,
                     duration: 0.3
@@ -571,9 +620,14 @@ document.addEventListener("DOMContentLoaded", () => {
             y: 0,
             opacity: 1,
             duration: 0.8,
-            stagger: 0.05,
+            stagger: 0.02,
             ease: "power4.out"
         }, "-=1.2")
+        .fromTo(".stats-flipper", 
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" }, 
+            "-=1.4"
+        )
         .fromTo(".nav", 
             { y: -20, opacity: 0 },
             { y: 0, opacity: 1, duration: 0.8 }, 
@@ -834,3 +888,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Initialize AOS
 AOS.init();
+
+// ===== HERO STATS FLIPPER =====
+function initStatsFlipper() {
+    const items = document.querySelectorAll('.stat-flip-item');
+    if (items.length === 0) return;
+    
+    let currentIndex = 0;
+    
+    setInterval(() => {
+        const current = items[currentIndex];
+        if (current) {
+            current.classList.remove('active');
+            current.classList.add('exit');
+        }
+        
+        currentIndex = (currentIndex + 1) % items.length;
+        
+        const next = items[currentIndex];
+        if (next) {
+            next.classList.remove('exit');
+            next.classList.add('active');
+        }
+        
+        setTimeout(() => {
+            if (current) {
+                current.classList.remove('exit');
+            }
+        }, 800);
+    }, 4000);
+}
+
+// Initialize when window loads or immediately
+initStatsFlipper();

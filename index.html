@@ -70,7 +70,8 @@
                 </svg>
             </div>
         </div>
-        <div class="loader-split-line"></div>
+        <div class="loader-split-line left"></div>
+        <div class="loader-split-line right"></div>
         <div class="loader-panel left"></div>
         <div class="loader-panel right"></div>
     </div>
@@ -108,6 +109,11 @@
         <div id="canvas-container"></div>
         <div class="hero-content">
             <h1 class="scroll-text">Your BIM Team.<br>Architect-Led.</h1>
+            <div class="stats-flipper">
+                <div class="stat-flip-item active">5+ years delivering internationally</div>
+                <div class="stat-flip-item">20 architects, engineers & BIM professionals</div>
+                <div class="stat-flip-item">0% client churn — no one has ever left</div>
+            </div>
             <p class="hero-description" id="hero-subline">Production capacity when you need it. Architectural intelligence you didn't expect. We embed in your workflow and deliver like we're part of your office.</p>
             <div class="hero-cta-positioner">
                 <a href="#contact" class="cta-btn">Book a Discovery Call <span>→</span></a>
@@ -115,22 +121,6 @@
         </div>
         <!-- Hero Image -->
         <img class="hero-image" src="./assets/bg.png" alt="BIM Architecture" />
-        <!-- KEY STATS BAR -->
-        <div class="stats-bar">
-            <div class="stats-container">
-                <div class="stat-item">
-                    <span class="stat-text">5+ years delivering internationally</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-text">20 architects, engineers & BIM professionals</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-text">0% client churn — no one has ever left</span>
-                </div>
-            </div>
-        </div>
     </section>
 
     <section class="rkms-slider">
@@ -713,7 +703,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GTBV8d3/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://unpkg.com/split-type"></script>
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor-dot"></div>
+    <div class="custom-cursor-outline"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="./script.js"></script>
