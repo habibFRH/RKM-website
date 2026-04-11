@@ -128,7 +128,7 @@ body[data-theme="light"] {
     width: auto;
     object-fit: contain;
     transition: transform 0.3s ease;
-    cursor: pointer;
+    cursor: none;
 }
 
 .logo img:hover {
@@ -165,7 +165,7 @@ body[data-theme="light"] {
 .hamburger {
     display: none;
     flex-direction: column;
-    cursor: pointer;
+    cursor: none;
     gap: 5px;
     z-index: 1001;
 }
@@ -213,7 +213,7 @@ body[data-theme="light"] {
     color: var(--text);
     border-radius: 0px;
     padding: 0.35rem 0.7rem;
-    cursor: pointer;
+    cursor: none;
     margin-left: 1rem;
 }
 
@@ -500,7 +500,7 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
     justify-content: center;
     height: 120px;
     transition: all 0.3s;
-    cursor: pointer;
+    cursor: none;
 }
 
 .client-logo:hover {
@@ -523,7 +523,7 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
     border-radius: 0px;
     padding: 3rem;
     transition: all 0.4s;
-    cursor: pointer;
+    cursor: none;
     position: relative;
     overflow: hidden;
 }
@@ -2889,7 +2889,7 @@ canvas.service-fill-layer {
     position: relative;
     background: var(--bg);
     overflow: hidden;
-    cursor: pointer;
+    cursor: none;
     border-bottom: 1px solid var(--border);
 }
 
@@ -2991,7 +2991,7 @@ canvas.service-fill-layer {
     height: 100vh;
     overflow: hidden;
     background: var(--bg);
-    cursor: pointer;
+    cursor: none;
     border-top: 1px solid var(--border);
 }
 
