@@ -4,958 +4,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RKM</title>
+    <title>RKM studio</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Local font faces */
-        @font-face {
-            font-family: 'Instrument Sans';
-            src: url('assets/InstrumentSans-VariableFont_wdth,wght.ttf') format('truetype');
-            font-weight: 100 900;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Instrument Sans';
-            src: url('assets/InstrumentSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
-            font-weight: 100 900;
-            font-style: italic;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'iA Writer Duospace';
-            src: url('assets/iAWriterDuospace-Regular.otf') format('opentype');
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'iA Writer Duospace';
-            src: url('assets/iAWriterDuospace-RegularItalic.otf') format('opentype');
-            font-weight: 400;
-            font-style: italic;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'iA Writer Duospace';
-            src: url('assets/iAWriterDuospace-Bold.otf') format('opentype');
-            font-weight: 700;
-            font-style: normal;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'iA Writer Duospace';
-            src: url('assets/iAWriterDuospace-BoldItalic.otf') format('opentype');
-            font-weight: 700;
-            font-style: italic;
-            font-display: swap;
-        }
-
-        :root {
-            --bg: #0a0a0a;
-            --text: #ffffff;
-            --muted: #aaaaaa;
-            --panel: rgba(10, 10, 10, 0.8);
-            --border: rgba(255, 255, 255, 0.1);
-            --accent: #fc4103;
-            --card-grad-1: linear-gradient(135deg, #fc41033c 0%, #fc410318 100%);
-            --panel-blur: 10px;
-            --overlaid-cards: black;
-        }
-
-        body {
-            font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-        }
-
-        /* Use iA Writer Duospace for paragraphs */
-        p {
-            font-family: 'iA Writer Duospace', 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-
-        /* Light theme overrides */
-        body[data-theme="light"] {
-            --bg: #ffffff;
-            --text: #0a0a0a;
-            --muted: black;
-            --panel: rgba(255, 255, 255, 0.9);
-            --border: rgba(0, 0, 0, 0.1);
-            --card-grad-1: linear-gradient(135deg, #fc41030d 0%, #fc410306 100%);
-            --overlaid-cards: white;
-        }
-
-        .nav {
-            position: fixed;
-            border: 1px solid var(--accent);
-            border-radius: 80px;
-            width: auto;
-            top: 0;
-            margin-top: 10px;
-            left: 150px;
-            right: 150px;
-            padding: 0.5rem 4rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: var(--panel);
-            backdrop-filter: blur(var(--panel-blur));
-        }
-
-        .logo {
-  display: flex;
-  align-items: center;
-  margin-right: 100px;
-}
-
-.logo img {
-  height: 40px; /* adjust to your logo’s natural size */
-  width: auto;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.logo img:hover {
-  transform: scale(1.05);
-}
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-                .mobile-menu.active {
-            right: 0;
-        }
-
-         .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            z-index: 1001;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--text);
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            height: 100vh;
-            background: var(--panel);
-            backdrop-filter: blur(20px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 3rem;
-            transition: right 0.4s ease;
-            z-index: 999;
-        }
-
-        .theme-toggle {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text);
-            border-radius: 20px;
-            padding: 0.35rem 0.7rem;
-            cursor: pointer;
-            margin-left: 1rem;
-        }
-        .theme-toggle:hover {
-            border-color: var(--accent);
-        }
-
-        .mobile-menu a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 2rem;
-            font-weight: 700;
-            transition: all 0.3s;
-        }
-
-        .mobile-menu a:hover {
-            color: var(--accent);
-            transform: translateX(10px);
-        }
-
-        .theme-toggle i {
-    color: #000000; /* Black color */
-    font-size: 1.2rem; /* Adjust size if needed */
-}
-
-/* Ensure it adapts to theme text color if you want dynamic black/white */
-body[data-theme="light"] .theme-toggle i {
-    color: #000000; /* Black in light mode */
-}
-body:not([data-theme="light"]) .theme-toggle i {
-    color: #ffffff; /* White in dark mode, or keep black if preferred */
-}
-
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        #canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 1400px;
-            padding: 0 2rem;
-        }
-
-        .scroll-text {
-            font-size: clamp(2rem, 3vw, 6rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, #f3a388  0%, #fc4103 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: textGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes textGlow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.2); }
-        }
-
-        .hero-description {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            color: var(--muted);
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .section {
-            padding: 8rem 4rem;
-            position: relative;
-        }
-
-        .section-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .section-subtitle {
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            color: #aaa;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto 5rem;
-            line-height: 1.6;
-        }
-
-        .clients-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem 0;
-        }
-
-        .client-logo {
-            background: rgba(0, 0, 0, 0.03);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 120px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .client-logo:hover {
-            background: rgba(255, 0, 13, 0.05);
-            border-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .service-card {
-            background: var(--card-grad-1);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 3rem;
-            transition: all 0.4s;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #fc41033c 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-        }
-
-        .service-card:hover::before {
-            opacity: 1;
-        }
-
-        .service-number {
-            font-size: 3rem;
-            font-weight: 900;
-            color: #fc4103;
-            margin-bottom: 1rem;
-        }
-
-        .service-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .service-description {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        .process-timeline {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .timeline-item {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-            align-items: center;
-        }
-
-        .timeline-number {
-            font-size: 8rem;
-            font-weight: 900;
-            color: transparent;
-            -webkit-text-stroke: 2px #fc4103;
-            line-height: 1;
-        }
-
-        .timeline-content h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .timeline-content p {
-            color: #aaa;
-            line-height: 1.6;
-        }
-
-        .culture-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 4rem auto 0;
-        }
-
-        .culture-card {
-            background: rgba(255, 0, 13, 0.05);
-            border: 1px solid red;
-            border-radius: 16px;
-            padding: 2.5rem;
-            transition: all 0.3s;
-        }
-
-        .culture-card:hover {
-            background: rgba(255, 0, 13, 0.1);
-            transform: scale(1.05);
-        }
-
-        .culture-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #fc4103;
-        }
-
-        .culture-card p {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        .cta-section {
-            text-align: center;
-            padding: 10rem 4rem;
-            background: linear-gradient(135deg, var() 0%, transparent 100%);
-        }
-
-        .cta-title {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 900;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1.5rem 4rem;
-            background: #fc4103;
-            color: #0a0a0a;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border-radius: 50px;
-            transition: all 0.3s;
-            margin-top: 2rem;
-        }
-
-        .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 60px #fc4103;
-        }
-
-        .overlay-cards-section {
-            min-height: 200vh;
-            position: relative;
-            padding: 10rem 4rem;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-        }
-
-        .overlay-cards-container {
-            position: sticky;
-            top: 10vh;
-            width: 100%;
-            max-width: 900px;
-            height: 600px;
-            margin: 0 auto;
-        }
-
-        .overlay-card {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 30px;
-            padding: 4rem;
-            transition: transform 0.1s ease-out;
-        }
-
-        .card-1 {
-            background: linear-gradient(135deg, var(--overlaid-cards) 0%, var(--overlaid-cards) 100%);
-            border: 2px solid rgba(255, 50, 50, 1);
-            z-index: 1;
-        }
-
-        .card-2 {
-            background: linear-gradient(135deg, var(--overlaid-cards) 0%, var(--overlaid-cards) 100%);
-            border: 2px solid rgba(0, 255, 136, 1);
-            z-index: 2;
-            transform: translateY(100%);
-        }
-
-        .card-content h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 1.5rem;
-            font-weight: 900;
-        }
-
-        .card-1 h2 {
-            color: #ff6b6b;
-        }
-
-        .card-2 h2 {
-            color: #00ff88;
-        }
-
-        .card-content p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: var(--muted);
-            margin-bottom: 2rem;
-        }
-
-        .card-features {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .card-features span {
-            font-size: 1.1rem;
-            padding: 0.8rem 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            display: inline-block;
-        }
-
-        .card-1 .card-features span {
-            color: #ff6b6b;
-            border: 1px solid rgba(255, 50, 50, 0.3);
-        }
-
-        .card-2 .card-features span {
-            color: #00ff88;
-            border: 1px solid rgba(0, 255, 136, 0.3);
-        }
-
-        .split-scroll-section {
-            min-height: 100vh;
-            padding: 8rem 0;
-            position: relative;
-        }
-
-        .split-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 4rem;
-            gap: 4rem;
-        }
-
-        .split-left {
-            position: sticky;
-            top: 20vh;
-            height: fit-content;
-            padding: 3rem;
-            background: linear-gradient(135deg, rgba(255, 25, 0, 0.1) 0%, rgba(0, 255, 136, 0.02) 100%);
-            border: 2px solid var(--accent);
-            border-radius: 30px;
-        }
-
-        .split-left-content h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            margin-bottom: 2rem;
-            line-height: 1.1;
-            background: #fc4103;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .split-left-content p {
-            font-size: 1.2rem;
-            color: var(--muted);
-            line-height: 1.8;
-            margin-bottom: 3rem;
-        }
-
-        .split-highlight {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            padding: 2rem;
-            background: rgba(255, 0, 36, 0.05);
-            border-radius: 20px;
-            border: 1px solid #fc4103;
-        }
-
-        .highlight-number {
-            font-size: 4rem;
-            font-weight: 900;
-            color: linear-gradient(135deg, #fff 0%, #fc4103 100%);
-            line-height: 1;
-        }
-
-        .highlight-text {
-            font-size: 1.1rem;
-            color: var(--muted);
-        }
-
-        .split-right {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-            padding-bottom: 4rem;
-        }
-
-        .split-right-item {
-            padding: 3rem;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            transition: all 0.3s;
-        }
-
-        .split-right-item:hover {
-            background: linear-gradient(135deg, rgba(255, 0, 13, 0.1) 0%, rgba(255, 0, 13, 0.02) 100%);
-            border-color: var(--accent);
-            transform: translateX(10px);
-        }
-
-        .item-number {
-            font-size: 3rem;
-            font-weight: 900;
-            color: transparent;
-            -webkit-text-stroke: 2px #fc4103;
-            margin-bottom: 1rem;
-            line-height: 1;
-        }
-
-        .split-right-item h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--muted);
-        }
-
-        .split-right-item p {
-            font-size: 1.1rem;
-            color: var(--muted);
-            line-height: 1.8;
-        }
-
-        .full-width-image {
-  width: 100vw; /* take full viewport width */
-  height: 50vh; /* or use a smaller height like 80vh if you prefer */
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-}
-
-.full-width-image img {
-  width: 30%;
-  object-fit: cover; /* ensures image fills section without distortion */
-  display: block;
-  margin: auto;
-}
-
-
-        .footer {
-            padding: 4rem;
-            text-align: center;
-            border-top: 1px solid var(--border);
-            color: #666;
-        }
-
-        .marquee {
-            overflow: hidden;
-            position: relative;
-            padding: 3rem 0;
-        }
-
-        .marquee-content {
-            display: flex;
-            animation: marquee 30s linear infinite;
-            white-space: nowrap;
-        }
-
-        .marquee-item {
-            font-size: 2rem;
-            font-weight: 700;
-            color: rgba(127, 127, 127, 0.2);
-            padding: 0 2rem;
-            text-transform: uppercase;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0)  ; }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* Center navbar on medium screens */
-        @media (max-width: 1024px) {
-            .nav {
-                left: 50%;
-                right: auto;
-                transform: translateX(-50%);
-                padding: 0.5rem 2rem;
-            }
-
-            .logo {
-                margin-right: 25px;
-            }
-
-            .nav-links {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 768px) {
-            html, body {
-                width: 100%;
-                max-width: 100%;
-                overflow-x: hidden;
-            }
-
-            .nav {
-                padding: 0.5rem 2rem;
-                left: 50%;
-                right: auto;
-                transform: translateX(-50%);
-                justify-content: space-between;
-            }
-
-            .section {
-                padding: 4rem 1.5rem;
-                width: 100%;
-                max-width: 100%;
-                margin: 0;
-                box-sizing: border-box;
-            }
-
-            .section-title {
-                text-align: center;
-                width: 100%;
-            }
-
-            .section-subtitle {
-                text-align: center;
-                width: 100%;
-                max-width: 100%;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .clients-grid {
-                max-width: 100%;
-                width: 100%;
-                margin: 0 auto;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-                padding: 2rem 0;
-                justify-items: stretch;
-            }
-
-            .client-logo {
-                width: 100%;
-                aspect-ratio: 1;
-                min-height: 120px;
-                height: auto;
-                padding: 1.5rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-                max-width: 100%;
-                width: 100%;
-                margin: 0 auto;
-            }
-
-            .culture-grid {
-                grid-template-columns: 1fr;
-                max-width: 100%;
-                width: 100%;
-                margin: 0 auto;
-            }
-
-            .process-timeline {
-                max-width: 100%;
-                width: 100%;
-                margin: 0 auto;
-            }
-
-            .timeline-item {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .timeline-number {
-                text-align: center;
-            }
-
-            .timeline-content {
-                text-align: center;
-            }
-
-            .nav-links {
-                display: none;
-            }
-            .hamburger {
-                display: flex;
-                margin-left: 15px;
-                margin-right: 0px;
-            }
-
-            .logo {
-                margin-right: 25px;
-            }
-            .overlay-cards-section {
-                padding: 5rem 1.5rem;
-                min-height: 150vh;
-                width: 100%;
-            }
-
-            .overlay-cards-container {
-                height: auto;
-                min-height: 500px;
-                max-width: 100%;
-                width: 100%;
-                position: relative;
-            }
-
-            .overlay-card {
-                padding: 2.5rem;
-            }
-
-            .card-1 {
-                height: fit-content;
-                min-height: 500px;
-                position: absolute;
-            }
-
-            .card-2 {
-                height: fit-content;
-                min-height: 500px;
-                position: absolute;
-            }
-
-            .card-content {
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .card-features {
-                align-items: center;
-            }
-
-            .card-features span {
-                font-size: 1rem;
-                padding: 0.6rem 1rem;
-            }
-
-            .split-scroll-section {
-                width: 100%;
-                padding: 4rem 0;
-            }
-
-            .split-container {
-                grid-template-columns: 1fr;
-                padding: 0 1.5rem;
-                gap: 3rem;
-                max-width: 100%;
-                width: 100%;
-            }
-
-            .split-left {
-                position: relative;
-                top: 0;
-                text-align: center;
-            }
-
-            .split-left-content {
-                text-align: center;
-            }
-
-            .split-highlight {
-                align-items: center;
-                text-align: center;
-            }
-
-            .split-right {
-                gap: 2rem;
-            }
-
-            .split-right-item {
-                padding: 2rem;
-                text-align: center;
-            }
-
-            .split-right-item:hover {
-                transform: translateX(0);
-            }
-
-            .cta-section {
-                width: 100%;
-                padding: 6rem 1.5rem;
-            }
-
-            .hero-content {
-                width: 100%;
-                max-width: 100%;
-                padding: 0 1.5rem;
-            }
-
-            .full-width-image {
-                width: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-     <nav class="nav">
+<body class="is-loading">
+    <!-- CINEMATIC LOADER -->
+    <div class="loader-wrapper">
+        <div class="loader-content">
+            <div class="brand-reveal">
+                <svg class="loader-svg" viewBox="0 0 786.692 360.02259887005647" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="matrix(1,0,0,1,-765.738,-371.099)">
+                        <!-- Signature Mark -->
+                        <g transform="matrix(0.725564,0,0,0.725564,724.9,676.32)">
+                            <g transform="matrix(0.827181,0,0,0.827181,56.2838,-408.565)">
+                                <path class="brand-path" d="M343.07,384C337.14,384.43 331.2,384.68 325.3,385.32C305.76,387.45 287.46,394.32 268.85,400.09C242.1,408.32 215.37,416.58 188.57,424.63C184.62,425.82 183.57,427.36 184.08,431.63C187.08,457.94 189.76,484.3 192.47,510.63C194.41,529.517 196.27,548.413 198.05,567.32C198.33,570.25 198.05,573.23 198.05,577.5C192.86,572.29 187.63,569.5 187.28,561.31C186.46,542.19 184.18,523.14 182.28,504.08C180.17,482.69 177.87,461.32 175.62,439.94C175.28,436.67 174.75,433.42 174.21,429.44C163.67,433.16 153.61,436.55 143.66,440.25C110.66,452.55 79.88,469.71 48.66,485.87C37.52,491.66 26.54,498 15.63,504.36C11.45,506.81 8.44,506.73 5.53,502.71C3.802,500.585 1.956,498.558 -0,496.64C1.054,495.677 2.192,494.81 3.4,494.05C24.96,483.48 43.4,468.23 62.64,454.28C96.5,429.75 130.24,405.05 164.17,380.62C167.82,377.99 168.68,375.33 168.32,371.05C164.19,322.05 162.44,272.95 165.32,223.75C167.32,189.75 175.98,157.47 188.11,125.86C196.86,103.05 206.75,80.86 221.8,61.44C243.3,33.7 269.23,11.51 304.28,3.36C327.67,-2.07 351.77,-2.08 372.23,12.12C396.57,29 409.51,53.49 412,83.43C414.11,108.75 407.25,132.25 398.93,155.59C386.17,191.34 364.93,221.84 339.93,249.86C315.78,276.91 288.03,300.09 260.21,323.23C234.72,344.44 209.89,366.4 182.29,384.92C181.1,385.72 179.73,387.5 179.81,388.73C180.32,396.66 181.2,404.55 182.03,413.19C191.78,410.19 200.8,407.49 209.82,404.72C236.72,396.46 263.48,387.64 290.59,380.15C303.01,376.72 316.1,375.55 328.96,373.91C346.21,371.72 358.96,385.56 353.08,403.91C349.95,413.7 345.61,423.11 341.82,432.7C341.16,434.38 340.55,436.09 339.58,438.7C342.89,439.06 345.74,439.55 348.58,439.7C368.3,440.42 387.29,435.8 406.34,431.7C427.513,427.167 448.66,422.5 469.78,417.7C473.36,416.89 476.07,417.6 478.15,420.4C481.48,424.88 484.61,429.49 487.88,434.02C489.14,435.76 490.45,437.48 491.88,439.09C504.05,452.77 516.43,466.25 528.35,480.09C535.04,487.89 538.35,497.44 538.8,507.67C539.07,513.67 542,516.01 547.37,517.35C565.76,521.92 584.26,521.06 602.44,517.35C647.8,508.09 693.04,498.27 738.23,488.2C753.98,484.7 769.5,480.06 784.98,475.48C797.797,471.884 808.873,463.736 816.12,452.57C821.25,444.76 821.86,436.97 817.46,428.57C810.6,415.45 799.78,406.11 788.24,397.57C776.7,389.03 764.24,381.29 752.77,372.48C745.7,367.06 739.38,360.55 733.31,354C729.39,349.78 728.56,344.39 730.6,338.59C735.53,324.59 744.77,313.43 753.77,302.07C777.34,272.31 808.07,251.24 839.64,231.07C879.64,205.57 922.09,184.74 965.17,165.13C1027.32,136.84 1089.82,109.29 1151.66,80.36C1193.6,60.75 1234.72,39.36 1276.07,18.54C1280.31,16.4 1282.87,16.36 1285.62,20.17C1287.35,22.281 1289.21,24.285 1291.18,26.17C1283.18,30.27 1275.83,34.27 1268.27,37.95C1219.6,61.63 1171.09,85.67 1122.12,108.73C1087.48,125.05 1051.94,139.47 1017.27,155.73C974.27,175.89 931.44,196.29 889.27,218.09C856.12,235.24 824.56,255.38 795.86,279.44C775.917,295.972 758.928,315.775 745.62,338C744.045,340.552 742.754,343.268 741.77,346.1C739.42,353.16 738.77,359.1 747.67,364.83C770.67,379.64 792.99,395.47 811.4,415.94C818.01,423.29 823.57,431.7 828.84,440.1C832.52,445.95 831.9,452.49 828.57,458.7C821.57,471.7 811.09,481.05 797.11,484.83C760.8,494.67 724.37,504.15 687.71,512.6C659.82,519.04 631.59,524.11 603.37,528.96C587.9,531.62 572.05,532.19 556.75,527.6C541.22,522.95 529.81,513.97 528.2,496.28C526.92,482.28 519.34,471.36 510.2,461.39C500.533,450.817 490.69,440.41 480.67,430.17C479.54,429.01 476.76,428.67 474.97,429.05C456.4,433.05 437.9,437.26 419.33,441.25C400.45,445.25 381.65,449.69 362.16,450.25C349.59,450.62 339.36,446.98 331.39,437.02C329.07,434.12 327.89,431.53 329.39,428.02C332.57,420.69 336,413.45 338.72,405.95C341.13,399.33 342.72,392.41 344.66,385.62L343.07,384ZM176.68,369L178.85,369.83C186.22,364.54 193.9,359.61 200.91,353.83C220.12,338.12 238.84,321.83 258.13,306.22C289.13,281.11 318.7,254.49 343.75,223.3C371.7,188.58 392,149.88 400,105.59C405.07,77.59 401.72,50.78 385.07,26.76C383.209,24.009 380.734,21.729 377.84,20.1C359.37,10.48 339.48,8.89 319.5,12.51C283.11,19.1 256,40.93 233.9,69.06C207.9,102.17 194.67,141.47 183.73,181.45C176.12,209.27 174.44,237.97 174.66,266.68C174.93,300.8 176,334.91 176.68,369ZM105.23,440.85L105.57,441.62C110.1,439.62 114.57,437.48 119.17,435.78C135.69,429.66 152.29,423.78 168.81,417.61C170.33,417.04 172.57,415.24 172.51,414.12C172.15,407.57 171.21,401.05 170.4,393.94L105.23,440.85Z" style="fill:rgb(38,51,137);fill-opacity:0;stroke:var(--accent);stroke-width:10;"/>
+                            </g>
+                        </g>
+
+                        <!-- Vertical Line -->
+                        <g transform="matrix(0.725564,0,0,0.725564,724.9,676.32)">
+                            <g transform="matrix(0.706131,0,0,0.706131,22.8219,-770.408)">
+                                <path class="brand-path" d="M1771.65,1127.55C1770.5,1127.55 1770.45,1127.51 1769.64,1126.69C1769.12,1126.16 1768.96,1125.35 1768.76,1124.64C1768.67,1124.32 1764.09,954.555 1763.58,868.078C1762.98,766.977 1768.15,597.768 1768.76,576.747C1768.79,575.578 1768.81,575.53 1769.64,574.701C1770.15,574.191 1770.97,574.129 1771.63,573.85C1773.53,573.058 1774.46,576.411 1774.55,576.727C1774.56,576.756 1779.32,732.805 1779.75,832.493C1780.11,917.167 1776.22,1063.32 1774.59,1123.35L1774.55,1124.64C1774.26,1125.32 1774.19,1126.16 1773.66,1126.69C1772.85,1127.51 1772.81,1127.55 1771.65,1127.55Z" style="fill:rgb(253,66,2);fill-opacity:0;stroke:var(--accent);stroke-width:10;"/>
+                            </g>
+                        </g>
+
+                        <!-- Geometric Mark -->
+                        <g transform="matrix(0.725564,0,0,0.725564,724.9,676.32)">
+                            <g transform="matrix(0.770599,0,0,0.770599,303.487,-1144.83)">
+                                <path class="brand-path" d="M1989.57,1064.6C2001.71,1071.54 2009.2,1084.46 2009.2,1098.44L2009.2,1161.07C2009.2,1165.52 2006.82,1169.63 2002.97,1171.85C1999.11,1174.08 1994.37,1174.08 1990.51,1171.85C1931.38,1137.69 1748.72,1032.17 1689.16,997.768C1685.28,995.527 1682.9,991.373 1682.94,986.892C1682.97,982.41 1685.41,978.292 1689.32,976.108C1706.45,966.547 1731.25,952.703 1747.25,943.777C1757,938.332 1768.9,938.394 1778.59,943.94C1821.67,968.577 1942.06,1037.43 1989.57,1064.6Z" style="fill:rgb(253,66,2);fill-opacity:0;stroke:var(--accent);stroke-width:20;"/>
+                            </g>
+                            <g transform="matrix(0.770599,0,0,-0.770599,303.487,731.808)">
+                                <path class="brand-path" d="M1989.57,1064.6C2001.71,1071.54 2009.2,1084.46 2009.2,1098.44L2009.2,1161.07C2009.2,1165.52 2006.82,1169.63 2002.97,1171.85C1999.11,1174.08 1994.37,1174.08 1990.51,1171.85C1931.38,1137.69 1748.72,1032.17 1689.16,997.768C1685.28,995.527 1682.9,991.373 1682.94,986.892C1682.97,982.41 1685.41,978.292 1689.32,976.108C1706.45,966.547 1731.25,952.703 1747.25,943.777C1757,938.332 1768.9,938.394 1778.59,943.94C1821.67,968.577 1942.06,1037.43 1989.57,1064.6Z" style="fill:rgb(253,66,2);fill-opacity:0;stroke:var(--accent);stroke-width:20;"/>
+                            </g>
+                            <g transform="matrix(0.763293,0,0,0.763293,318.167,-1136.04)">
+                                <path class="brand-path" d="M1617.62,1014.56C1620.9,1012.7 1624.92,1012.7 1628.19,1014.56C1654.29,1029.43 1771.53,1096.24 1856.19,1144.49C1867.07,1150.68 1872.41,1163.43 1869.2,1175.53C1866,1187.62 1855.05,1196.05 1842.53,1196.05C1749.54,1196.05 1618.25,1196.05 1553.04,1196.05C1542.44,1196.05 1532.27,1191.84 1524.77,1184.34C1517.27,1176.84 1513.06,1166.67 1513.06,1156.07L1513.06,1097.41C1513.06,1083.05 1520.76,1069.79 1533.24,1062.67C1559.16,1047.89 1602.61,1023.12 1617.62,1014.56Z" style="fill:rgb(253,66,2);fill-opacity:0;stroke:var(--accent);stroke-width:20;"/>
+                            </g>
+                            <g transform="matrix(0.763293,0,0,-0.763293,318.167,723.017)">
+                                <path class="brand-path" d="M1617.62,1014.56C1620.9,1012.7 1624.92,1012.7 1628.19,1014.56C1654.29,1029.43 1771.53,1096.24 1856.19,1144.49C1867.07,1150.68 1872.41,1163.43 1869.2,1175.53C1866,1187.62 1855.05,1196.05 1842.53,1196.05C1749.54,1196.05 1618.25,1196.05 1553.04,1196.05C1542.44,1196.05 1532.27,1191.84 1524.77,1184.34C1517.27,1176.84 1513.06,1166.67 1513.06,1156.07L1513.06,1097.41C1513.06,1083.05 1520.76,1069.79 1533.24,1062.67C1559.16,1047.89 1602.61,1023.12 1617.62,1014.56Z" style="fill:rgb(253,66,2);fill-opacity:0;stroke:var(--accent);stroke-width:20;"/>
+                            </g>
+                        </g>
+
+                        <!-- Text elements as groups with classes -->
+                        <g transform="matrix(0.725564,0,0,0.725564,724.9,676.32)">
+                             <g transform="matrix(0.645304,0,0,0.645304,178.21,-1115.15)">
+                                <g class="brand-name" transform="matrix(230.842,0,0,230.842,2669.29,1440.94)" style="opacity: 0;">
+                                    <path d="M0.046,-0L0.046,-0.72L0.368,-0.72C0.42,-0.72 0.465,-0.711 0.504,-0.694C0.543,-0.676 0.573,-0.651 0.594,-0.619C0.615,-0.587 0.626,-0.55 0.626,-0.507C0.626,-0.465 0.615,-0.428 0.594,-0.397C0.573,-0.365 0.543,-0.34 0.504,-0.323C0.465,-0.305 0.42,-0.296 0.368,-0.296L0.168,-0.296L0.168,-0.409L0.364,-0.409C0.401,-0.409 0.429,-0.418 0.449,-0.435C0.468,-0.452 0.478,-0.475 0.478,-0.506C0.478,-0.537 0.468,-0.561 0.449,-0.578C0.43,-0.594 0.401,-0.602 0.364,-0.602L0.2,-0.602L0.2,-0L0.046,-0ZM0.452,-0L0.163,-0.374L0.326,-0.374L0.66,-0L0.452,-0Z" style="fill:rgb(38,51,137);"/>
+                                </g>
+                                <g class="brand-name" transform="matrix(230.842,0,0,230.842,2823.49,1440.94)" style="opacity: 0;">
+                                    <path d="M0.05,-0L0.05,-0.72L0.204,-0.72L0.204,-0L0.05,-0ZM0.155,-0.374L0.479,-0.72L0.684,-0.72L0.342,-0.374L0.155,-0.374ZM0.495,-0L0.153,-0.374L0.342,-0.374L0.704,-0L0.495,-0Z" style="fill:rgb(38,51,137);"/>
+                                </g>
+                                <g class="brand-name" transform="matrix(230.842,0,0,230.842,2990.16,1440.94)" style="opacity: 0;">
+                                    <path d="M0.05,-0L0.05,-0.72L0.29,-0.72L0.49,-0.026L0.403,-0.026L0.603,-0.72L0.844,-0.72L0.844,-0L0.692,-0L0.692,-0.677L0.718,-0.677L0.523,-0L0.364,-0L0.171,-0.671L0.196,-0.671L0.196,-0L0.05,-0Z" style="fill:rgb(38,51,137);"/>
+                                </g>
+                            </g>
+                            <g transform="matrix(0.645304,0,0,0.645304,541.91,-1115.15)">
+                                <text class="brand-name" style="font-family:'iAWriterDuospace-Regular', 'iA Writer Duospace', monospace;font-size:230.842px;fill:rgb(38,51,137);opacity: 0;" y="1440.94px" x="2669.29px">Studio</text>
+                            </g>
+                            <g transform="matrix(0.269557,0,0,0.269557,1182.44,-507.735)">
+                                <text class="brand-tagline primary" style="font-family:'iAWriterDuospace-Regular', 'iA Writer Duospace', monospace;font-size:230.842px;fill:rgb(3,15,96);opacity: 0;" y="1440.94px" x="2669.29px">DESIGNED TO LEAD</text>
+                                <text class="brand-tagline secondary" style="font-family:'iAWriterDuospace-RegularItalic', 'iA Writer Duospace', monospace;font-style:italic;font-size:230.842px;fill:rgb(3,15,96);opacity: 0;" y="1671.79px" x="4192.85px">BUILT TO LAST</text>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <div class="loader-split-line"></div>
+        <div class="loader-panel left"></div>
+        <div class="loader-panel right"></div>
+    </div>
+
+    <nav class="nav">
         <div class="logo">
             <a href="#home">
                 <img href="/" src="./RKM Branding Logotype.svg" alt="" srcset="">
@@ -987,8 +107,47 @@ body:not([data-theme="light"]) .theme-toggle i {
     <section class="hero" id="home">
         <div id="canvas-container"></div>
         <div class="hero-content">
-            <h1 class="scroll-text">ENABLING BOLD,<br>FUTURE-DRIVEN<br>ARCHITECTURE</h1>
-            <p class="hero-description">We team up with busy AEC companies to develop their BIM projects with cutting-edge tech, so they succeed!</p>
+            <h1 class="scroll-text">Your BIM Team.<br>Architect-Led.</h1>
+            <p class="hero-description" id="hero-subline">Production capacity when you need it. Architectural intelligence you didn't expect. We embed in your workflow and deliver like we're part of your office.</p>
+            <div class="hero-cta-positioner">
+                <a href="#contact" class="cta-btn">Book a Discovery Call <span>→</span></a>
+            </div>
+        </div>
+        <!-- Hero Image -->
+        <img class="hero-image" src="./assets/bg.png" alt="BIM Architecture" />
+        <!-- KEY STATS BAR -->
+        <div class="stats-bar">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-text">5+ years delivering internationally</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-text">20 architects, engineers & BIM professionals</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-text">0% client churn — no one has ever left</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="rkms-slider">
+        <div class="rkms-slide-titles">
+            <div class="rkms-title"><h1>Project Foundation</h1></div>
+            <div class="rkms-title"><h1>Architectural Flow</h1></div>
+            <div class="rkms-title"><h1>Technical Depth</h1></div>
+            <div class="rkms-title"><h1>BIM Integration</h1></div>
+            <div class="rkms-title"><h1>Creative Vision</h1></div>
+            <div class="rkms-title"><h1>Precision Build</h1></div>
+            <div class="rkms-title"><h1>Global Standard</h1></div>
+            <div class="rkms-title"><h1>Project Foundation</h1></div>
+            <div class="rkms-title"><h1>Architectural Flow</h1></div>
+        </div>
+        <div class="rkms-slide-images">
+            <div class="rkms-img-top"></div>
+            <div class="rkms-img-bottom"></div>
         </div>
     </section>
 
@@ -1009,24 +168,192 @@ body:not([data-theme="light"]) .theme-toggle i {
         </div>
     </div>
 
-    <section class="section">
-        <h2 class="section-title">We've been collaborating with</h2>
-        <div class="clients-grid">
-            <div class="client-logo">RYAN</div>
-            <div class="client-logo">HGA</div>
-            <div class="client-logo">SAMARA</div>
-            <div class="client-logo">HMC</div>
-            <div class="client-logo">EHDD</div>
-            <div class="client-logo">PERKINS+WILL</div>
-            <div class="client-logo">RRM</div>
-            <div class="client-logo">EYRC</div>
-            <div class="client-logo">LIONAKIS</div>
-            <div class="client-logo">WOODS BAGOT</div>
-            <div class="client-logo">CANOA</div>
-            <div class="client-logo">CLARK</div>
+    <!-- SECTION 2: THE PAIN POINT HOOK -->
+    <section class="pain-point-section">
+        <div class="pain-point-container">
+            <h3 class="pain-point-hook-text" data-kinetic-text="Sound familiar?">Sound familiar?</h3>
+
+            <div class="pain-points-grid">
+                <div class="pain-point-card" data-card-index="0">
+                    <div class="card-number">01</div>
+                    <h4 class="pain-point-question">We need more capacity, but hiring takes months.</h4>
+                    <p class="pain-point-description">Your pipeline is growing faster than your team. Projects are stacking up, deadlines are slipping, and your principals are spending more time managing production than designing.</p>
+                </div>
+
+                <div class="pain-point-card" data-card-index="1">
+                    <div class="card-number">02</div>
+                    <h4 class="pain-point-question">Our current partners don't understand architecture.</h4>
+                    <p class="pain-point-description">You've worked with external BIM teams before. They model what you tell them — but they don't think. Every deliverable needs corrections. Every review cycle feels like a tutorial.</p>
+                </div>
+
+                <div class="pain-point-card" data-card-index="2">
+                    <div class="card-number">03</div>
+                    <h4 class="pain-point-question">We're tired of micromanaging external teams.</h4>
+                    <p class="pain-point-description">You didn't hire a partner to babysit them. But that's what it's become — constant check-ins, repeated instructions, quality reviews that take longer than the work itself.</p>
+                </div>
+
+                <div class="pain-point-card" data-card-index="3">
+                    <div class="card-number">04</div>
+                    <h4 class="pain-point-question">Nobody cares about our business the way we do.</h4>
+                    <p class="pain-point-description">Your projects deserve people who treat them with the same seriousness you do. Not people clocking hours. Not people who vanish when things get complicated.</p>
+                </div>
+
+                <div class="pain-point-card" data-card-index="4">
+                    <div class="card-number">05</div>
+                    <h4 class="pain-point-question">We need to scale — and sometimes scale back.</h4>
+                    <p class="pain-point-description">Hiring is slow. Firing is painful. You need the flexibility to ramp up when projects demand it and dial down when they don't — without losing institutional knowledge.</p>
+                </div>
+
+                <div class="pain-point-card solution-card" data-card-index="5">
+                    <div class="card-accent-line"></div>
+                    <h3 class="solution-headline">We built RKM Studio to solve exactly this.</h3>
+                    <p class="solution-description">We're not a service provider you manage. We're the technical extension of your practice — architect-led, deeply embedded, and invested in your success as if it were our own.</p>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- SECTION 3 - SERVICE PROGRESSION GALLERY -->
+    <section class="service-progression-section">
+        <div class="service-sticky">
+            <div class="service-bg-img"><img src="./assets/bg/BG.jpg" alt="Service background" /></div>
+
+            <canvas class="service-outline-layer"></canvas>
+
+            <div class="service-cards">
+                <div class="service-text-slide">
+                    <h2 class="slide-title word-anim" data-word-anim>We start with production. We stay for everything after.</h2>
+                    <p class="slide-p word-anim" data-word-anim>Every engagement begins with reliable, architect-led delivery. As we embed deeper into your workflow, we unlock more — quality systems, process optimization, and eventually, design innovation. The longer we work together, the more value we create.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-card-img"><img src="./assets/bg/1.jpg" alt="Production & Delivery" /></div>
+                    <div class="service-card-content">
+                        <div class="service-card-number">01</div>
+                        <h3 class="service-card-title">Production & Delivery</h3>
+                        <p class="service-card-subtitle">The reliable engine behind your projects.</p>
+                        <div class="service-card-description">
+                            <p>Fast, precise, architect-reviewed from day one. From high-fidelity BIM models to coordination-ready documentation, we handle the technical production that keeps your projects moving — delivered to your standards, in your environment, on your timeline.</p>
+                            <div class="service-card-tags">
+                                <span class="tag">BIM modeling</span>
+                                <span class="tag">Drafting & documentation</span>
+                                <span class="tag">Scan-to-BIM</span>
+                                <span class="tag">Construction documents</span>
+                                <span class="tag">Coordination & detection</span>
+                                <span class="tag">As-built modeling</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-card-img"><img src="./assets/bg/2.jpg" alt="Integration & Quality" /></div>
+                    <div class="service-card-content">
+                        <div class="service-card-number">02</div>
+                        <h3 class="service-card-title">Integration & Quality</h3>
+                        <p class="service-card-subtitle">We don't just deliver — we embed, manage, and ensure.</p>
+                        <div class="service-card-description">
+                            <p>As the relationship deepens, so does our involvement. We take ownership of your BIM ecosystem — building your libraries, developing your templates, optimizing your processes, and ensuring every deliverable passes rigorous QA before it reaches your desk. Your standards become our standards.</p>
+                            <div class="service-card-tags">
+                                <span class="tag">QA/QC processes</span>
+                                <span class="tag">BIM standards</span>
+                                <span class="tag">Template development</span>
+                                <span class="tag">Workflow optimization</span>
+                                <span class="tag">Data management</span>
+                                <span class="tag">Coordination oversight</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-card-img"><img src="./assets/bg/3.jpg" alt="Design & Innovation" /></div>
+                    <div class="service-card-content">
+                        <div class="service-card-number">03</div>
+                        <h3 class="service-card-title">Design & Innovation</h3>
+                        <p class="service-card-subtitle">Where architectural thinking meets computational power.</p>
+                        <div class="service-card-description">
+                            <p>Once we truly understand your practice, we stop being a production team and become a development partner. Computational design, automation, custom scripts, architectural design support — we push your capabilities forward, solving problems you haven't had time to think about yet.</p>
+                            <div class="service-card-tags">
+                                <span class="tag">Computational design</span>
+                                <span class="tag">Generative modeling</span>
+                                <span class="tag">Automation & scripting</span>
+                                <span class="tag">Design development</span>
+                                <span class="tag">Architectural support</span>
+                                <span class="tag">Custom solutions</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-text-slide">
+                    <h2 class="slide-title word-anim" data-word-anim>And we keep growing together.</h2>
+                    <p class="slide-p word-anim" data-word-anim>Visualization, AI-driven workflows, data analytics, custom tools — we don’t limit ourselves to a fixed menu. As your needs evolve, so do we. If it relates to BIM, architecture, data, or digital construction — we can develop it.</p>
+                </div>
+            </div>
+
+            <canvas class="service-fill-layer"></canvas>
+        </div>
+    </section>
+
+    <section class="section proof-trust-section" id="proof">
+        <h2 class="proof-title">P R O O F & T R U S T</h2>
+        
+        <div class="stats-grid-complex">
+            <div class="stat-complex-item">
+                <div class="stat-icon"><i class="fas fa-shield-heart"></i></div>
+                <div class="stat-big-number"><span class="counter" data-target="0">0</span>%</div>
+                <div class="stat-sub">client churn — no client has ever left</div>
+            </div>
+            <div class="stat-complex-item">
+                <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                <div class="stat-big-number"><span class="counter" data-target="5">0</span>+</div>
+                <div class="stat-sub">years of international BIM delivery</div>
+            </div>
+            <div class="stat-complex-item">
+                <div class="stat-icon"><i class="fas fa-drafting-compass"></i></div>
+                <div class="stat-big-number"><span class="counter" data-target="400">0</span>+</div>
+                <div class="stat-sub">projects delivered across 4 continents</div>
+            </div>
+            <div class="stat-complex-item">
+                <div class="stat-icon"><i class="fas fa-earth-americas"></i></div>
+                <div class="stat-big-number"><span class="counter" data-target="50">0</span>+</div>
+                <div class="stat-sub">clients served in 13+ countries</div>
+            </div>
+            <div class="stat-complex-item">
+                <div class="stat-icon"><i class="fas fa-user-group"></i></div>
+                <div class="stat-big-number"><span class="counter" data-target="20">0</span></div>
+                <div class="stat-sub">architects, engineers & BIM professionals in the studio</div>
+            </div>
+        </div>
+
+        <div class="credentials-box">
+            <p>“Led by a licensed architect with advanced certifications in BIM Management and an MBA in business strategy.”</p>
+        </div>
+
+        <div class="global-presence">
+            <div class="presence-header">TRUSTED GLOBALLY</div>
+            <p class="presence-text">Architecture, engineering, and construction firms across France, the United States, the United Kingdom, Canada, Singapore, South Korea, and the Middle East.</p>
+        </div>
+<!-- 
+        <div class="clients-marquee-new">
+            <div class="clients-grid">
+                <div class="client-logo">RYAN</div>
+                <div class="client-logo">HGA</div>
+                <div class="client-logo">SAMARA</div>
+                <div class="client-logo">HMC</div>
+                <div class="client-logo">EHDD</div>
+                <div class="client-logo">PERKINS+WILL</div>
+                <div class="client-logo">RRM</div>
+                <div class="client-logo">EYRC</div>
+                <div class="client-logo">LIONAKIS</div>
+                <div class="client-logo">WOODS BAGOT</div>
+                <div class="client-logo">CANOA</div>
+                <div class="client-logo">CLARK</div>
+            </div>
+        </div> -->
+    </section>
+<!-- 
     <section class="overlay-cards-section">
         <div class="overlay-cards-container">
             <div class="overlay-card card-1">
@@ -1052,45 +379,56 @@ body:not([data-theme="light"]) .theme-toggle i {
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <section class="split-scroll-section">
         <div class="split-container">
             <div class="split-left">
                 <div class="split-left-content">
-                    <h2>Why Choose<br>RKM?</h2>
-                    <p>We combine expertise, innovation, and dedication to deliver exceptional results that transform your architectural vision into reality.</p>
-                    <div class="split-highlight">
-                        <span class="highlight-number">500+</span>
-                        <span class="highlight-text">Projects Completed</span>
-                    </div>
+                    <h2>Why RKM</h2>
+                    <p>You can find BIM services anywhere. But what we offer isn’t a service — it’s peace of mind. Here’s what that actually means.</p>
                 </div>
             </div>
             <div class="split-right">
                 <div class="split-right-item">
                     <div class="item-number">01</div>
-                    <h3>Expert Team</h3>
-                    <p>Our team consists of licensed architects and BIM specialists with years of experience in cutting-edge architectural technology.</p>
+                    <h3>Architect-Led Teams</h3>
+                    <p>We don’t just model. We think. Every project at RKM has architectural oversight from licensed architects and experienced engineers. That means we catch design inconsistencies, flag coordination issues, and improve your deliverables — not just execute them. You get a team that understands architecture from the inside, not technicians following instructions.</p>
                 </div>
                 <div class="split-right-item">
                     <div class="item-number">02</div>
-                    <h3>Latest Technology</h3>
-                    <p>We utilize the most advanced cloud-based collaboration tools and BIM software to ensure seamless project execution.</p>
+                    <h3>Zero Client Churn</h3>
+                    <p>No client has ever voluntarily left RKM. Not one. In five years of international delivery, every client who started working with us is still working with us — or evolved their strategy in a direction that no longer required external support. Some internalized the capabilities we helped them build. Others pivoted their business entirely. But none left because of dissatisfaction. We don’t say this to boast. We say it because it reflects something real about how deeply we invest.</p>
                 </div>
                 <div class="split-right-item">
                     <div class="item-number">03</div>
-                    <h3>Proven Results</h3>
-                    <p>Our track record speaks for itself with hundreds of successful projects delivered on time and exceeding expectations.</p>
+                    <h3>Deep Embedding</h3>
+                    <p>Your extension, not your vendor. We don’t work for you from the outside — we work with you from the inside. We adopt your templates, your naming conventions, your standards, your review process. After the onboarding period, working with us feels indistinguishable from working with an in-house team — except we scale with you when you need to grow, and scale back when you don’t. No hiring. No layoffs. Just flexibility.</p>
                 </div>
                 <div class="split-right-item">
                     <div class="item-number">04</div>
-                    <h3>Custom Solutions</h3>
-                    <p>Every project is unique, and we tailor our approach to meet your specific needs and architectural challenges.</p>
+                    <h3>Radically Adaptable</h3>
+                    <p>We absorb the chaos so you don’t have to. Construction projects are unpredictable — delays, pending information, shifting scopes, unclear RFIs, decisions blocked by third parties. We don’t freeze when the plan changes. We take initiative, anticipate what’s needed, adapt to whatever the current reality demands, and iterate as many times as necessary. We’re built for the real conditions of AEC, not the ideal ones.</p>
+                </div>
+                <div class="split-right-item">
+                    <div class="item-number">05</div>
+                    <h3>Data-Driven & Always Optimizing</h3>
+                    <p>We measure, we learn, we improve — continuously. We don’t just repeat the same process on every project. We track our performance, analyze our workflows, and actively look for ways to deliver faster, more accurately, and more efficiently. Every engagement gets better over time because we’re obsessed with optimization — not just for us, but for your entire operation.</p>
+                </div>
+                <div class="split-right-item">
+                    <div class="item-number">06</div>
+                    <h3>Communication That Actually Works</h3>
+                    <p>We think like business owners, because we are. We know how important clear information flow is. We know what it feels like to wait for an answer that doesn’t come. Because we’re architects, managers, and business operators ourselves, we communicate the way you need us to — whether that’s technical detail for your engineers, executive summaries for your leadership, or plain language for clients who aren’t in the field. We’re instantly accessible, and we put ourselves in your shoes before every interaction.</p>
+                </div>
+                <div class="split-right-item">
+                    <div class="item-number">07</div>
+                    <h3>We Care — Unreasonably</h3>
+                    <p>Your projects are our projects. This is the part that’s hard to put on a website but impossible to fake in practice. We care about your work to a degree that surprises our clients. We review what we deliver before you see it. We flag risks you haven’t noticed. We optimize what you didn’t ask us to optimize. We consider ourselves part of your company — not a contractor filling a seat.</p>
                 </div>
             </div>
         </div>
     </section>
-
+<!-- 
     <section class="section" id="services">
         <h2 class="section-title">Our Services</h2>
         <div class="services-grid">
@@ -1110,58 +448,207 @@ body:not([data-theme="light"]) .theme-toggle i {
                 <p class="service-description">Automated workflows, custom tools, and innovative solutions tailored to your specific needs. We push the boundaries of what's possible in the AEC industry.</p>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <section class="section" id="process">
-        <h2 class="section-title">Teaming-up is super simple!</h2>
-        <div class="process-timeline">
-            <div class="timeline-item">
-                <div class="timeline-number" data-aos="fade-right" data-aos-duration="3000">01</div>
-                <div class="timeline-content" data-aos="fade-left" data-aos-duration="3000">
-                    <h3>Meeting</h3>
-                    <p>To better understand your needs and how we can help you achieve your architectural vision with cutting-edge technology.</p>
+        <h2 class="section-title">How We Work</h2>
+        <p class="section-subtitle">Getting started is straightforward. But the real value unfolds over time.</p>
+        
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            <div class="timeline-progress"></div>
+            
+            <div class="timeline-step" data-step="1">
+                <div class="step-marker">01</div>
+                <div class="step-content">
+                    <h3>Discovery Call — We listen first.</h3>
+                    <p>A 30-minute conversation to understand your needs, your current workflow, your pain points, and what success looks like for you. We also share how we operate — because fit matters to us. We choose our clients as carefully as they choose us, and we need to understand your vision, your goals, and your standards to know we can genuinely help. No pitch. No pressure. Just clarity.</p>
                 </div>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-number" data-aos="fade-right" data-aos-duration="3000">02</div>
-                <div class="timeline-content" data-aos="fade-left" data-aos-duration="3000">
-                    <h3>Planning</h3>
-                    <p>To fully understand the project's specifics, discuss the timeline and establish clear agreements for successful collaboration.</p>
+
+            <div class="timeline-step" data-step="2">
+                <div class="step-marker">02</div>
+                <div class="step-content">
+                    <h3>Scope & Alignment — We define the engagement together.</h3>
+                    <p>Based on the discovery call, we propose a scope, timeline, and team structure tailored to your project. We align on deliverables, standards, tools, and communication rhythm before any work begins. Nothing starts until we both know exactly what success looks like.</p>
                 </div>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-number" data-aos="fade-right" data-aos-duration="3000">03</div>
-                <div class="timeline-content" data-aos="fade-left" data-aos-duration="3000">
-                    <h3>Development</h3>
-                    <p>Let's collaborate using the ultimate technology for the AEC industry, delivering exceptional results together.</p>
+
+            <div class="timeline-step" data-step="3">
+                <div class="step-marker">03</div>
+                <div class="step-content">
+                    <h3>Onboarding & Integration — We plug into your environment.</h3>
+                    <p>We adopt your templates, your BIM standards, your file structure, your collaboration platform. This integration period doesn’t mean we’re not productive — we deliver from day one. But we’re also learning your operation in parallel: absorbing your standards, understanding your expectations, mapping your workflows. We learn fast. We don’t ask the same question twice — and if something’s unclear, we ask immediately rather than guess. The investment in onboarding pays off permanently, because once we’re truly embedded, we operate like part of your team.</p>
                 </div>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-number" data-aos="fade-right" data-aos-duration="3000">04</div>
-                <div class="timeline-content" data-aos="fade-left" data-aos-duration="3000">
-                    <h3>Enjoy!</h3>
-                    <p>Enjoy your life while we take care of every detail of your project with precision and expertise.</p>
+
+            <div class="timeline-step" data-step="4">
+                <div class="step-marker">04</div>
+                <div class="step-content">
+                    <h3>Delivery & Optimization — We produce, we review, we improve.</h3>
+                    <p>Every deliverable flows through our internal QA process before it reaches you. But we don’t stop at delivery. As the engagement matures, we optimize — faster turnarounds, fewer iterations, better anticipation of your needs. We track our own performance and actively push for improvement, project after project.</p>
+                </div>
+            </div>
+
+            <div class="timeline-step" data-step="5">
+                <div class="step-marker">05</div>
+                <div class="step-content">
+                    <h3>Growth & Development — We push things forward.</h3>
+                    <p>This is where we go beyond what you asked for. Once we understand your practice deeply, we start seeing opportunities you haven’t had time to explore — workflow automations, process improvements, R&D solutions, tools that didn’t exist before. We don’t just give you peace of mind on production. We become a development engine for your practice.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="process-footer">
+            <p class="footer-text">Most clients start with a single project. Within months, they hand us everything.</p>
+            <a href="#contact" class="cta-btn">Book a Discovery Call <span>→</span></a>
+        </div>
+    </section>
+
+    <section class="section team-section" id="team">
+        <div class="team-header">
+            <h2 class="team-quote">“We’re minds, not labor” made personal.</h2>
+            <p class="section-title">The minds behind the work</p>
+        </div>
+
+        <div class="leadership-grid">
+            <!-- Rami - Founder -->
+            <div class="member-card main-member" data-aos="fade-up">
+                <div class="member-image-box">
+                    <div class="member-placeholder"><i class="fas fa-user-tie"></i></div>
+                    <a href="https://linkedin.com" target="_blank" class="linkedin-badge"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="member-content">
+                    <h3 class="member-name">KARA MOSTEFA Rami</h3>
+                    <h4 class="member-role">Founder & CEO — Licensed Architect, BIM Strategist, MBA</h4>
+                    <p class="member-bio">RKM Studio exists because I believe AEC firms deserve better than transactional service relationships. I’m a licensed architect with a background in BIM management and computational design, and I built this studio on a simple conviction: technical production should be led by people who understand architecture — not by operators who’ve never designed a building.</p>
+                    <p class="member-bio">We are selective about who we work with — because we invest deeply in every client relationship. We learn your standards, your culture, your vision. We can only do that properly if there’s genuine alignment between how you think and how we operate.</p>
+                    <p class="member-tagline">When you work with RKM, you’re not hiring a service. You’re gaining a technical partner who will know your projects as well as you do — and who will care about them just as much.</p>
+                </div>
+            </div>
+
+            <div class="secondary-members">
+                <!-- Mikael -->
+                <div class="member-card small-member" data-aos="fade-up" data-aos-delay="100">
+                    <div class="member-image-box">
+                        <div class="member-placeholder"><i class="fas fa-user"></i></div>
+                        <a href="https://linkedin.com" target="_blank" class="linkedin-badge"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="member-content">
+                        <h3 class="member-name">HANAFI Mikael</h3>
+                        <h4 class="member-role">Architect — Operations Manager</h4>
+                        <p class="member-bio">An accomplished architect who ensures the seamless execution of every project. Mikael oversees day-to-day operations, maintains delivery quality across all engagements, and serves as the bridge between the team and our clients’ evolving needs.</p>
+                    </div>
+                </div>
+
+                <!-- Charaf -->
+                <div class="member-card small-member" data-aos="fade-up" data-aos-delay="200">
+                    <div class="member-image-box">
+                        <div class="member-placeholder"><i class="fas fa-user-gear"></i></div>
+                        <a href="https://linkedin.com" target="_blank" class="linkedin-badge"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="member-content">
+                        <h3 class="member-name">KHELIFI Charaf</h3>
+                        <h4 class="member-role">Structural Engineer — BIM Lead</h4>
+                        <p class="member-bio">A structural engineer who leads our BIM production, bringing engineering rigor and technical depth to every model and deliverable. Charaf ensures our output meets the highest standards of precision and constructibility.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="culture">
-        <h2 class="section-title">The power of being different</h2>
-        <p class="section-subtitle">Our secret to success relies on our talented team. An array of diverse, highly skilled professionals, early adopters and top performers.</p>
-        <div class="culture-grid">
-            <div class="culture-card">
-                <h3>Sharing knowledge</h3>
-                <p>We're obsessed with an open source culture. Knowledge shared is knowledge multiplied.</p>
+    <section class="marquees-section">
+        <div class="marquee-container" id="marquee-1">
+            <div class="marquee-inner">
+                <div class="marquee-item"><img src="./assets/assets/img1.jpg" alt="Work 1"></div>
+                <div class="marquee-item with-text"><h1>BIM Build</h1></div>
+                <div class="marquee-item"><img src="./assets/assets/img2.jpg" alt="Work 2"></div>
+                <div class="marquee-item"><img src="./assets/assets/img3.jpg" alt="Work 3"></div>
+                <div class="marquee-item"><img src="./assets/assets/img4.jpg" alt="Work 4"></div>
             </div>
-            <div class="culture-card">
-                <h3>Powerful collaboration</h3>
-                <p>Not just teamwork. The whole is greater than the sum of the parts.</p>
+        </div>
+        <div class="marquee-container" id="marquee-2">
+            <div class="marquee-inner">
+                <div class="marquee-item"><img src="./assets/assets/img5.jpg" alt="Work 5"></div>
+                <div class="marquee-item with-text"><h1>Precision</h1></div>
+                <div class="marquee-item"><img src="./assets/assets/img6.jpg" alt="Work 6"></div>
+                <div class="marquee-item"><img src="./assets/assets/img7.jpg" alt="Work 7"></div>
+                <div class="marquee-item"><img src="./assets/assets/img8.jpg" alt="Work 8"></div>
             </div>
-            <div class="culture-card">
-                <h3>Breathing technology</h3>
-                <p>Thinking digitally is the ultimate game changer to better shape architecture.</p>
+        </div>
+        <div class="marquee-container" id="marquee-3">
+            <div class="marquee-inner">
+                <div class="marquee-item"><img src="./assets/assets/img9.jpg" alt="Work 9"></div>
+                <div class="marquee-item with-text"><h1>Global Hub</h1></div>
+                <div class="marquee-item"><img src="./assets/assets/img10.jpg" alt="Work 10"></div>
+                <div class="marquee-item"><img src="./assets/assets/img11.jpg" alt="Work 11"></div>
+                <div class="marquee-item"><img src="./assets/assets/img12.jpg" alt="Work 12"></div>
             </div>
+        </div>
+        <div class="marquee-container" id="marquee-4">
+            <div class="marquee-inner">
+                <div class="marquee-item"><img src="./assets/assets/img13.jpg" alt="Work 13"></div>
+                <div class="marquee-item with-text"><h1>Design Engine</h1></div>
+                <div class="marquee-item"><img src="./assets/assets/img14.jpg" alt="Work 14"></div>
+                <div class="marquee-item"><img src="./assets/assets/img15.jpg" alt="Work 15"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="vision-reveal-section">
+        <div class="studio-manifesto" data-aos="fade-up">
+            <div class="manifesto-top">
+                <div class="studio-count">20</div>
+                <h3 class="manifesto-title">Architects, Engineers & <br>BIM Professionals.</h3>
+            </div>
+            
+            <div class="manifesto-grid">
+                <div class="manifesto-item">
+                    <div class="manifesto-icon"><i class="fas fa-users-gear"></i></div>
+                    <h4>Not a staffing agency.</h4>
+                    <p>We are a unified studio with a shared culture. We invest in every deliverable as if it were our own project.</p>
+                </div>
+                <div class="manifesto-item">
+                    <div class="manifesto-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h4>Trained In-House.</h4>
+                    <p>Every team member is mentored by senior architects. We don't just hire technical operators; we build architectural minds.</p>
+                </div>
+                <div class="manifesto-item">
+                    <div class="manifesto-icon"><i class="fas fa-globe-americas"></i></div>
+                    <h4>One Studio.</h4>
+                    <p>Operating across continents as one team. The distance is invisible in the precision of our final output.</p>
+                </div>
+            </div>
+
+            <div class="practice-certification">
+                <div class="cert-icon"><i class="fas fa-award"></i></div>
+                <div class="cert-content">
+                    <p><strong>RKM Studio is a Licensed Architecture Practice in Algeria.</strong> Designing and delivering real building projects is why our BIM work carries the depth of firsthand architectural experience.</p>
+                    <span class="cert-slogan">We don’t just model buildings. We design them.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="reveal-line" style="margin-top: 15rem;">
+            <span>We craft</span>
+            <span class="reveal-img-span">
+                <img src="https://i.pinimg.com/1200x/93/27/65/932765c7cd00055218ba7398119d7d4d.jpg" alt="Design detail">
+            </span>
+            <span>architectural</span>
+        </div>
+        <div class="reveal-line">
+            <span>precision</span>
+            <span class="reveal-img-span">
+                <img src="https://i.pinimg.com/736x/a9/f1/19/a9f11909a9644d7bfd5102fabcd8310c.jpg" alt="BIM analysis">
+            </span>
+            <span>through</span>
+        </div>
+        <div class="reveal-line">
+            <span>unreasonable</span>
+            <span class="reveal-img-span">
+                <img src="https://i.pinimg.com/1200x/48/09/77/480977567d6b4503c8f642728f266b72.jpg" alt="Technical drawing">
+            </span>
+            <span>care.</span>
         </div>
     </section>
 
@@ -1170,109 +657,148 @@ body:not([data-theme="light"]) .theme-toggle i {
     </section>
 
 
-    <section class="cta-section" id="contact">
-        <h2 class="cta-title">Got a project in mind?</h2>
-        <p class="section-subtitle">Let's revolutionize architecture through technology together.</p>
-        <a href="#" class="cta-button">Start Your Project</a>
+    <section class="rkm-stack-section">
+        <div class="rkm-stack-slider">
+            <div class="rkm-stack-card">
+                <img src="./assets/assets/img1.jpg" alt="">
+                <div class="rkm-stack-copy"><h1>Digital Twin</h1></div>
+            </div>
+            <div class="rkm-stack-card">
+                <img src="./assets/assets/img2.jpg" alt="">
+                <div class="rkm-stack-copy"><h1>Precision Flow</h1></div>
+            </div>
+            <div class="rkm-stack-card">
+                <img src="./assets/assets/img3.jpg" alt="">
+                <div class="rkm-stack-copy"><h1>Global Standard</h1></div>
+            </div>
+            <div class="rkm-stack-card">
+                <img src="./assets/assets/img4.jpg" alt="">
+                <div class="rkm-stack-copy"><h1>Design Depth</h1></div>
+            </div>
+            <div class="rkm-stack-card">
+                <img src="./assets/assets/img5.jpg" alt="">
+                <div class="rkm-stack-copy"><h1>Future Reach</h1></div>
+            </div>
+        </div>
     </section>
 
-    <footer class="footer">
-        <p>© 2024 RKM All rights reserved</p>
+    <section class="final-cta" id="contact">
+        <div class="container">
+            <h2 class="cta-headline">Let’s build something together.</h2>
+            <p class="cta-sub">Book a 30-minute discovery call. No pitch, no commitment — just a conversation about your projects and whether we’re the right fit for each other.</p>
+            <a href="mailto:hello@rkmstudio.com" class="cta-btn">Book a Discovery Call <span>→</span></a>
+            
+            <div class="direct-contact">
+                <p>Or reach us directly: <a href="mailto:hello@rkmstudio.com">hello@rkmstudio.com</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-top">
+            <div class="footer-tagline">RKM Studio — Your BIM Team. Architect-Led.</div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-links">
+                <a href="mailto:hello@rkm-studio.com">hello@rkm-studio.com</a>
+                <span class="divider">|</span>
+                <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+                <span class="divider">|</span>
+                <span class="copyright">© 2026 RKM Studio</span>
+            </div>
+        </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GTBV8d3/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script>
-        // Three.js Scene Setup
-const container = document.getElementById('canvas-container');
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        // ===== INTERACTIVE SHAPED BACKGROUND FOR HERO =====
+        const canvasContainer = document.getElementById('canvas-container');
+        
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            canvasContainer.style.setProperty('--mouse-x', x + '%');
+            canvasContainer.style.setProperty('--mouse-y', y + '%');
+        });
 
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-container.appendChild(renderer.domElement);
+        // ===== THREE.JS SHAPES CODE - COMMENTED OUT FOR REMAKE =====
+        /*
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        canvasContainer.appendChild(renderer.domElement);
+        
+        const geometry1 = new THREE.IcosahedronGeometry(1.6, 2);
+        const geometry3 = new THREE.TetrahedronGeometry(1, 0);
+        const geometry2 = new THREE.OctahedronGeometry(1.8, 0);
+        
+        const material = new THREE.MeshBasicMaterial({
+            color: 0xfc4103,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.7
+        });
+        
+        const mesh1 = new THREE.Mesh(geometry1, material);
+        const mesh2 = new THREE.Mesh(geometry2, material);
+        const mesh3 = new THREE.Mesh(geometry3, material);
+        
+        scene.add(mesh1, mesh2, mesh3);
+        camera.position.y = 1;
+        camera.position.z = 6;
+        
+        let mouseX = 0;
+        let mouseY = 0;
+        let scrollY = 0;
+        
+        window.addEventListener('scroll', () => {
+            scrollY = window.scrollY;
+        });
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            const scrollProgress = Math.min(scrollY / window.innerHeight, 1);
+            
+            mesh1.rotation.x += 0.005;
+            mesh1.rotation.y += 0.005;
+            mesh2.rotation.x -= 0.003;
+            mesh2.rotation.y += 0.007;
+            mesh3.rotation.x += 0.004;
+            mesh3.rotation.z += 0.006;
+            
+            mesh1.position.x = -3 + mouseX * 0.5 - scrollProgress * 4;
+            mesh1.position.y = 1 + mouseY * 0.5 + scrollProgress * 3;
+            mesh1.scale.setScalar(1 + scrollProgress * 2);
+            mesh2.position.x = 3 + mouseX * 0.3 + scrollProgress * 5;
+            mesh2.position.y = -1 + mouseY * 0.3 - scrollProgress * 2;
+            mesh2.scale.setScalar(1 + scrollProgress * 1.5);
+            mesh3.position.x = mouseX * 0.4 + scrollProgress * 2;
+            mesh3.position.y = 3.5 + mouseY * 0.4 + scrollProgress * 4;
+            mesh3.position.z = -2 - scrollProgress * 3;
+            mesh3.scale.setScalar(1 + scrollProgress * 2.5);
+            material.opacity = 0.3 - scrollProgress * 0.25;
+            renderer.render(scene, camera);
+        }
+        animate();
+        
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        */
+        // ===== END OF COMMENTED THREE.JS CODE =====
 
-// Create multiple geometric shapes
-const geometry1 = new THREE.IcosahedronGeometry(1.6, 2);
-const geometry3 = new THREE.TetrahedronGeometry(1, 0);
-const geometry2 = new THREE.OctahedronGeometry(1.8, 0);
-
-const material = new THREE.MeshBasicMaterial({
-    color: 0xfc4103,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.7
-});
-
-const mesh1 = new THREE.Mesh(geometry1, material);
-const mesh2 = new THREE.Mesh(geometry2, material);
-const mesh3 = new THREE.Mesh(geometry3, material);
-
-// mesh1.position.set(-3, 1, 0);
-// mesh2.position.set(12, -1, 0);
-// mesh3.position.set(0, 2, -2);
-
-scene.add(mesh1, mesh2, mesh3);
-camera.position.y = 1;
-camera.position.z = 6;
-
-// Mouse movement interaction
-let mouseX = 0;
-let mouseY = 0;
-let scrollY = 0;
-
-// document.addEventListener('mousemove', (e) => {
-//     mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-//     mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-// });
-
-// Scroll interaction
-window.addEventListener('scroll', () => {
-    scrollY = window.scrollY;
-});
-
-// Animation loop
-function animate() {
-    requestAnimationFrame(animate);
-
-    // Calculate scroll progress (0 to 1)
-    const scrollProgress = Math.min(scrollY / window.innerHeight, 1);
-
-    // Rotate meshes
-    mesh1.rotation.x += 0.005;
-    mesh1.rotation.y += 0.005;
-    
-    mesh2.rotation.x -= 0.003;
-    mesh2.rotation.y += 0.007;
-    
-    mesh3.rotation.x += 0.004;
-    mesh3.rotation.z += 0.006;
-
-    // Mouse interaction combined with scroll
-    mesh1.position.x = -3 + mouseX * 0.5 - scrollProgress * 4;
-    mesh1.position.y = 1 + mouseY * 0.5 + scrollProgress * 3;
-    mesh1.scale.setScalar(1 + scrollProgress * 2);
-    
-    mesh2.position.x = 3 + mouseX * 0.3 + scrollProgress * 5;
-    mesh2.position.y = -1 + mouseY * 0.3 - scrollProgress * 2;
-    mesh2.scale.setScalar(1 + scrollProgress * 1.5);
-    
-    mesh3.position.x = mouseX * 0.4 + scrollProgress * 2;
-    mesh3.position.y = 3.5 + mouseY * 0.4 + scrollProgress * 4;
-    mesh3.position.z = -2 - scrollProgress * 3;
-    mesh3.scale.setScalar(1 + scrollProgress * 2.5);
-
-    // Fade out shapes on scroll
-    material.opacity = 0.3 - scrollProgress * 0.25;
-
-    renderer.render(scene, camera);
-}
-
-animate();
-
-// Overlay cards scroll animation
+        // Overlay cards scroll animation
 const overlaySection = document.querySelector('.overlay-cards-section');
 const card2 = document.querySelector('.card-2');
 
@@ -1396,6 +922,634 @@ if (themeToggleBtn) {
         applyTheme(next);
     });
 }
+
+// ===== WORD-BY-WORD ANIMATION FOR HERO SUBLINE =====
+function animateSublineByWord() {
+    const sublineEl = document.getElementById('hero-subline');
+    if (!sublineEl) return;
+
+    const text = sublineEl.textContent;
+    const words = text.split(' ');
+    
+    sublineEl.innerHTML = words.map(word => `<span class="word">${word}</span>`).join(' ');
+    
+    const wordElements = sublineEl.querySelectorAll('.word');
+    const delayBetweenWords = 100; // milliseconds
+    const titleAnimationDuration = 1000; // match title animation duration
+    
+    wordElements.forEach((word, index) => {
+        word.style.animationDelay = `${titleAnimationDuration + (index * delayBetweenWords)}ms`;
+    });
+}
+
+// Run word animation when page loads
+animateSublineByWord();
+
+// ===== KINETIC TYPOGRAPHY ANIMATION =====
+function initializeKineticText() {
+    const elements = document.querySelectorAll('[data-kinetic-text]');
+    const charAnimationDuration = 60; // ms per character
+    const defaultDelay = 3200; // Start after hero animations complete
+
+    elements.forEach((element, elementIndex) => {
+        const text = element.getAttribute('data-kinetic-text') || element.textContent;
+        
+        // Clear original text
+        element.innerHTML = '';
+        
+        // Split into characters and wrap each in a span
+        const chars = text.split('');
+        chars.forEach((char, charIndex) => {
+            const charSpan = document.createElement('span');
+            charSpan.className = 'kinetic-char';
+            
+            if (char === ' ') {
+                charSpan.innerHTML = '&nbsp;';
+            } else {
+                charSpan.textContent = char;
+            }
+            
+            // Calculate delay for this character
+            const totalDelay = defaultDelay + (charIndex * charAnimationDuration);
+            charSpan.style.animationDelay = `${totalDelay}ms`;
+            charSpan.style.animation = `kineticStamp 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards`;
+            
+            element.appendChild(charSpan);
+        });
+    });
+}
+
+// Initialize kinetic text animations
+initializeKineticText();
+
+// ===== SERVICE PROGRESSION GALLERY =====
+document.addEventListener("DOMContentLoaded", () => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const lenis = new Lenis();
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    const stickySection = document.querySelector(".service-sticky");
+    if (stickySection) {
+        const stickyHeight = window.innerHeight * 5;
+        const outlineCanvas = document.querySelector(".service-outline-layer");
+        const fillCanvas = document.querySelector(".service-fill-layer");
+        const outlineCtx = outlineCanvas.getContext("2d");
+        const fillCtx = fillCanvas.getContext("2d");
+
+        function setCanvasSize(canvas, ctx) {
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            canvas.style.width = `${window.innerWidth}px`;
+            canvas.style.height = `${window.innerHeight}px`;
+            ctx.scale(dpr, dpr);
+        }
+        setCanvasSize(outlineCanvas, outlineCtx);
+        setCanvasSize(fillCanvas, fillCtx);
+
+        const triangleSize = 150;
+        const lineWidth = 1;
+        const SCALE_THRESHOLD = 0.01;
+        const triangleStates = new Map();
+        let animationFrameId = null;
+        let canvasXPosition = 0;
+
+        function drawTriangle(ctx, x, y, fillScale = 0, flipped = false) {
+            const halfSize = triangleSize / 2;
+
+            if (fillScale < SCALE_THRESHOLD) {
+                ctx.beginPath();
+                if (!flipped) {
+                    ctx.moveTo(x, y - halfSize);
+                    ctx.lineTo(x + halfSize, y + halfSize);
+                    ctx.lineTo(x - halfSize, y + halfSize);
+                } else {
+                    ctx.moveTo(x, y + halfSize);
+                    ctx.lineTo(x + halfSize, y - halfSize);
+                    ctx.lineTo(x - halfSize, y - halfSize);
+                }
+                ctx.closePath();
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.075)";
+                ctx.lineWidth = lineWidth;
+                ctx.stroke();
+            }
+
+            if (fillScale >= SCALE_THRESHOLD) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.scale(fillScale, fillScale);
+                ctx.translate(-x, -y);
+
+                ctx.beginPath();
+                if (!flipped) {
+                    ctx.moveTo(x, y - halfSize);
+                    ctx.lineTo(x + halfSize, y + halfSize);
+                    ctx.lineTo(x - halfSize, y + halfSize);
+                } else {
+                    ctx.moveTo(x, y + halfSize);
+                    ctx.lineTo(x + halfSize, y - halfSize);
+                    ctx.lineTo(x - halfSize, y - halfSize);
+                }
+                ctx.closePath();
+                ctx.fillStyle = "#fc4103";
+                ctx.strokeStyle = "#fc4103";
+                ctx.lineWidth = lineWidth;
+                ctx.stroke();
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function drawGrid(scrollProgress = 0) {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+
+            outlineCtx.clearRect(0, 0, outlineCanvas.width, outlineCanvas.height);
+            fillCtx.clearRect(0, 0, fillCanvas.width, fillCanvas.height);
+
+            const animationProgress =
+                scrollProgress <= 0.65 ? 0 : (scrollProgress - 0.65) / 0.35;
+
+            let needsUpdate = false;
+            const animationSpeed = 0.15;
+
+            triangleStates.forEach((state, key) => {
+                if (state.scale < 1) {
+                    const x =
+                        state.col * (triangleSize * 0.5) + triangleSize / 2 + canvasXPosition;
+                    const y = state.row * triangleSize + triangleSize / 2;
+                    const flipped = (state.row + state.col) % 2 !== 0;
+                    drawTriangle(outlineCtx, x, y, 0, flipped);
+                }
+            });
+
+            triangleStates.forEach((state, key) => {
+                const shouldBeVisible = state.order <= animationProgress;
+                const targetScale = shouldBeVisible ? 1 : 0;
+                const newScale =
+                    state.scale + (targetScale - state.scale) * animationSpeed;
+
+                if (Math.abs(newScale - state.scale) > 0.001) {
+                    state.scale = newScale;
+                    needsUpdate = true;
+                }
+
+                if (state.scale >= SCALE_THRESHOLD) {
+                    const x =
+                        state.col * (triangleSize * 0.5) + triangleSize / 2 + canvasXPosition;
+                    const y = state.row * triangleSize + triangleSize / 2;
+                    const flipped = (state.row + state.col) % 2 !== 0;
+                    drawTriangle(fillCtx, x, y, state.scale, flipped);
+                }
+            });
+
+            if (needsUpdate) {
+                animationFrameId = requestAnimationFrame(() => drawGrid(scrollProgress));
+            }
+        }
+
+        function initializeTriangles() {
+            const cols = Math.ceil(window.innerWidth / (triangleSize * 0.5));
+            const rows = Math.ceil(window.innerHeight / (triangleSize * 0.5));
+            const totalTriangles = rows * cols;
+
+            const positions = [];
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    positions.push({ row: r, col: c, key: `${r}-${c}` });
+                }
+            }
+
+            for (let i = positions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [positions[i], positions[j]] = [positions[j], positions[i]];
+            }
+
+            positions.forEach((pos, index) => {
+                triangleStates.set(pos.key, {
+                    order: index / totalTriangles,
+                    scale: 0,
+                    row: pos.row,
+                    col: pos.col,
+                });
+            });
+        }
+
+        initializeTriangles();
+        drawGrid();
+
+        window.addEventListener("resize", () => {
+            setCanvasSize(outlineCanvas, outlineCtx);
+            setCanvasSize(fillCanvas, fillCtx);
+            triangleStates.clear();
+            initializeTriangles();
+            drawGrid();
+        });
+
+        ScrollTrigger.create({
+            trigger: stickySection,
+            start: "top top",
+            end: `+=${stickyHeight}px`,
+            pin: true,
+            onUpdate: (self) => {
+                canvasXPosition = -self.progress * 200;
+                drawGrid(self.progress);
+
+                const cards = document.querySelector(".service-cards");
+                const progress = Math.min(self.progress / 0.654, 1);
+                gsap.set(cards, {
+                    x: -progress * window.innerWidth * 4,
+                });
+
+                // Performance: Only check word animation visibility when in the service section
+                if (progress > 0 && progress < 1) {
+                    document.querySelectorAll('[data-word-anim] .word').forEach(word => {
+                        const rect = word.getBoundingClientRect();
+                        if (rect.left < window.innerWidth * 0.8 && rect.right > window.innerWidth * 0.2) {
+                            word.classList.add('active');
+                        }
+                    });
+                }
+            },
+        });
+
+        // Initialize Word-by-Word Animations for Gallery
+        function prepareGalleryWordAnim() {
+            document.querySelectorAll('[data-word-anim]').forEach(el => {
+                const text = el.textContent;
+                const words = text.split(' ');
+                el.innerHTML = words.map((word, i) => `<span class="word">${word}</span>`).join(' ');
+            });
+        }
+        prepareGalleryWordAnim();
+
+        // ===== PROCESS TIMELINE ANIMATION =====
+        gsap.to(".timeline-progress", {
+            height: "100%",
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".timeline-container",
+                start: "top center",
+                end: "bottom center",
+                scrub: true
+            }
+        });
+
+        document.querySelectorAll(".timeline-step").forEach((step) => {
+            ScrollTrigger.create({
+                trigger: step,
+                start: "top 80%",
+                onEnter: () => step.classList.add("active"),
+                onLeaveBack: () => step.classList.remove("active")
+            });
+        });
+
+        // ===== CINEMATIC LOADER & HERO ENTRANCE =====
+        const masterTl = gsap.timeline();
+
+        // Reveal Brand Logo
+        masterTl.to(".loader-svg", { opacity: 1, duration: 0.5 })
+                .to(".brand-path", {
+                    strokeDashoffset: 0,
+                    duration: 2.5,
+                    ease: "power2.inOut",
+                    stagger: 0.05
+                })
+                .to(".brand-path", {
+                    fillOpacity: 1,
+                    duration: 0.8,
+                    onStart: function() {
+                        gsap.to(".brand-path", { strokeOpacity: 0, duration: 0.4 });
+                    }
+                })
+                // Reveal Text
+                .to(".brand-name", {
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power3.out"
+                }, "-=0.6")
+                .to(".brand-tagline.primary", {
+                    opacity: 1,
+                    duration: 0.8,
+                }, "-=0.4")
+                .to(".brand-tagline.secondary", {
+                    opacity: 1,
+                    duration: 0.8,
+                }, "-=0.4")
+                .to(".loader-content", {
+                    y: -50,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: "power4.in",
+                    delay: 0.5
+                })
+                .to(".loader-split-line", {
+                    height: "100%",
+                    duration: 1,
+                    ease: "power4.inOut"
+                })
+                .to(".loader-panel.left", {
+                    x: "-100%",
+                    duration: 1.2,
+                    ease: "power4.inOut"
+                }, "split")
+                .to(".loader-panel.right", {
+                    x: "100%",
+                    duration: 1.2,
+                    ease: "power4.inOut"
+                }, "split")
+                .to(".loader-split-line", {
+                    opacity: 0,
+                    duration: 0.3
+                }, "split+=0.5")
+                .to(".loader-wrapper", {
+                    display: "none"
+                })
+                .call(() => {
+                    document.body.classList.remove("is-loading");
+                });
+
+        // Hero entrance linked to loader
+        masterTl.fromTo(".hero-image", 
+            { y: 100, opacity: 0 },
+            { y: 0, opacity: 1, duration: 2, ease: "power4.out" }, 
+            "-=0.8"
+        )
+        .fromTo(".scroll-text", 
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1, ease: "power4.out" }, 
+            "-=1.5"
+        )
+        .to(".hero-description .word", {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.05,
+            ease: "power4.out"
+        }, "-=1.2")
+        .fromTo(".nav", 
+            { y: -20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8 }, 
+            "-=1.0"
+        )
+        .fromTo(".hero .cta-btn", 
+            { scale: 0.8, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.6 }, 
+            "-=0.8"
+        );
+
+        // Existing animations triggered after intro
+        // (Wait for masterTl if needed, but GSAP handles it lineally here)
+
+
+        // ===== RKM MODULAR CAROUSEL =====
+        let rkmsCurrentIndex = 1;
+        let rkmsTotalSlides = 7;
+
+        const updateRkmsActiveSlide = () => {
+            document.querySelectorAll(".rkms-title").forEach((el, index) => {
+                if (index === rkmsCurrentIndex) {
+                    el.classList.add("active");
+                } else {
+                    el.classList.remove("active");
+                }
+            });
+        };
+
+        const updateRkmsImages = (imageNumber) => {
+            const imgSrc = `./assets/assets/img${imageNumber}.jpg`;
+            const imgTop = document.createElement("img");
+            const imgBottom = document.createElement("img");
+
+            imgTop.src = imgSrc;
+            imgBottom.src = imgSrc;
+
+            imgTop.style.clipPath = "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)";
+            imgBottom.style.clipPath = "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)";
+            imgTop.style.transform = "scale(2)";
+            imgBottom.style.transform = "scale(2)";
+
+            document.querySelector(".rkms-img-top").appendChild(imgTop);
+            document.querySelector(".rkms-img-bottom").appendChild(imgBottom);
+
+            gsap.to([imgTop, imgBottom], {
+                clipPath: "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)",
+                transform: "scale(1)",
+                duration: 2,
+                ease: "power4.out",
+                stagger: 0.15,
+                onComplete: () => {
+                    [".rkms-img-top", ".rkms-img-bottom"].forEach((selector) => {
+                        const container = document.querySelector(selector);
+                        const images = Array.from(container.querySelectorAll("img"));
+                        if (images.length > 5) {
+                            images.slice(0, images.length - 5).forEach(img => container.removeChild(img));
+                        }
+                    });
+                }
+            });
+        };
+
+        const handleRkmsSlider = () => {
+            if (rkmsCurrentIndex < rkmsTotalSlides) {
+                rkmsCurrentIndex++;
+            } else {
+                rkmsCurrentIndex = 1;
+            }
+
+            gsap.to(".rkms-slide-titles", {
+                onStart: () => {
+                    setTimeout(updateRkmsActiveSlide, 100);
+                    updateRkmsImages(rkmsCurrentIndex + 1);
+                },
+                x: `-${(rkmsCurrentIndex - 1) * 11.1111}%`,
+                duration: 2,
+                ease: "power4.out",
+            });
+        };
+
+        const sliderEl = document.querySelector('.rkms-slider');
+        if (sliderEl) {
+            sliderEl.addEventListener("click", handleRkmsSlider);
+            updateRkmsImages(2);
+            updateRkmsActiveSlide();
+        }
+
+        // ===== MARQUEE GALLERY ANIMATION =====
+        const splitText = new SplitType(".marquee-item h1", { types: "chars" });
+        const marqueeContainers = document.querySelectorAll(".marquee-container");
+
+        marqueeContainers.forEach((container, index) => {
+            let start = "0%";
+            let end = "-15%";
+            if (index % 2 === 0) {
+                start = "0%";
+                end = "10%";
+            }
+
+            const marqueeInner = container.querySelector(".marquee-inner");
+            const words = marqueeInner.querySelectorAll("h1");
+
+            gsap.fromTo(marqueeInner, 
+                { x: start },
+                {
+                    x: end,
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top bottom",
+                        end: "150% top",
+                        scrub: true,
+                    }
+                }
+            );
+
+            words.forEach((word) => {
+                const chars = word.querySelectorAll(".char");
+                if (chars.length) {
+                    const reverse = index % 2 !== 0;
+                    gsap.fromTo(chars,
+                        { fontWeight: 100 },
+                        {
+                            fontWeight: 900,
+                            duration: 1,
+                            ease: "none",
+                            stagger: {
+                                each: 0.35,
+                                from: reverse ? "start" : "end",
+                                ease: "linear",
+                            },
+                            scrollTrigger: {
+                                trigger: container,
+                                start: "50% bottom",
+                                end: "top top",
+                                scrub: true,
+                            },
+                        }
+                    );
+                }
+            });
+        });
+
+        // ===== PAIN POINTS SECTION ANIMATION =====
+        gsap.from(".pain-point-card", {  
+            scrollTrigger: {
+                trigger: ".pain-points-grid",
+                start: "top 80%",
+            },
+            y: 100,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out"
+        });
+
+        // ===== RKM 3D STACK SLIDER =====
+        CustomEase.create("rkms-cubic", "0.83, 0, 0.17, 1");
+        let stackIsAnimating = false;
+
+        function splitStackText(selector) {
+            document.querySelectorAll(selector).forEach((el) => {
+                let text = el.innerText;
+                el.innerHTML = text.split("").map(c => `<span>${c === " " ? "&nbsp;&nbsp;" : c}</span>`).join("");
+            });
+        }
+
+        function initStackCards() {
+            let cards = Array.from(document.querySelectorAll(".rkm-stack-card"));
+            gsap.to(cards, {
+                y: (i) => -15 + 15 * i + "%",
+                z: (i) => 15 * i,
+                opacity: 1,
+                duration: 1,
+                ease: "rkms-cubic",
+                stagger: -0.1,
+            });
+        }
+
+        splitStackText(".rkm-stack-copy h1");
+        initStackCards();
+        gsap.set(".rkm-stack-copy h1 span", { y: -200 });
+        gsap.set(".rkm-stack-slider .rkm-stack-card:last-child h1 span", { y: 0 });
+
+        const stackSection = document.querySelector('.rkm-stack-section');
+        if (stackSection) {
+            stackSection.addEventListener("click", function () {
+                if (stackIsAnimating) return;
+                stackIsAnimating = true;
+
+                let slider = document.querySelector(".rkm-stack-slider");
+                let cards = Array.from(slider.querySelectorAll(".rkm-stack-card"));
+                let lastCard = cards.pop();
+                let nextCard = cards[cards.length - 1];
+
+                gsap.to(lastCard.querySelectorAll("h1 span"), {
+                    y: 200,
+                    duration: 0.75,
+                    ease: "rkms-cubic",
+                });
+
+                gsap.to(lastCard, {
+                    y: "+=150%",
+                    duration: 0.75,
+                    ease: "rkms-cubic",
+                    onComplete: () => {
+                        slider.prepend(lastCard);
+                        initStackCards();
+                        gsap.set(lastCard.querySelectorAll("h1 span"), { y: -200 });
+                        setTimeout(() => { stackIsAnimating = false; }, 1000);
+                    },
+                });
+
+                gsap.to(nextCard.querySelectorAll("h1 span"), {
+                    y: 0,
+                    duration: 1,
+                    ease: "rkms-cubic",
+                    stagger: 0.05,
+                });
+            });
+        }
+
+        // ===== COUNTER ANIMATION =====
+        document.querySelectorAll(".counter").forEach((counter) => {
+            const target = +counter.getAttribute("data-target");
+            ScrollTrigger.create({
+                trigger: counter,
+                start: "top 90%",
+                onEnter: () => {
+                    gsap.to(counter, {
+                        innerText: target,
+                        duration: 2,
+                        snap: { innerText: 1 },
+                        ease: "power2.out"
+                    });
+                }
+            });
+        });
+
+        // ===== VISION REVEAL ANIMATION =====
+        document.querySelectorAll('.reveal-line').forEach((line) => {
+            const imgSpan = line.querySelector('.reveal-img-span');
+            if (imgSpan) {
+                gsap.to(imgSpan, {
+                    width: 200,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: line,
+                        start: "top 90%",
+                        end: "top 40%",
+                        scrub: 1,
+                    }
+                });
+            }
+        });
+    }
+});
 
 // Initialize AOS
 AOS.init();
