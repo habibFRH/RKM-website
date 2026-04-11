@@ -921,3 +921,21 @@ function initStatsFlipper() {
 
 // Initialize when window loads or immediately
 initStatsFlipper();
+
+// ===== SCROLL HIGHLIGHT ANIMATION =====
+function initScrollHighlight() {
+    gsap.utils.toArray('.scroll-highlight').forEach((span) => {
+        ScrollTrigger.create({
+            trigger: span,
+            start: "top 85%",
+            end: "bottom 35%",
+            onEnter: () => span.classList.add('active'),
+            onLeave: () => span.classList.remove('active'),
+            onEnterBack: () => span.classList.add('active'),
+            onLeaveBack: () => span.classList.remove('active'),
+        });
+    });
+}
+
+// Call it
+initScrollHighlight();

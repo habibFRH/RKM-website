@@ -3296,9 +3296,17 @@ body:hover .custom-cursor-outline {
     opacity: 1;
 }
 
-/* Hide default cursor on desktop */
-@media (min-width: 1025px) {
-    body, a, button, .cta-btn, .nav-links a {
-        cursor: none !important;
-    }
+/* SCROLL HIGHLIGHT */
+.scroll-highlight {
+    color: var(--muted);
+    transition: color 0.4s ease;
+    display: inline;
+}
+
+body[data-theme="light"] .scroll-highlight {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.scroll-highlight.active {
+    color: var(--accent);
 }
