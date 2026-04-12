@@ -333,6 +333,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     gsap.ticker.lagSmoothing(0);
 
+    // ===== NAV CTA BUTTON APPEARANCE ON SCROLL =====
+    const heroCtaBtn = document.querySelector('.hero-cta-positioner .cta-btn');
+    const navCtaWrapper = document.querySelector('.nav-cta-wrapper');
+
+    if (heroCtaBtn && navCtaWrapper) {
+        ScrollTrigger.create({
+            trigger: ".hero-content",
+            start: "bottom top", 
+            onEnter: () => {
+                gsap.to(navCtaWrapper, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", pointerEvents: "auto" });
+            },
+            onLeaveBack: () => {
+                gsap.to(navCtaWrapper, { opacity: 0, y: 20, duration: 0.3, ease: "power2.in", pointerEvents: "none" });
+            }
+        });
+    }
+
     const stickySection = document.querySelector(".service-sticky");
     if (stickySection) {
         const stickyHeight = window.innerHeight * 5;

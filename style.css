@@ -60,6 +60,7 @@
     --panel: rgba(10, 10, 10, 0.8);
     --border: rgba(255, 255, 255, 0.1);
     --accent: #fc4103;
+    --accent-rgb: 252,65,3;
     --card-grad-1: linear-gradient(135deg, #fc41033c 0%, #fc410318 100%);
     --panel-blur: 10px;
     --overlaid-cards: black;
@@ -82,6 +83,10 @@ body {
     overflow-x: hidden;
 }
 
+body[data-theme="light"] {
+    background: var(--bg);
+}
+
 /* Use iA Writer Duospace for paragraphs */
 p {
     font-family: 'iA Writer Duospace', 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -89,13 +94,14 @@ p {
 
 /* Light theme overrides */
 body[data-theme="light"] {
-    --bg: #ffffff;
-    --text: #0a0a0a;
-    --muted: black;
-    --panel: rgba(255, 255, 255, 0.9);
+    --bg: #fafafa;
+    --text: #1a1a1a;
+    --muted: #666666;
+    --panel: rgba(255, 255, 255, 0.95);
     --border: rgba(0, 0, 0, 0.1);
-    --card-grad-1: linear-gradient(135deg, #fc41030d 0%, #fc410306 100%);
-    --overlaid-cards: white;
+    --card-grad-1: linear-gradient(135deg, rgba(var(--accent-rgb), 0.2) 0%, rgba(var(--accent-rgb), 0.12) 100%);
+    --overlaid-cards: #ffffff;
+    --muted-dark: #444444;
 }
 
 .nav {
@@ -152,6 +158,7 @@ body[data-theme="light"] {
 
 .nav-links a {
     color: var(--text);
+    margin-top: 8px;
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.3s;
@@ -692,13 +699,17 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
     position: relative;
 }
 
+.proof-trust-section, body[data-theme="light"] .proof-trust-section {
+    background: #000000 !important;
+}
+
 .proof-title {
     font-size: clamp(2rem, 5vw, 4rem);
     font-weight: 900;
     text-align: center;
     letter-spacing: 1.5rem;
     margin-bottom: 8rem;
-    color: var(--text);
+    color: #ffffff;
     text-transform: uppercase;
     opacity: 0.8;
 }
@@ -713,13 +724,23 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
     backdrop-filter: blur(10px);
 }
 
+.stats-grid-complex, body[data-theme="light"] .stats-grid-complex {
+    background: rgba(0, 0, 0, 0.8) !important;
+}
+
 .stat-complex-item {
     padding: 4rem 2rem;
-    border: 1px solid var(--border);
+    border: 1px solid transparent;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     text-align: center;
     position: relative;
     overflow: hidden;
+    color: #ffffff;
+}
+
+body[data-theme="light"] .stat-complex-item {
+    border: 1px solid transparent;
+    color: #ffffff;
 }
 
 .stat-complex-item:hover {
@@ -754,7 +775,7 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
 .stat-big-number {
     font-size: clamp(3rem, 6vw, 4.5rem);
     font-weight: 900;
-    color: var(--accent);
+    color: #ffffff;
     line-height: 1;
     margin-bottom: 1.5rem;
     font-family: 'Instrument Sans', sans-serif;
@@ -762,7 +783,7 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
 
 .stat-sub {
     font-size: 1.1rem;
-    color: var(--muted);
+    color: #ffffff;
     font-family: 'iA Writer Duospace', monospace;
     line-height: 1.6;
 }
@@ -1121,9 +1142,17 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
 .marquee-item {
     font-size: 2rem;
     font-weight: 700;
-    color: rgba(127, 127, 127, 0.2);
+    color: #ffffff;
     padding: 0 2rem;
     text-transform: uppercase;
+}
+
+body[data-theme="light"] .marquee {
+    background: #000000;
+}
+
+body[data-theme="light"] .marquee-item {
+    color: #ffffff;
 }
 
 @keyframes marquee {
@@ -1293,7 +1322,7 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
     padding: 3rem 2.5rem;
     border: 1px solid var(--border);
     border-radius: 0;
-    background: transparent;
+    background: var(--panel);
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     position: relative;
     display: flex;
@@ -1303,6 +1332,16 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
     animation: cardSlideIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     grid-column: span 2;
     overflow: hidden;
+}
+
+.pain-point-card .pain-point-question,
+.pain-point-card .pain-point-description {
+    color: var(--text);
+}
+
+body[data-theme="light"] .service-card,
+body[data-theme="light"] .pain-point-card {
+    color: var(--text);
 }
 
 .pain-point-card::after {
@@ -1527,7 +1566,7 @@ canvas.service-fill-layer {
     position: relative;
     width: 22%;
     height: 88%;
-    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.9) 100%);
+    background: var(--panel);
     border: 1px solid var(--border);
     border-radius: 0;
     display: flex;
@@ -1537,6 +1576,10 @@ canvas.service-fill-layer {
     overflow: hidden;
     scrollbar-width: thin;
     scrollbar-color: var(--accent) rgba(255, 255, 255, 0.1);
+}
+
+body[data-theme="light"] .service-cards .service-card {
+    background: rgba(255, 255, 255, 0.95);
 }
 
 .service-card:hover {
@@ -2965,9 +3008,25 @@ canvas.service-fill-layer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: var(--bg);
+    background-color: #000000;
     overflow: hidden;
     padding: 5rem 0;
+}
+
+body[data-theme="light"] .marquees-section {
+    background-color: #ffffff !important;
+}
+
+body[data-theme="light"] .marquees-section .marquee-item h1 {
+    color: #000000;
+}
+
+.marquees-section {
+    background-color: #000000;
+}
+
+body[data-theme="light"] .marquees-section .marquee-item h1 {
+    color: #000000;
 }
 
 .marquee-container {
@@ -3096,15 +3155,15 @@ canvas.service-fill-layer {
     text-align: center;
     font-size: clamp(2rem, 10vw, 15rem);
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.05);
+    color: var(--text);
     transition: color 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     font-family: 'Instrument Sans', sans-serif;
     text-transform: uppercase;
     line-height: 0.8;
 }
 
-.rkms-title.active h1 {
-    color: var(--accent);
+body[data-theme="light"] .rkms-title h1 {
+    color: #000000;
 }
 
 .rkms-slide-images {
@@ -3296,7 +3355,7 @@ canvas.service-fill-layer {
 .stat-big-number {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 900;
-    color: var(--text);
+    color: white;
     font-family: 'Instrument Sans', sans-serif;
     line-height: 1;
     margin-bottom: 1rem;
@@ -3304,7 +3363,7 @@ canvas.service-fill-layer {
 
 .stat-sub {
     font-size: 0.85rem;
-    color: var(--muted);
+    color: white;
     font-family: 'iA Writer Duospace', monospace;
     line-height: 1.5;
     text-transform: uppercase;
@@ -3477,13 +3536,9 @@ body:hover .custom-cursor-outline {
 
 /* SCROLL HIGHLIGHT */
 .scroll-highlight {
-    color: var(--muted);
+    color: var(--muted-dark, var(--muted));
     transition: color 0.4s ease;
     display: inline;
-}
-
-body[data-theme="light"] .scroll-highlight {
-    color: rgba(0, 0, 0, 0.4);
 }
 
 .scroll-highlight.active {
@@ -3660,11 +3715,15 @@ body[data-theme="light"] .scroll-highlight {
     .section-title {
         font-size: 2.5rem;
     }
-    .nav-links, .theme-toggle {
+    .nav-links {
         display: none !important;
     }
     .hamburger {
         display: flex !important;
+    }
+    .theme-toggle {
+        display: inline-block !important; /* Force toggle on mobile */
+        margin-right: 1.5rem; /* Space from hamburger */
     }
     .hero-cta-group {
         flex-direction: column;
@@ -3811,5 +3870,36 @@ body[data-theme="light"] .scroll-highlight {
     .footer-links {
         flex-wrap: wrap;
         justify-content: center;
+    }
+}
+
+.nav-cta-wrapper {
+    margin-left: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+}
+
+.nav-cta-btn {
+    padding: 0.8rem 1.8rem !important;
+    font-size: 0.9rem !important;
+    height: auto !important;
+}
+
+@media (max-width: 768px) {
+    .nav-cta-wrapper {
+        display: none !important; /* Hide on mobile so it doesn't break navbar */
+    }
+}
+
+@keyframes bounceRight {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(0);
+    }
+    40% {
+        transform: translateX(10px);
+    }
+    60% {
+        transform: translateX(5px);
     }
 }

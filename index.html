@@ -85,12 +85,16 @@
         <div class="nav-links">
             <a href="#services">Services</a>
             <a href="#process">Process</a>
-            <a href="#culture">Culture</a>
+            <a href="#team">Culture</a>
             <a href="#contact">Contact</a>
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-sun" id="theme-icon"></i>
+            </button>
         </div>
-        <button class="theme-toggle" aria-label="Toggle theme">
-            <i class="fas fa-sun" id="theme-icon"></i>
-        </button>
+        
+        <div class="nav-cta-wrapper">
+            <a href="#contact" class="cta-btn nav-cta-btn">Book a Call <span>→</span></a>
+        </div>
         <div class="hamburger">
             <span></span>
             <span></span>
@@ -101,7 +105,7 @@
     <div class="mobile-menu">
         <a href="#services">Services</a>
         <a href="#process">Process</a>
-        <a href="#culture">Culture</a>
+        <a href="#team">Culture</a>
         <a href="#contact">Contact</a>
     </div>
 
@@ -123,7 +127,11 @@
         <img class="hero-image" src="./assets/bg.png" alt="BIM Architecture" />
     </section>
 
-    <section class="rkms-slider">
+    <section class="rkms-slider" style="position: relative;">
+        <div class="rkms-slider-arrows" style="position: absolute; bottom: 40px; right: 5%; display: flex; gap: 20px; z-index: 100; font-size: 2rem; color: var(--accent); pointer-events: none;">
+            <i class="fas fa-chevron-left" style="opacity: 0.3;"></i>
+            <i class="fas fa-chevron-right" style="opacity: 0.8; animation: bounceRight 2s infinite;"></i>
+        </div>
         <div class="rkms-slide-titles">
             <div class="rkms-title"><h1>Project Foundation</h1></div>
             <div class="rkms-title"><h1>Architectural Flow</h1></div>
@@ -143,13 +151,13 @@
 
     <div class="marquee">
         <div class="marquee-content">
-            <span class="marquee-item">Design</span>
+            <span class="marquee-item">• Design</span>
             <span class="marquee-item">• Technology</span>
-            <span class="marquee-item">• Collaboration</span>
+            <span class="marquee-item">• Collab</span>
             <span class="marquee-item">• Innovation</span>
             <span class="marquee-item">• Architecture</span>
             <span class="marquee-item">• BIM</span>
-            <span class="marquee-item">Design</span>
+            <span class="marquee-item">• Design</span>
             <span class="marquee-item">• Technology</span>
             <span class="marquee-item">• Collaboration</span>
             <span class="marquee-item">• Innovation</span>
@@ -204,7 +212,7 @@
     </section>
 
     <!-- SECTION 3 - SERVICE PROGRESSION GALLERY -->
-    <section class="service-progression-section">
+    <section class="service-progression-section" id="services">
         <div class="service-sticky">
             <div class="service-bg-img"><img src="./assets/bg/BG.jpg" alt="Service background" /></div>
 
