@@ -912,6 +912,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
         });
+
+        // ===== SCROLL HIGHLIGHT ANIMATION (inside DOMContentLoaded so ScrollTrigger is registered) =====
+        gsap.utils.toArray('.scroll-highlight').forEach((span) => {
+            // Skip spans inside .service-cards — those are handled by the horizontal scroll onUpdate
+            if (span.closest('.service-cards')) return;
+
+            ScrollTrigger.create({
+                trigger: span,
+                start: "top 85%",
+                end: "bottom 35%",
+                onEnter: () => span.classList.add('active'),
+                onLeave: () => span.classList.remove('active'),
+                onEnterBack: () => span.classList.add('active'),
+                onLeaveBack: () => span.classList.remove('active'),
+            });
+        });
     }
 });
 
@@ -967,4 +983,5 @@ function initScrollHighlight() {
 }
 
 // Call it
-initScrollHighlight();
+// (scroll highlights for non-service-card sections are now handled inside DOMContentLoaded)
+// initScrollHighlight() — moved inside DOMContentLoaded
