@@ -1509,20 +1509,21 @@ canvas.service-fill-layer {
     position: absolute;
     top: 0;
     left: 0;
-    width: 500%;
+    width: 350%;
     height: 100vh;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: flex-end;
     will-change: transform;
     z-index: 2;
-    padding: 0 4rem 8vh;
+    padding: 0 10vw 8vh;
+    gap: 12vw;
 }
 
 .service-cards .service-card {
     position: relative;
-    width: 25%;
-    height: 65%;
+    width: 22%;
+    height: 88%;
     background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.9) 100%);
     border: 1px solid var(--border);
     border-radius: 0;
@@ -1638,7 +1639,7 @@ canvas.service-fill-layer {
 
 .service-text-slide {
     position: relative;
-    width: 25%;
+    width: 22%;
     height: 75%;
     display: flex;
     flex-direction: column;
@@ -1660,6 +1661,63 @@ canvas.service-fill-layer {
     line-height: 1.7;
     color: var(--muted);
     font-family: 'iA Writer Duospace', monospace;
+}
+
+/* SWISS UI SLIDE VARIANT */
+.swiss-slide {
+    justify-content: flex-start;
+    padding: 8vh 0 8vh 0;
+    gap: 2rem;
+    width: 26%;
+}
+
+.word-anim{
+    margin-top: 15px;
+}
+
+.swiss-slide::before {
+    content: attr(data-index);
+    position: absolute;
+    top: 8vh;
+    left: 0;
+    font-family: 'iA Writer Duospace', monospace;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+.swiss-slide .slide-title {
+    font-size: clamp(1.8rem, 2.8vw, 3rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    text-align: left;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--accent);
+}
+
+.swiss-slide .slide-p {
+    font-size: clamp(0.8rem, 1vw, 0.95rem);
+    line-height: 1.8;
+    color: var(--muted);
+    font-family: 'iA Writer Duospace', monospace;
+    text-align: left;
+    width: 100%;
+}
+
+.swiss-slide .scroll-highlight {
+    color: var(--accent);
+    font-style: normal;
+}
+
+.swiss-slide .scroll-highlight.active {
+    color: var(--text);
+    background: var(--accent);
+    padding: 0 0.15em;
 }
 
 .word-anim {
@@ -1715,8 +1773,8 @@ canvas.service-fill-layer {
 
     /* Service Progression Gallery */
     .service-cards .service-card {
-        width: 35%;
-        height: 60%;
+        max-width: 950px;
+        max-height: 60%;
         padding: 0;
         gap: 0;
     }

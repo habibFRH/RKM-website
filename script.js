@@ -487,12 +487,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     x: -progress * window.innerWidth * 4,
                 });
 
-                // Performance: Only check word animation visibility when in the service section
                 if (progress > 0 && progress < 1) {
                     document.querySelectorAll('[data-word-anim] .word').forEach(word => {
                         const rect = word.getBoundingClientRect();
-                        if (rect.left < window.innerWidth * 0.8 && rect.right > window.innerWidth * 0.2) {
+                        if (rect.left < window.innerWidth * 0.85 && rect.right > window.innerWidth * 0.02) {
                             word.classList.add('active');
+                        }
+                    });
+
+                    // Activate scroll-highlights inside horizontally-scrolling cards
+                    document.querySelectorAll('.service-cards .scroll-highlight').forEach(span => {
+                        const rect = span.getBoundingClientRect();
+                        if (rect.left < window.innerWidth * 0.85 && rect.right > window.innerWidth * 0.05) {
+                            span.classList.add('active');
+                        } else {
+                            span.classList.remove('active');
                         }
                     });
                 }
@@ -502,8 +511,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Initialize Word-by-Word Animations for Gallery
         function prepareGalleryWordAnim() {
             document.querySelectorAll('[data-word-anim]').forEach(el => {
-                const text = el.textContent;
-                const words = text.split(' ');
+                const text = el.textContent.trim();
+                const words = text.split(/\s+/);
                 el.innerHTML = words.map((word, i) => `<span class="word">${word}</span>`).join(' ');
             });
         }
