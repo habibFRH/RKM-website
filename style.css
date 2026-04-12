@@ -2645,7 +2645,7 @@ canvas.service-fill-layer {
 
 .studio-manifesto {
     max-width: 1200px;
-    margin: 4rem auto 0;
+    margin: 2rem auto 0;
     padding: 6rem;
     background: rgba(255, 255, 255, 0.015);
     border: 1px solid var(--border);
@@ -2967,7 +2967,7 @@ canvas.service-fill-layer {
     justify-content: center;
     background-color: var(--bg);
     overflow: hidden;
-    padding: 10rem 0;
+    padding: 5rem 0;
 }
 
 .marquee-container {
@@ -3488,4 +3488,135 @@ body[data-theme="light"] .scroll-highlight {
 
 .scroll-highlight.active {
     color: var(--accent);
+}
+
+/* ===== NODE CODING SECTION ===== */
+.node-section {
+    position: relative;
+    padding-bottom: 4rem;
+}
+
+.node-canvas-container {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    min-height: 500px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 3rem;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.05);
+    background-image: radial-gradient(var(--border) 1px, transparent 1px);
+    background-size: 20px 20px; /* Dot grid background */
+}
+
+.node-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.node-connections {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto; /* Allow hovering wires if strictly needed, otherwise none */
+    z-index: 1;
+}
+
+.node-wire {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-linecap: round;
+    opacity: 0.6;
+    transition: stroke-width 0.2s, opacity 0.2s;
+}
+
+.node-wire:hover {
+    stroke-width: 4;
+    opacity: 1;
+}
+
+.bim-node {
+    position: absolute;
+    width: 220px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    cursor: grab;
+    font-family: 'iA Writer Duospace', monospace;
+    display: flex;
+    flex-direction: column;
+}
+
+.bim-node:active {
+    cursor: grabbing;
+    z-index: 10;
+}
+
+.node-header {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    user-select: none;
+}
+
+.node-body {
+    padding: 0.8rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.node-port {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 1rem;
+    font-size: 0.8rem;
+    color: var(--text);
+    user-select: none;
+}
+
+.node-port.in {
+    justify-content: flex-start;
+}
+
+.node-port.out {
+    justify-content: flex-end;
+}
+
+.port-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+body[data-theme="light"] .port-dot {
+    background: #fff;
+}
+
+.node-port.in .port-dot {
+    left: -6px;
+}
+
+.node-port.out .port-dot {
+    right: -6px;
 }

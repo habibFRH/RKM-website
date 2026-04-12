@@ -584,6 +584,53 @@
                 </div>
              </div>
         </div>
+        </div>
+    </section>
+
+    <!-- NODE CODING SECTION -->
+    <section class="section node-section" id="bim-nodes">
+        <h2 class="section-title">Parametric Intelligence</h2>
+        <p class="section-subtitle">We build computational systems, not just static models. Drag the nodes to explore.</p>
+        
+        <div class="node-canvas-container">
+            <svg class="node-connections" id="node-wires"></svg>
+            <div class="node-canvas" id="node-canvas">
+                
+                <div class="bim-node" id="node-1" style="transform: translate(100px, 100px)">
+                    <div class="node-header">Project.Data</div>
+                    <div class="node-body">
+                        <div class="node-port out" data-port="out-1">Geometry <span class="port-dot"></span></div>
+                        <div class="node-port out" data-port="out-2">Parameters <span class="port-dot"></span></div>
+                    </div>
+                </div>
+
+                <div class="bim-node" id="node-2" style="transform: translate(450px, 50px)">
+                    <div class="node-header">Logic.Filter</div>
+                    <div class="node-body">
+                        <div class="node-port in" data-port="in-1"><span class="port-dot"></span> Input Data</div>
+                        <div class="node-port out" data-port="out-1">Filtered <span class="port-dot"></span></div>
+                    </div>
+                </div>
+
+                <div class="bim-node" id="node-3" style="transform: translate(450px, 200px)">
+                    <div class="node-header">Math.Calculate</div>
+                    <div class="node-body">
+                        <div class="node-port in" data-port="in-1"><span class="port-dot"></span> Variables</div>
+                        <div class="node-port out" data-port="out-1">Result <span class="port-dot"></span></div>
+                    </div>
+                </div>
+
+                <div class="bim-node" id="node-4" style="transform: translate(800px, 100px)">
+                    <div class="node-header">BIM.Generate</div>
+                    <div class="node-body">
+                        <div class="node-port in" data-port="in-1"><span class="port-dot"></span> Element Stream</div>
+                        <div class="node-port in" data-port="in-2"><span class="port-dot"></span> Modifiers</div>
+                        <div class="node-port out" data-port="out-1">Revit Elements <span class="port-dot"></span></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </section>
 
     <section class="marquees-section">
@@ -727,6 +774,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
     <script src="./script.js"></script>
 </body>
 </html>

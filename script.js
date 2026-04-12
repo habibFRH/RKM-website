@@ -1038,3 +1038,68 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 });
+
+// ===== NODE CODING SECTION LOGIC =====
+document.addEventListener("DOMContentLoaded", () => {
+    if (typeof Draggable !== 'undefined') {
+        const svgW = document.getElementById("node-wires");
+        if (!svgW) return;
+
+        const connections = [
+            { from: '#node-1 [data-port="out-1"] .port-dot', to: '#node-4 [data-port="in-1"] .port-dot' },
+            { from: '#node-1 [data-port="out-2"] .port-dot', to: '#node-2 [data-port="in-1"] .port-dot' },
+            { from: '#node-2 [data-port="out-1"] .port-dot', to: '#node-3 [data-port="in-1"] .port-dot' },
+            { from: '#node-3 [data-port="out-1"] .port-dot', to: '#node-4 [data-port="in-2"] .port-dot' }
+        ];
+
+        let paths = [];
+
+        // Create SVG paths
+        connections.forEach(() => {
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.classList.add("node-wire");
+            svgW.appendChild(path);
+            paths.push(path);
+        });
+
+        // Update wire paths
+        function updateConnections() {
+            const svgRect = svgW.getBoundingClientRect();
+            
+            connections.forEach((conn, i) => {
+                const fromEl = document.querySelector(conn.from);
+                const toEl = document.querySelector(conn.to);
+                
+                if (fromEl && toEl) {
+                    const fromRect = fromEl.getBoundingClientRect();
+                    const toRect = toEl.getBoundingClientRect();
+                    
+                    const x1 = fromRect.left + fromRect.width/2 - svgRect.left;
+                    const y1 = fromRect.top + fromRect.height/2 - svgRect.top;
+                    const x2 = toRect.left + toRect.width/2 - svgRect.left;
+                    const y2 = toRect.top + toRect.height/2 - svgRect.top;
+                    
+                    // Creates a smooth cubic bezier bezier curve simulating a wire
+                    const offset = Math.abs(x2 - x1) * 0.4;
+                    const pathString = `M ${x1} ${y1} C ${x1 + Math.max(offset, 40)} ${y1}, ${x2 - Math.max(offset, 40)} ${y2}, ${x2} ${y2}`;
+                    
+                    paths[i].setAttribute("d", pathString);
+                }
+            });
+        }
+
+        // Delay to make sure fonts/layout load
+        setTimeout(updateConnections, 100);
+        window.addEventListener('resize', updateConnections);
+
+        // Make nodes draggable and update wires on drag
+        Draggable.create(".bim-node", {
+            type: "x,y",
+            bounds: ".node-canvas-container",
+            onDrag: () => {
+                // Ensure wires stay attached smoothly during drag frames
+                requestAnimationFrame(updateConnections);
+            }
+        });
+    }
+});
