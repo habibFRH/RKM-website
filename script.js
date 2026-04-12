@@ -207,6 +207,26 @@ if (hamburger && mobileMenuEl) {
     });
 }
 
+// ===== LOGO SCROLL ROTATION =====
+(function initLogoRotation() {
+    const logoImg = document.getElementById('nav-logo-img');
+    if (!logoImg) return;
+
+    const heroSection = document.getElementById('home');
+    const getThreshold = () => heroSection ? heroSection.offsetHeight * 0.3 : window.innerHeight * 0.3;
+
+    function onLogoScroll() {
+        if (window.scrollY > getThreshold()) {
+            logoImg.classList.add('logo-rotated');
+        } else {
+            logoImg.classList.remove('logo-rotated');
+        }
+    }
+
+    window.addEventListener('scroll', onLogoScroll, { passive: true });
+    onLogoScroll();
+})();
+
 // Theme toggle
 function applyTheme(theme) {
     const signatureImage = document.getElementById('signature-image');
