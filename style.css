@@ -1675,7 +1675,7 @@ canvas.service-fill-layer {
 }
 
 .word-anim{
-    margin-top: 15px;
+    margin-top: 35px;
 }
 
 .swiss-slide::before {
@@ -3490,6 +3490,11 @@ body[data-theme="light"] .scroll-highlight {
     color: var(--accent);
 }
 
+/* Custom mobile descriptions for projects */
+.project-mobile-desc {
+    display: none;
+}
+
 /* ===== NODE CODING SECTION ===== */
 .node-section {
     position: relative;
@@ -3594,29 +3599,217 @@ body[data-theme="light"] .scroll-highlight {
     justify-content: flex-start;
 }
 
-.node-port.out {
-    justify-content: flex-end;
-}
-
-.port-dot {
-    width: 10px;
-    height: 10px;
-    background: var(--bg);
-    border: 2px solid var(--accent);
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-body[data-theme="light"] .port-dot {
-    background: #fff;
-}
-
-.node-port.in .port-dot {
-    left: -6px;
-}
-
 .node-port.out .port-dot {
     right: -6px;
+}
+
+/* ========================================= */
+/* ===== RESPONSIVE GLOBALS & QUERIES ====== */
+/* ========================================= */
+
+@media (max-width: 1024px) {
+    .hero-title {
+        font-size: clamp(3rem, 7vw, 6rem);
+    }
+    .hero-description {
+        font-size: 1.2rem;
+        max-width: 80%;
+    }
+    .pain-point-section .split-container {
+        flex-direction: column;
+    }
+    .pain-point-section .split-left, 
+    .pain-point-section .split-right {
+        width: 100%;
+        position: relative;
+        top: 0;
+        height: auto;
+    }
+    .pain-point-section .split-right {
+        padding-top: 4rem;
+        padding-bottom: 2rem;
+    }
+    .services-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1.5rem;
+    }
+    .leadership-grid {
+        gap: 2rem;
+    }
+    .member-card {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+    }
+    .member-image-box {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    .secondary-members {
+        grid-template-columns: 1fr;
+    }
+    .project {
+        padding: 2rem 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 4rem 1.5rem;
+    }
+    .section-title {
+        font-size: 2.5rem;
+    }
+    .nav-links, .theme-toggle {
+        display: none !important;
+    }
+    .hamburger {
+        display: flex !important;
+    }
+    .hero-cta-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    .cta-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+    .rkms-slide-titles {
+        flex-direction: column;
+        display: none; /* Can get complex on mobile, simplest to hide or re-layout */
+    }
+    /* Disable the custom cursor entirely on mobile */
+    .custom-cursor-dot, 
+    .custom-cursor-outline {
+        display: none !important;
+    }
+
+    /* Swiss UI Service Gallery overrides */
+    .service-text-slide,
+    .swiss-slide {
+        width: 85vw !important; /* Make it smaller so they see the next card to scroll horizontally */
+        height: auto !important;
+        min-height: auto !important;
+        padding: 4rem 1.5rem !important;
+        flex-shrink: 0;
+        display: flex !important;
+        /* overrides for the missing text slides */
+    }
+    .swiss-slide .slide-h2 {
+        font-size: 2rem;
+    }
+    
+    /* Why RKM Projects override */
+    .project {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem 1rem;
+    }
+    .project h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Project Thumbnail Interaction for Mobile */
+    .project-thumbnail {
+        display: none !important; /* Hide floating popup on touch devices */
+    }
+    
+    /* Show paragraph inline on mobile since hover/popup isn't available */
+    .project-mobile-desc {
+        display: block !important;
+        margin-top: 1rem;
+        color: var(--text);
+        font-size: 0.95rem;
+        line-height: 1.5;
+        font-family: 'Instrument Sans', sans-serif;
+    }
+
+    /* Node Section panning on mobile */
+    .node-canvas-container {
+        height: 70vh;
+        min-height: 500px;
+        overflow: auto !important;
+        scrollbar-width: none;
+    }
+    .node-canvas-container::-webkit-scrollbar {
+        display: none;
+    }
+    .node-canvas, #node-wires {
+        width: 200vw !important;
+        height: 900px !important;
+    }
+    /* Bind background grid to panning canvas instead of static container for mobile */
+    .node-canvas {
+        background-image: radial-gradient(var(--border) 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+    .bim-node {
+        transform: scale(0.85); /* fallback */
+    }
+    /* Vertical node positioning for scrolling canvas inside mobile */
+    #node-1 { top: 40px !important; left: 20px !important; }
+    #node-2 { top: 220px !important; left: 60px !important; }
+    #node-3 { top: 400px !important; left: 20px !important; }
+    #node-4 { top: 580px !important; left: 60px !important; }
+    
+    /* Timeline How We Work */
+    .timeline-container {
+        padding: 2rem 0;
+    }
+    .timeline-step {
+        width: 90%;
+        margin: 0 0 2rem 2rem !important; /* Force to left side */
+        text-align: left !important;
+        display: flex;
+        flex-direction: column !important; /* Forces title and paragraph under marker */
+        align-items: flex-start !important;
+        gap: 1rem;
+    }
+    .timeline-line {
+        left: 0;
+    }
+    .timeline-progress {
+        left: 0;
+    }
+    
+    /* Studio Manifesto Grid */
+    .studio-manifesto {
+        padding: 2rem 1.5rem;
+    }
+    .manifesto-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .process-timeline {
+        flex-direction: column;
+    }
+    
+    /* Marquees */
+    .marquee-item img {
+        height: 4rem;
+        width: 6rem;
+    }
+    .marquee-item.with-text h1 {
+        font-size: 2.5rem;
+    }
+    
+    /* Footer */
+    .footer-top {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+    .footer-tagline {
+        font-size: 2rem;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }

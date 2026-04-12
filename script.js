@@ -481,62 +481,87 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        initializeTriangles();
-        drawGrid();
+        // Initialize Word-by-Word Animations using SplitType perfectly preserving nested HTML spans
+        document.querySelectorAll('[data-word-anim]').forEach(el => {
+            new SplitType(el, { types: "words" });
+        });
 
-        window.addEventListener("resize", () => {
-            setCanvasSize(outlineCanvas, outlineCtx);
-            setCanvasSize(fillCanvas, fillCtx);
-            triangleStates.clear();
+        // ===== HORIZONTAL GALLERY GSAP MATCHMEDIA =====
+        let mm = gsap.matchMedia();
+
+        mm.add("(min-width: 769px)", () => {
             initializeTriangles();
             drawGrid();
-        });
 
-        ScrollTrigger.create({
-            trigger: stickySection,
-            start: "top top",
-            end: `+=${stickyHeight}px`,
-            pin: true,
-            onUpdate: (self) => {
-                canvasXPosition = -self.progress * 200;
-                drawGrid(self.progress);
-
-                const cards = document.querySelector(".service-cards");
-                const progress = Math.min(self.progress / 0.654, 1);
-                gsap.set(cards, {
-                    x: -progress * window.innerWidth * 4,
-                });
-
-                if (progress > 0 && progress < 1) {
-                    document.querySelectorAll('[data-word-anim] .word').forEach(word => {
-                        const rect = word.getBoundingClientRect();
-                        if (rect.left < window.innerWidth * 0.85 && rect.right > window.innerWidth * 0.02) {
-                            word.classList.add('active');
-                        }
-                    });
-
-                    // Activate scroll-highlights inside horizontally-scrolling cards
-                    document.querySelectorAll('.service-cards .scroll-highlight').forEach(span => {
-                        const rect = span.getBoundingClientRect();
-                        if (rect.left < window.innerWidth * 0.85 && rect.right > window.innerWidth * 0.05) {
-                            span.classList.add('active');
-                        } else {
-                            span.classList.remove('active');
-                        }
-                    });
-                }
-            },
-        });
-
-        // Initialize Word-by-Word Animations for Gallery
-        function prepareGalleryWordAnim() {
-            document.querySelectorAll('[data-word-anim]').forEach(el => {
-                const text = el.textContent.trim();
-                const words = text.split(/\s+/);
-                el.innerHTML = words.map((word, i) => `<span class="word">${word}</span>`).join(' ');
+            window.addEventListener("resize", () => {
+                setCanvasSize(outlineCanvas, outlineCtx);
+                setCanvasSize(fillCanvas, fillCtx);
+                triangleStates.clear();
+                initializeTriangles();
+                drawGrid();
             });
-        }
-        prepareGalleryWordAnim();
+
+            ScrollTrigger.create({
+                trigger: stickySection,
+                start: "top top",
+                end: `+=${stickyHeight}px`,
+                pin: true,
+                onUpdate: (self) => {
+                    canvasXPosition = -self.progress * 200;
+                    drawGrid(self.progress);
+
+                    const cards = document.querySelector(".service-cards");
+                    const progress = Math.min(self.progress / 0.654, 1);
+                    gsap.set(cards, {
+                        x: -progress * window.innerWidth * 4,
+                    });
+
+                    if (progress > 0 && progress < 1) {
+                        document.querySelectorAll('[data-word-anim] .word').forEach(word => {
+                            const rect = word.getBoundingClientRect();
+                            if (rect.left < window.innerWidth * 0.85 && rect.right > window.innerWidth * 0.02) {
+                                word.classList.add('active');
+                            }
+                        });
+
+                        document.querySelectorAll('.service-cards .scroll-highlight').forEach(span => {
+                            const rect = span.getBoundingClientRect();
+                            if (rect.left < window.innerWidth * 0.85 && rect.right > window.innerWidth * 0.05) {
+                                span.classList.add('active');
+                            } else {
+                                span.classList.remove('active');
+                            }
+                        });
+                    }
+                },
+            });
+            
+            return () => {
+                // optional cleanup
+            };
+        });
+
+        mm.add("(max-width: 768px)", () => {
+            // Un-pinned vertically stacked logic 
+            // Words show up sequentially as you scroll past them individually via normal intersection
+            document.querySelectorAll('[data-word-anim] .word').forEach((word, index) => {
+                ScrollTrigger.create({
+                    trigger: word,
+                    start: "top 80%",
+                    onEnter: () => word.classList.add('active'),
+                });
+            });
+            
+            document.querySelectorAll('.service-cards .scroll-highlight').forEach((span) => {
+                ScrollTrigger.create({
+                    trigger: span,
+                    start: "top 80%",
+                    onEnter: () => span.classList.add('active'),
+                });
+            });
+        });
+
+
 
         // ===== PROCESS TIMELINE ANIMATION =====
         gsap.to(".timeline-progress", {
