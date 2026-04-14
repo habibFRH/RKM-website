@@ -544,9 +544,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         document.querySelectorAll('.service-cards .scroll-highlight').forEach(span => {
                             const rect = span.getBoundingClientRect();
                             if (rect.left < window.innerWidth * 0.85 && rect.right > window.innerWidth * 0.05) {
-                                span.classList.add('active');
+                                if (!span.classList.contains('active')) {
+                                    // Assign random flicker timing on first activation
+                                    const duration = (2.5 + Math.random() * 3).toFixed(2); // 2.5s – 5.5s
+                                    const delay    = (Math.random() * 2).toFixed(2);        // 0s – 2s
+                                    span.style.setProperty('--flicker-duration', `${duration}s`);
+                                    span.style.setProperty('--flicker-delay',    `${delay}s`);
+                                    span.classList.add('active');
+                                }
                             } else {
                                 span.classList.remove('active');
+                                span.style.removeProperty('--flicker-duration');
+                                span.style.removeProperty('--flicker-delay');
                             }
                         });
                     }

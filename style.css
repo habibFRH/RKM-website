@@ -1758,12 +1758,30 @@ body[data-theme="light"] .service-cards .service-card {
 .swiss-slide .scroll-highlight {
     color: var(--accent);
     font-style: normal;
+    opacity: 0.35;
+    transition: opacity 0.4s ease, text-shadow 0.4s ease, color 0.4s ease;
+    position: relative;
 }
 
 .swiss-slide .scroll-highlight.active {
-    color: var(--text);
-    background: var(--accent);
-    padding: 0 0.15em;
+    color: var(--accent);
+    opacity: 1;
+    text-shadow:
+        0 0 8px rgba(252, 65, 3, 0.9),
+        0 0 20px rgba(252, 65, 3, 0.6),
+        0 0 45px rgba(252, 65, 3, 0.35),
+        0 0 80px rgba(252, 65, 3, 0.15);
+    animation: highlightFlicker var(--flicker-duration, 3s) ease-in-out var(--flicker-delay, 0s) infinite;
+}
+
+@keyframes highlightFlicker {
+    0%   { opacity: 1;    text-shadow: 0 0 8px rgba(252,65,3,0.9),  0 0 20px rgba(252,65,3,0.6),  0 0 45px rgba(252,65,3,0.35); }
+    15%  { opacity: 0.75; text-shadow: 0 0 4px rgba(252,65,3,0.5),  0 0 10px rgba(252,65,3,0.3); }
+    17%  { opacity: 1;    text-shadow: 0 0 8px rgba(252,65,3,0.9),  0 0 25px rgba(252,65,3,0.7),  0 0 55px rgba(252,65,3,0.4); }
+    40%  { opacity: 1;    text-shadow: 0 0 8px rgba(252,65,3,0.9),  0 0 20px rgba(252,65,3,0.6),  0 0 45px rgba(252,65,3,0.35); }
+    60%  { opacity: 0.85; text-shadow: 0 0 6px rgba(252,65,3,0.7),  0 0 15px rgba(252,65,3,0.45); }
+    62%  { opacity: 1;    text-shadow: 0 0 10px rgba(252,65,3,1),   0 0 30px rgba(252,65,3,0.8),  0 0 60px rgba(252,65,3,0.5); }
+    100% { opacity: 1;    text-shadow: 0 0 8px rgba(252,65,3,0.9),  0 0 20px rgba(252,65,3,0.6),  0 0 45px rgba(252,65,3,0.35); }
 }
 
 /* ===== WORK SECTION (FROM TEMPLATE) ===== */
