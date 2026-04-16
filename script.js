@@ -340,12 +340,26 @@ document.addEventListener("DOMContentLoaded", () => {
     if (heroCtaBtn && navCtaWrapper) {
         ScrollTrigger.create({
             trigger: ".hero-content",
-            start: "bottom top", 
+            start: "bottom top",
             onEnter: () => {
-                gsap.to(navCtaWrapper, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", pointerEvents: "auto" });
+                if (window.innerWidth <= 768) return;
+                gsap.to(navCtaWrapper, { 
+                    opacity: 1, 
+                    maxWidth: "250px", 
+                    duration: 0.6, 
+                    ease: "power3.inOut", 
+                    pointerEvents: "auto" 
+                });
             },
             onLeaveBack: () => {
-                gsap.to(navCtaWrapper, { opacity: 0, y: 20, duration: 0.3, ease: "power2.in", pointerEvents: "none" });
+                if (window.innerWidth <= 768) return;
+                gsap.to(navCtaWrapper, { 
+                    opacity: 0, 
+                    maxWidth: "0px", 
+                    duration: 0.4, 
+                    ease: "power3.inOut", 
+                    pointerEvents: "none" 
+                });
             }
         });
     }
@@ -578,6 +592,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             });
             
+            document.querySelectorAll('.service-cards .service-card').forEach((card, index) => {
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: "top 85%",
+                    onEnter: () => {
+                        gsap.to(card, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 1,
+                            ease: "power3.out"
+                        });
+                    },
+                });
+            });
+
             document.querySelectorAll('.service-cards .scroll-highlight').forEach((span) => {
                 ScrollTrigger.create({
                     trigger: span,
@@ -614,70 +643,70 @@ document.addEventListener("DOMContentLoaded", () => {
         const masterTl = gsap.timeline();
 
         // Reveal Brand Logo
-        masterTl.to(".loader-svg", { opacity: 1, duration: 0.5 })
+        masterTl.to(".loader-svg", { opacity: 1, duration: 0.3 })
                 .to(".brand-path", {
                     strokeDashoffset: 0,
-                    duration: 2.5,
+                    duration: 2.2,
                     ease: "power2.inOut",
-                    stagger: 0.05
+                    stagger: 0.04
                 })
                 .to(".brand-path", {
                     fillOpacity: 1,
                     duration: 0.8,
                     onStart: function() {
-                        gsap.to(".brand-path", { strokeOpacity: 0, duration: 0.4 });
+                        gsap.to(".brand-path", { strokeOpacity: 0, duration: 0.5 });
                     }
                 })
                 // Reveal Text
                 .to(".brand-name", {
                     opacity: 1,
-                    duration: 1,
+                    duration: 0.8,
                     ease: "power3.out"
-                }, "-=0.6")
+                }, "-=0.3")
                 .to(".brand-tagline.primary", {
                     opacity: 1,
-                    duration: 0.8,
-                }, "-=0.4")
+                    duration: 0.5,
+                }, "-=0.2")
                 .to(".brand-tagline.secondary", {
                     opacity: 1,
-                    duration: 0.8,
-                }, "-=0.4")
+                    duration: 0.5,
+                }, "-=0.2")
                 .to(".loader-content", {
-                    y: -50,
+                    y: -30,
                     opacity: 0,
-                    duration: 0.8,
+                    duration: 0.5,
                     ease: "power4.in",
-                    delay: 0.5
+                    delay: 0.2
                 })
                 .to(".loader-split-line", {
                     height: "100%",
-                    duration: 1,
+                    duration: 0.5,
                     ease: "power4.inOut"
                 })
                 .to(".loader-panel.left", {
                     x: "-100%",
-                    duration: 1.2,
+                    duration: 0.8,
                     ease: "power4.inOut"
                 }, "split")
                 .to(".loader-panel.right", {
                     x: "100%",
-                    duration: 1.2,
+                    duration: 0.8,
                     ease: "power4.inOut"
                 }, "split")
                 .to(".loader-split-line.left", {
                     x: "-50vw",
-                    duration: 1.2,
+                    duration: 0.8,
                     ease: "power4.inOut"
                 }, "split")
                 .to(".loader-split-line.right", {
                     x: "50vw",
-                    duration: 1.2,
+                    duration: 0.8,
                     ease: "power4.inOut"
                 }, "split")
                 .to(".loader-split-line", {
                     opacity: 0,
-                    duration: 0.3
-                }, "split+=0.5")
+                    duration: 0.2
+                }, "split+=0.3")
                 .to(".loader-wrapper", {
                     display: "none"
                 })
@@ -977,6 +1006,33 @@ document.addEventListener("DOMContentLoaded", () => {
                 onLeave: () => span.classList.remove('active'),
                 onEnterBack: () => span.classList.add('active'),
                 onLeaveBack: () => span.classList.remove('active'),
+            });
+        });
+        // ===== PARAGRAPH WORD-BY-WORD REVEAL =====
+        document.querySelectorAll('p').forEach(p => {
+            // Skip excluded contexts
+            if (
+                p.closest('.loader-wrapper') ||
+                p.closest('[data-word-anim]') ||
+                p.closest('.service-cards') ||
+                p.closest('.stat-flip-item') ||
+                p.closest('.thumbnail-text') ||
+                p.closest('.mobile-menu')
+            ) return;
+
+            const split = new SplitType(p, { types: 'words' });
+            if (!split.words || split.words.length === 0) return;
+
+            gsap.from(split.words, {
+                opacity: 0,
+                y: 14,
+                duration: 0.55,
+                stagger: 0.018,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: p,
+                    start: 'top 88%',
+                }
             });
         });
     }
