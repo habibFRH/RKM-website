@@ -3521,8 +3521,8 @@ body.is-loading {
 }
 
 .brand-path {
-    stroke-dasharray: 6000;
-    stroke-dashoffset: 6000;
+    stroke-dasharray: 10000;
+    stroke-dashoffset: 10000;
 }
 
 .loader-split-line {
