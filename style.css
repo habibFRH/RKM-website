@@ -861,8 +861,7 @@ body[data-theme="light"] .stat-complex-item {
 
 @media (max-width: 768px) {
     .proof-title {
-        letter-spacing: 0.5rem;
-        margin-bottom: 4rem;
+        margin-bottom: 2rem;
     }
     
     .stats-grid-complex {
@@ -3393,7 +3392,7 @@ body[data-theme="light"] .rkms-title h1 {
     font-weight: 700;
     color: var(--accent);
     text-align: center;
-    letter-spacing: 0.5em;
+    letter-spacing: 0.2em;
     margin-bottom: 6rem;
     font-family: 'iA Writer Duospace', monospace;
 }
