@@ -1326,3 +1326,32 @@ AOS.init({
     once: true,
     offset: 200
 });
+
+
+// ===== STATS ICON PATH ANIMATION =====
+function initStatIconAnimations() {
+    const paths = document.querySelectorAll('.stat-path');
+    paths.forEach(path => {
+        const length = path.getTotalLength();
+        
+        // Set initial state
+        gsap.set(path, {
+            strokeDasharray: length,
+            strokeDashoffset: length
+        });
+
+        // Animate on scroll
+        gsap.to(path, {
+            strokeDashoffset: 0,
+            duration: 1.5,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: path.closest('.stat-complex-item'),
+                start: 'top 85%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initStatIconAnimations);

@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="RKM Branding Logotype.svg">
 
-    <!-- Map Dependencies -->
+    <!-- Map & Icon Dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datamaps/0.5.9/datamaps.world.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
 <body class="is-loading">
@@ -262,29 +263,29 @@
         
         <div class="stats-grid-complex">
             <div class="stat-complex-item">
-                <div class="stat-icon"><i class="fas fa-shield-heart"></i></div>
+                <div class="stat-icon"><i data-lucide="shield-check"></i></div>
                 <div class="stat-big-number"><span class="counter" data-target="0">0</span>%</div>
                 <div class="stat-sub">client churn — no client has ever left</div>
             </div>
             <div class="stat-complex-item">
-                <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                <div class="stat-icon"><i data-lucide="calendar-days"></i></div>
                 <div class="stat-big-number"><span class="counter" data-target="5">0</span>+</div>
                 <div class="stat-sub">years of international BIM delivery</div>
             </div>
             <div class="stat-complex-item">
-                <div class="stat-icon"><i class="fas fa-drafting-compass"></i></div>
+                <div class="stat-icon"><i data-lucide="layers"></i></div>
                 <div class="stat-big-number"><span class="counter" data-target="400">0</span>+</div>
                 <div class="stat-sub">projects delivered across 4 continents</div>
             </div>
             <div class="stat-complex-item">
-                <div class="stat-icon"><i class="fas fa-earth-americas"></i></div>
+                <div class="stat-icon"><i data-lucide="globe"></i></div>
                 <div class="stat-big-number"><span class="counter" data-target="50">0</span>+</div>
                 <div class="stat-sub">clients served in 13+ countries</div>
             </div>
             <div class="stat-complex-item">
-                <div class="stat-icon"><i class="fas fa-user-group"></i></div>
+                <div class="stat-icon"><i data-lucide="users"></i></div>
                 <div class="stat-big-number"><span class="counter" data-target="20">0</span></div>
-                <div class="stat-sub">architects, engineers & BIM professionals in the studio</div>
+                <div class="stat-sub">architects, engineers & professionals</div>
             </div>
         </div>
 
@@ -745,6 +746,11 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Init Lucide icons
+        lucide.createIcons();
+    </script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GTBV8d3/A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
