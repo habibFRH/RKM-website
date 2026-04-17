@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', () => {
         const canvasContainer = document.getElementById('canvas-container');
         const cursorDot = document.querySelector('.custom-cursor-dot');
         const cursorOutline = document.querySelector('.custom-cursor-outline');
@@ -141,6 +142,7 @@ function updateCardOverlay() {
     }
 }
 
+
 window.addEventListener('scroll', updateCardOverlay);
 updateCardOverlay(); // Initial call
 
@@ -151,6 +153,7 @@ window.addEventListener('resize', () => {
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
+    });
 });
 
 // Smooth scroll animations
@@ -283,7 +286,7 @@ function animateSublineByWord() {
     const titleAnimationDuration = 1000; // match title animation duration
     
     wordElements.forEach((word, index) => {
-        word.style.animationDelay = `${titleAnimationDuration + (index * delayBetweenWords)}ms`;
+        word.style.transitionDelay = `${titleAnimationDuration + (index * delayBetweenWords)}ms`;
     });
 }
 
@@ -330,6 +333,11 @@ initializeKineticText();
 // ===== SERVICE PROGRESSION GALLERY =====
 document.addEventListener("DOMContentLoaded", () => {
     gsap.registerPlugin(ScrollTrigger);
+    
+    // Init Stat Icons after ScrollTrigger is ready
+    if (typeof initStatIconAnimations === 'function') {
+        initStatIconAnimations();
+    }
 
     const lenis = new Lenis();
     lenis.on("scroll", ScrollTrigger.update);
@@ -730,11 +738,12 @@ document.addEventListener("DOMContentLoaded", () => {
             { y: 0, opacity: 1, duration: 1, ease: "power4.out" }, 
             "-=1.5"
         )
-        .to(".hero-description .word", {
-            y: 0,
-            opacity: 1,
+        .to(".hero-description", {
+            onStart: () => {
+                const el = document.getElementById('hero-subline');
+                if (el) el.classList.add('revealed');
+            },
             duration: 0.8,
-            stagger: 0.02,
             ease: "power4.out"
         }, "-=1.2")
         .fromTo(".stats-flipper", 
@@ -1022,7 +1031,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 p.closest('.service-cards') ||
                 p.closest('.stat-flip-item') ||
                 p.closest('.thumbnail-text') ||
-                p.closest('.mobile-menu')
+                p.closest('.mobile-menu') ||
+                p.id === 'hero-subline' ||
+                p.classList.contains('hero-description')
             ) return;
 
             const split = new SplitType(p, { types: 'words' });
@@ -1320,7 +1331,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Initialize AOS
+// Initialize AOS & Stat Icons
 AOS.init({
     duration: 1000,
     once: true,
@@ -1330,7 +1341,7 @@ AOS.init({
 
 // ===== STATS ICON PATH ANIMATION =====
 function initStatIconAnimations() {
-    const paths = document.querySelectorAll('.stat-path');
+    const paths = document.querySelectorAll('.stat-icon svg path');
     paths.forEach(path => {
         const length = path.getTotalLength();
         
@@ -1353,5 +1364,3 @@ function initStatIconAnimations() {
         });
     });
 }
-
-document.addEventListener('DOMContentLoaded', initStatIconAnimations);

@@ -484,7 +484,7 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
     position: absolute;
     bottom: 4rem;
     right: 4rem;
-    z-index: 10;
+    z-index: 30;
 }
 
 .hero-description {
@@ -496,12 +496,20 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
     position: absolute;
     bottom: 4rem;
     left: 4rem;
+    z-index: 20; /* Ensure it stays above canvas/image */
 }
 
 .hero-description .word {
     display: inline-block;
     margin-right: 0.3em;
     opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.hero-description.revealed .word {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 @keyframes fadeInWord {
