@@ -2890,6 +2890,39 @@ body[data-theme="light"] .service-cards .service-card {
     }
 }
 
+/* MAP SECTION */
+.map-section {
+    padding-bottom: 0;
+    overflow: hidden;
+}
+
+#map-container { 
+    width: 100vw; 
+    height: 70vh; 
+    margin: 4rem 0 0; 
+    background-color: var(--bg);
+    position: relative;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.datamaps-hoverover {
+    font-family: 'Instrument Sans', sans-serif !important;
+    font-weight: 700 !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+}
+
+.hoverinfo {
+    padding: 12px 20px !important;
+    border-radius: 0px !important; /* Sharp corners */
+    background: var(--accent) !important;
+    color: #fff !important;
+    border: none !important;
+    font-size: 0.9rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
 /* FINAL CTA & FOOTER */
 .final-cta {
     padding: 12rem 2rem;

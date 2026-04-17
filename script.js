@@ -260,6 +260,11 @@ if (themeToggleBtn) {
         const next = isLight ? 'dark' : 'light';
         localStorage.setItem('theme', next);
         applyTheme(next);
+        
+        // Update map colors if it exists
+        if (typeof initGlobalMap === 'function') {
+            initGlobalMap();
+        }
     });
 }
 
@@ -1036,6 +1041,93 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+});
+
+// ===== GLOBAL PRESENCE MAP LOGIC =====
+let globalMaps = null;
+
+function initGlobalMap() {
+    const mapElement = document.getElementById('map-container');
+    if (!mapElement) return;
+
+    // Clear existing map if any
+    mapElement.innerHTML = '';
+
+    const isLight = document.body.getAttribute('data-theme') === 'light';
+    const accentColor = '#fc4103';
+    const countryFill = isLight ? '#dcdcdc' : '#1a1a1a';
+    const borderColor = isLight ? '#ffffff' : '#0a0a0a';
+
+    globalMaps = new Datamap({
+        element: mapElement,
+        projection: 'mercator',
+        responsive: true,
+        fills: {
+            defaultFill: countryFill,
+            accent: accentColor,
+            highlight: '#2a2a2a'
+        },
+        data: {},
+        geographyConfig: {
+            highlightFillColor: accentColor,
+            highlightBorderColor: '#ffffff',
+            highlightBorderWidth: 1,
+            borderWidth: 1,
+            borderColor: borderColor,
+            popupTemplate: function(geo, data) {
+                return `<div class="hoverinfo"><strong>${geo.properties.name}</strong></div>`;
+            }
+        }
+    });
+
+    // Add Cities
+    globalMaps.bubbles([
+        {
+            name: 'RKM Global Hub (Constantine)',
+            radius: 12,
+            latitude: 36.36,
+            longitude: 6.61,
+            fillKey: 'accent',
+            url: 'https://www.google.com/maps/search/Constantine'
+        },
+        {
+            name: 'RKM Studio (Algiers)',
+            radius: 8,
+            latitude: 36.75,
+            longitude: 3.05,
+            fillKey: 'accent',
+            url: 'https://www.google.com/maps/search/Algiers'
+        }
+    ], {
+        highlightFillColor: '#ffffff',
+        highlightBorderColor: accentColor,
+        popupTemplate: function(geo, data) {
+            return `<div class="hoverinfo">SITE: <strong>${data.name}</strong><br><small>(Click to view on map)</small></div>`;
+        }
+    });
+
+    // Add click functionality to bubbles
+    globalMaps.svg.selectAll('.datamaps-bubble')
+        .on('click', function(data) {
+            if (data.url) window.open(data.url, '_blank');
+        })
+        .on('mouseenter', function() {
+            const cursorOutline = document.querySelector('.custom-cursor-outline');
+            if (cursorOutline) gsap.to(cursorOutline, { scale: 1.5, duration: 0.3 });
+        })
+        .on('mouseleave', function() {
+            const cursorOutline = document.querySelector('.custom-cursor-outline');
+            if (cursorOutline) gsap.to(cursorOutline, { scale: 1, duration: 0.3 });
+        });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    initGlobalMap();
+    window.addEventListener('resize', () => {
+        if (globalMaps && typeof globalMaps.resize === 'function') {
+            globalMaps.resize();
+        }
+    });
 });
 
 // Initialize AOS
