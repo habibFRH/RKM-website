@@ -1142,7 +1142,7 @@ body[data-theme="light"] .stat-complex-item {
 }
 
 .full-width-image img {
-    width: 30%;
+    width: 50%;
     object-fit: cover;
     /* ensures image fills section without distortion */
     display: block;
@@ -2748,7 +2748,7 @@ body[data-theme="light"] .service-cards .service-card {
 
 .studio-manifesto {
     max-width: 1200px;
-    margin: 2rem auto 0;
+    margin: 2rem auto 2rem;
     padding: 6rem;
     background: rgba(255, 255, 255, 0.015);
     border: 1px solid var(--border);
@@ -2881,12 +2881,20 @@ body[data-theme="light"] .service-cards .service-card {
     .practice-certification {
         flex-direction: column;
         text-align: center;
-        padding: 3rem;
+        padding: 3rem 0.5rem;
         gap: 2rem;
+        width: 100%;
+        margin: 0 auto;
     }
     
     .studio-manifesto {
-        padding: 3rem;
+        padding: 4rem 1rem;
+        width: 100%;
+    }
+    
+    .cert-content p {
+        font-size: 1.1rem;
+        text-align: center;
     }
 }
 
@@ -3043,9 +3051,10 @@ body[data-theme="light"] .service-cards .service-card {
 .vision-reveal-section {
     width: 100%;
     min-height: 100vh;
-    padding: 6rem 4rem;
+    padding: 6rem 1rem;
     overflow: hidden;
     background: var(--bg);
+    margin-bottom: 2rem;
 }
 
 .reveal-line {

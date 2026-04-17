@@ -1068,6 +1068,7 @@ function initGlobalMap() {
         },
         data: {},
         done: function(datamap) {
+            // Manual hover logic
             datamap.svg.selectAll('.datamaps-subunit').on('mouseover', function(geography) {
                 const current = d3.select(this);
                 current.style('fill', accentColor);
@@ -1075,6 +1076,16 @@ function initGlobalMap() {
                 const current = d3.select(this);
                 current.style('fill', countryFill);
             });
+
+            // Mobile zoom logic
+            if (window.innerWidth <= 768) {
+                const zoom = d3.behavior.zoom()
+                    .scaleExtent([1, 8])
+                    .on("zoom", function() {
+                        datamap.svg.selectAll("g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+                    });
+                datamap.svg.call(zoom);
+            }
         },
         geographyConfig: {
             highlightOnHover: false, // Disable built-in hover to use our manual one
@@ -1307,4 +1318,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+});
+
+// Initialize AOS
+AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 200
 });
