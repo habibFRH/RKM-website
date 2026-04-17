@@ -1064,19 +1064,25 @@ function initGlobalMap() {
         responsive: true,
         fills: {
             defaultFill: countryFill,
-            accent: accentColor,
-            highlight: '#2a2a2a'
+            accent: accentColor
         },
         data: {},
+        done: function(datamap) {
+            datamap.svg.selectAll('.datamaps-subunit').on('mouseover', function(geography) {
+                const current = d3.select(this);
+                current.style('fill', accentColor);
+            }).on('mouseout', function(geography) {
+                const current = d3.select(this);
+                current.style('fill', countryFill);
+            });
+        },
         geographyConfig: {
-            highlightFillColor: accentColor,
-            highlightBorderColor: '#ffffff',
-            highlightBorderWidth: 1,
-            borderWidth: 1,
-            borderColor: borderColor,
+            highlightOnHover: false, // Disable built-in hover to use our manual one
             popupTemplate: function(geo, data) {
                 return `<div class="hoverinfo"><strong>${geo.properties.name}</strong></div>`;
-            }
+            },
+            borderWidth: 1,
+            borderColor: borderColor
         }
     });
 

@@ -2906,6 +2906,10 @@ body[data-theme="light"] .service-cards .service-card {
     border-bottom: 1px solid var(--border);
 }
 
+.datamaps-subunit {
+    transition: fill 0s !important;
+}
+
 .datamaps-hoverover {
     font-family: 'Instrument Sans', sans-serif !important;
     font-weight: 700 !important;
