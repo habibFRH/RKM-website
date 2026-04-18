@@ -655,35 +655,33 @@ document.addEventListener("DOMContentLoaded", () => {
         // ===== CINEMATIC LOADER & HERO ENTRANCE =====
         const masterTl = gsap.timeline();
 
-        // Reveal Brand Logo
-        masterTl.to(".loader-svg", { opacity: 1, duration: 0.3 })
-                .to(".brand-path", {
-                    strokeDashoffset: 0,
-                    duration: 2.2,
-                    ease: "power2.inOut",
-                    stagger: 0.04
-                })
-                .to(".brand-path", {
-                    fillOpacity: 1,
-                    duration: 0.8,
-                    onStart: function() {
-                        gsap.to(".brand-path", { strokeOpacity: 0, duration: 0.5 });
-                    }
-                })
-                // Reveal Text
-                .to(".brand-name", {
-                    opacity: 1,
-                    duration: 0.8,
-                    ease: "power3.out"
-                }, "-=0.3")
-                .to(".brand-tagline.primary", {
-                    opacity: 1,
-                    duration: 0.5,
-                }, "-=0.2")
-                .to(".brand-tagline.secondary", {
-                    opacity: 1,
-                    duration: 0.5,
-                }, "-=0.2")
+        // ── Signature draw: measure every path, set dasharray = dashoffset = length ──
+        const sigPaths = document.querySelectorAll('.brand-path');
+        sigPaths.forEach(path => {
+            const len = path.getTotalLength();
+            gsap.set(path, { strokeDasharray: len, strokeDashoffset: len, fillOpacity: 0 });
+        });
+
+        const s1 = document.getElementById('sig-s1');
+        const s2 = document.getElementById('sig-s2');
+        const s3 = document.getElementById('sig-s3');
+        const s4 = document.getElementById('sig-s4');
+        const s5 = document.getElementById('sig-s5');
+        const s6 = document.getElementById('sig-s6');
+
+        gsap.set(".loader-svg", { opacity: 1 });
+
+        // Draw each path sequentially — main sweep then detail marks
+        masterTl
+            .to(s1, { strokeDashoffset: 0, duration: 2.6, ease: "power1.inOut" })
+            .to(s2, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, "-=0.1")
+            .to(s3, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, "-=0.05")
+            .to(s4, { strokeDashoffset: 0, duration: 0.25, ease: "power2.out" }, "-=0.05")
+            .to(s5, { strokeDashoffset: 0, duration: 0.2, ease: "power2.out" })
+            .to(s6, { strokeDashoffset: 0, duration: 0.2, ease: "power2.out" }, "-=0.1")
+            // Fill floods in, stroke fades simultaneously
+            .to('.brand-path', { fillOpacity: 1, duration: 0.6, ease: "power2.inOut" }, "+=0.15")
+            .to('.brand-path', { strokeOpacity: 0, duration: 0.4, ease: "power2.inOut" }, "<")
                 .to(".loader-content", {
                     y: -30,
                     opacity: 0,
