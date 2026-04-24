@@ -1453,3 +1453,15 @@ document.addEventListener('DOMContentLoaded', () => {
     initStatIconAnimations();
     initTestimonialsCarousel();
 });
+
+function toggleBio(id, btn) {
+    const content = document.getElementById(id);
+    content.classList.toggle('active');
+    btn.classList.toggle('active');
+    
+    if (content.classList.contains('active')) {
+        btn.innerHTML = 'Close Story <span>+</span>';
+    } else {
+        btn.innerHTML = 'Read Story <span>+</span>';
+    }
+}
