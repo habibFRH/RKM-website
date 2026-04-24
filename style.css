@@ -1630,7 +1630,7 @@ canvas.service-fill-layer {
     position: absolute;
     top: 0;
     left: 0;
-    width: 350%;
+    width: 600%;
     height: 100vh;
     display: flex;
     justify-content: flex-start;
@@ -1643,8 +1643,9 @@ canvas.service-fill-layer {
 
 .service-cards .service-card {
     position: relative;
-    width: 25vw;
-    height: 65vh;
+    width: 35vw;
+    min-height: 60vh;
+    height: fit-content;
     background: var(--panel);
     border: 1px solid var(--border);
     border-radius: 4px;
@@ -1658,8 +1659,8 @@ canvas.service-fill-layer {
 
 .service-cards .service-card:hover {
     border-color: var(--accent);
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2), 0 0 20px rgba(var(--accent-rgb), 0.1);
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(252, 65, 3, 0.15);
 }
 
 body[data-theme="light"] .service-cards .service-card {
@@ -1674,7 +1675,7 @@ body[data-theme="light"] .service-cards .service-card {
 /* SERVICE CARD IMAGE / SVG AREA */
 .service-card-img {
     width: 100%;
-    height: 60%;
+    height: 300px;
     overflow: hidden;
     flex-shrink: 0;
     display: flex;
@@ -1682,7 +1683,18 @@ body[data-theme="light"] .service-cards .service-card {
     justify-content: center;
     background: rgba(var(--accent-rgb), 0.03);
     border-bottom: 1px solid var(--border);
-    padding: 2rem;
+    padding: 3rem;
+    position: relative;
+}
+
+.service-card-img::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
 }
 
 .service-card-img svg {
@@ -1699,25 +1711,32 @@ body[data-theme="light"] .service-cards .service-card {
 .service-card-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 0.8rem;
-    padding: 2rem;
-    height: 40%;
+    padding: 2.5rem;
+    height: auto;
     background: transparent;
 }
 
-.service-card-number {
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--accent);
-    font-family: 'Instrument Sans', sans-serif;
-    line-height: 1;
+.service-layer-tag {
+    font-family: 'iA Writer Duospace', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    width: fit-content;
+    opacity: 0.8;
 }
 
 .service-card-title {
-    font-size: 1.6rem;
-    font-weight: 900;
+    font-size: 1.8rem;
+    font-weight: 800;
     color: var(--text);
     font-family: 'Instrument Sans', sans-serif;
     line-height: 1.2;
