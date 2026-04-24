@@ -122,6 +122,10 @@ body[data-theme="light"] {
     backdrop-filter: blur(var(--panel-blur));
 }
 
+.colored{
+    color: var(--accent)!important;
+}
+
 @media (min-width: 1400px) {
     .nav {
         left: 150px;
@@ -4060,5 +4064,244 @@ body:hover .custom-cursor-outline {
     }
     60% {
         transform: translateX(5px);
+    }
+}
+
+/* Client refactor overrides */
+.nav {
+    background: transparent;
+    border-color: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+    transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.nav.nav-scrolled {
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(15, 15, 15, 0.08);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(14px);
+}
+
+.nav.nav-scrolled .nav-links a,
+.nav.nav-scrolled .theme-toggle,
+.nav.nav-scrolled .theme-toggle i {
+    color: #111111;
+}
+
+.nav.nav-scrolled .hamburger span {
+    background: #111111;
+}
+
+.nav.nav-scrolled .logo img {
+    filter: invert(1);
+}
+
+.nav.nav-scrolled .theme-toggle {
+    border-color: rgba(15, 15, 15, 0.12);
+}
+
+.loader-svg .brand-path {
+    stroke-width: 1.7 !important;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.pain-point-card[data-card-index="5"] {
+    animation-delay: 5s;
+}
+
+.pain-point-card[data-card-index="6"] {
+    animation-delay: 5.2s;
+}
+
+.service-card-img.service-visual {
+    display: grid;
+    place-items: center;
+    min-height: 280px;
+    background:
+        radial-gradient(circle at top, rgba(252, 65, 3, 0.2), transparent 55%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+}
+
+.service-visual svg {
+    width: min(92%, 360px);
+    height: auto;
+}
+
+.service-visual svg rect,
+.service-visual svg path,
+.service-visual svg circle {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.service-visual svg circle:last-child,
+.service-visual svg circle:first-of-type {
+    fill: rgba(var(--accent-rgb), 0.12);
+}
+
+.pricing-section,
+.testimonials-section {
+    padding: 8rem 2rem;
+}
+
+.pricing-header,
+.testimonials-header {
+    max-width: 860px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.pricing-kicker {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.pricing-grid,
+.testimonials-grid,
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.pricing-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.pricing-card,
+.testimonial-card,
+.contact-form,
+.booking-embed {
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem;
+    min-height: 100%;
+}
+
+.pricing-label,
+.testimonial-author {
+    color: var(--accent);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.pricing-card h3,
+.testimonial-card h3,
+.contact-form h3 {
+    margin: 0.7rem 0 0.9rem;
+}
+
+.testimonial-quote {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.contact-grid {
+    grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.9fr);
+    align-items: start;
+    margin-top: 3rem;
+}
+
+.booking-embed iframe {
+    width: 100%;
+    border: 0;
+    min-height: 600px;
+}
+
+.contact-form {
+    display: grid;
+    gap: 1rem;
+}
+
+.contact-form label {
+    display: grid;
+    gap: 0.45rem;
+    font-size: 0.92rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.9rem 1rem;
+    font: inherit;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form-note {
+    color: var(--muted);
+    font-size: 0.88rem;
+}
+
+.direct-contact {
+    margin-top: 2rem;
+}
+
+.footer-links span {
+    color: var(--muted);
+}
+
+body[data-theme="light"] .pricing-card,
+body[data-theme="light"] .testimonial-card,
+body[data-theme="light"] .contact-form,
+body[data-theme="light"] .booking-embed {
+    background: #ffffff;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.05);
+}
+
+body[data-theme="light"] .nav.nav-scrolled {
+    background: rgba(255, 255, 255, 0.94);
+}
+
+body[data-theme="light"] .service-card-img.service-visual {
+    background:
+        radial-gradient(circle at top, rgba(252, 65, 3, 0.16), transparent 55%),
+        linear-gradient(135deg, rgba(10, 10, 10, 0.03), rgba(10, 10, 10, 0.01));
+}
+
+@media (max-width: 1200px) {
+    .pricing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .contact-grid,
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-section,
+    .testimonials-section {
+        padding: 5rem 1.25rem;
+    }
+
+    .service-card-img.service-visual {
+        min-height: 220px;
+    }
+
+    .booking-embed iframe {
+        min-height: 520px;
     }
 }

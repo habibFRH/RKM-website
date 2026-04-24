@@ -194,6 +194,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const hamburger = document.querySelector('.hamburger');
 const mobileMenuEl = document.querySelector('.mobile-menu');
 const themeToggleBtn = document.querySelector('.theme-toggle');
+const themeIconEl = document.getElementById('theme-icon');
 
 if (hamburger && mobileMenuEl) {
     hamburger.addEventListener('click', () => {
@@ -230,13 +231,41 @@ if (hamburger && mobileMenuEl) {
     onLogoScroll();
 })();
 
+(function initNavbarState() {
+    const navEl = document.querySelector('.nav');
+    const heroSection = document.getElementById('home');
+    const logoLink = document.querySelector('.logo a');
+    if (!navEl || !heroSection) return;
+
+    function syncNavbarState() {
+        const threshold = heroSection.offsetHeight * 0.15;
+        navEl.classList.toggle('nav-scrolled', window.scrollY > threshold);
+    }
+
+    if (logoLink) {
+        logoLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (mobileMenuEl && hamburger) {
+                mobileMenuEl.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', syncNavbarState, { passive: true });
+    syncNavbarState();
+})();
+
 // Theme toggle
 function applyTheme(theme) {
     const signatureImage = document.getElementById('signature-image');
     if (theme === 'light') {
         document.body.setAttribute('data-theme', 'light');
         if (themeToggleBtn) {
-            themeToggleBtn.textContent = '🌙';
+            if (themeIconEl) {
+                themeIconEl.className = 'fas fa-moon';
+            }
             themeToggleBtn.setAttribute('aria-label', 'Switch to dark theme');
         }
         if (signatureImage) {
@@ -245,7 +274,9 @@ function applyTheme(theme) {
     } else {
         document.body.removeAttribute('data-theme');
         if (themeToggleBtn) {
-            themeToggleBtn.textContent = '☀️';
+            if (themeIconEl) {
+                themeIconEl.className = 'fas fa-sun';
+            }
             themeToggleBtn.setAttribute('aria-label', 'Switch to light theme');
         }
         if (signatureImage) {
@@ -673,45 +704,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Draw each path sequentially — main sweep then detail marks
         masterTl
-            .to(s1, { strokeDashoffset: 0, duration: 2.6, ease: "power1.inOut" })
-            .to(s2, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, "-=0.1")
-            .to(s3, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, "-=0.05")
-            .to(s4, { strokeDashoffset: 0, duration: 0.25, ease: "power2.out" }, "-=0.05")
-            .to(s5, { strokeDashoffset: 0, duration: 0.2, ease: "power2.out" })
-            .to(s6, { strokeDashoffset: 0, duration: 0.2, ease: "power2.out" }, "-=0.1")
-            // Fill floods in, stroke fades simultaneously
-            .to('.brand-path', { fillOpacity: 1, duration: 0.6, ease: "power2.inOut" }, "+=0.15")
-            .to('.brand-path', { strokeOpacity: 0, duration: 0.4, ease: "power2.inOut" }, "<")
+            .to(s1, { strokeDashoffset: 0, duration: 1.9, ease: "power1.inOut" })
+            .to(s2, { strokeDashoffset: 0, duration: 0.2, ease: "power2.out" }, "-=0.05")
+            .to(s3, { strokeDashoffset: 0, duration: 0.18, ease: "power2.out" }, "-=0.04")
+            .to(s4, { strokeDashoffset: 0, duration: 0.16, ease: "power2.out" }, "-=0.04")
+            .to(s5, { strokeDashoffset: 0, duration: 0.12, ease: "power2.out" })
+            .to(s6, { strokeDashoffset: 0, duration: 0.12, ease: "power2.out" }, "-=0.05")
+            .to('.brand-path', { fillOpacity: 1, duration: 0.3, ease: "power2.inOut" }, "+=0.05")
+            .to('.brand-path', { strokeOpacity: 0, duration: 0.18, ease: "power2.inOut" }, "<")
                 .to(".loader-content", {
                     y: -30,
                     opacity: 0,
-                    duration: 0.5,
+                    duration: 0.35,
                     ease: "power4.in",
-                    delay: 0.2
+                    delay: 0.1
                 })
                 .to(".loader-split-line", {
                     height: "100%",
-                    duration: 0.5,
+                    duration: 0.35,
                     ease: "power4.inOut"
                 })
                 .to(".loader-panel.left", {
                     x: "-100%",
-                    duration: 0.8,
+                    duration: 0.55,
                     ease: "power4.inOut"
                 }, "split")
                 .to(".loader-panel.right", {
                     x: "100%",
-                    duration: 0.8,
+                    duration: 0.55,
                     ease: "power4.inOut"
                 }, "split")
                 .to(".loader-split-line.left", {
                     x: "-50vw",
-                    duration: 0.8,
+                    duration: 0.55,
                     ease: "power4.inOut"
                 }, "split")
                 .to(".loader-split-line.right", {
                     x: "50vw",
-                    duration: 0.8,
+                    duration: 0.55,
                     ease: "power4.inOut"
                 }, "split")
                 .to(".loader-split-line", {
@@ -838,59 +868,61 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // ===== MARQUEE GALLERY ANIMATION =====
-        const splitText = new SplitType(".marquee-item h1", { types: "chars" });
         const marqueeContainers = document.querySelectorAll(".marquee-container");
+        if (marqueeContainers.length) {
+            new SplitType(".marquee-item h1", { types: "chars" });
 
-        marqueeContainers.forEach((container, index) => {
-            let start = "0%";
-            let end = "-15%";
-            if (index % 2 === 0) {
-                start = "0%";
-                end = "10%";
-            }
-
-            const marqueeInner = container.querySelector(".marquee-inner");
-            const words = marqueeInner.querySelectorAll("h1");
-
-            gsap.fromTo(marqueeInner, 
-                { x: start },
-                {
-                    x: end,
-                    scrollTrigger: {
-                        trigger: container,
-                        start: "top bottom",
-                        end: "150% top",
-                        scrub: true,
-                    }
+            marqueeContainers.forEach((container, index) => {
+                let start = "0%";
+                let end = "-15%";
+                if (index % 2 === 0) {
+                    start = "0%";
+                    end = "10%";
                 }
-            );
 
-            words.forEach((word) => {
-                const chars = word.querySelectorAll(".char");
-                if (chars.length) {
-                    const reverse = index % 2 !== 0;
-                    gsap.fromTo(chars,
-                        { fontWeight: 100 },
-                        {
-                            fontWeight: 900,
-                            duration: 1,
-                            ease: "none",
-                            stagger: {
-                                each: 0.35,
-                                from: reverse ? "start" : "end",
-                                ease: "linear",
-                            },
-                            scrollTrigger: {
-                                trigger: container,
-                                start: "50% bottom",
-                                end: "top top",
-                                scrub: true,
-                            },
+                const marqueeInner = container.querySelector(".marquee-inner");
+                const words = marqueeInner.querySelectorAll("h1");
+
+                gsap.fromTo(marqueeInner, 
+                    { x: start },
+                    {
+                        x: end,
+                        scrollTrigger: {
+                            trigger: container,
+                            start: "top bottom",
+                            end: "150% top",
+                            scrub: true,
                         }
-                    );
-                }
+                    }
+                );
+
+                words.forEach((word) => {
+                    const chars = word.querySelectorAll(".char");
+                    if (chars.length) {
+                        const reverse = index % 2 !== 0;
+                        gsap.fromTo(chars,
+                            { fontWeight: 100 },
+                            {
+                                fontWeight: 900,
+                                duration: 1,
+                                ease: "none",
+                                stagger: {
+                                    each: 0.35,
+                                    from: reverse ? "start" : "end",
+                                    ease: "linear",
+                                },
+                                scrollTrigger: {
+                                    trigger: container,
+                                    start: "50% bottom",
+                                    end: "top top",
+                                    scrub: true,
+                                },
+                            }
+                        );
+                    }
+                });
             });
-        });
+        }
 
         // ===== PAIN POINTS SECTION ANIMATION =====
         gsap.from(".pain-point-card", {  
@@ -978,6 +1010,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 trigger: counter,
                 start: "top 90%",
                 onEnter: () => {
+                    counter.innerText = 0;
                     gsap.to(counter, {
                         innerText: target,
                         duration: 2,
@@ -1362,3 +1395,25 @@ function initStatIconAnimations() {
         });
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const contactForm = document.getElementById('contact-form');
+    if (!contactForm) return;
+
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const name = formData.get('name') || '';
+        const email = formData.get('email') || '';
+        const company = formData.get('company') || '';
+        const message = formData.get('message') || '';
+
+        const subject = encodeURIComponent(`RKM Studio Inquiry - ${name || 'New Lead'}`);
+        const body = encodeURIComponent(
+            `Name: ${name}\nEmail: ${email}\nCompany: ${company}\n\nProject brief:\n${message}`
+        );
+
+        window.location.href = `mailto:hello@rkm-studio.com?subject=${subject}&body=${body}`;
+    });
+});
