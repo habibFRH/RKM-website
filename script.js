@@ -394,7 +394,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const stickySection = document.querySelector(".service-sticky");
     if (stickySection) {
-        const stickyHeight = window.innerHeight * 5;
+        const stickyHeight = window.innerHeight * 8;
         const outlineCanvas = document.querySelector(".service-outline-layer");
         const fillCanvas = document.querySelector(".service-fill-layer");
         const outlineCtx = outlineCanvas.getContext("2d");
@@ -572,7 +572,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const cards = document.querySelector(".service-cards");
                     const progress = Math.min(self.progress / 0.654, 1);
                     gsap.set(cards, {
-                        x: -progress * window.innerWidth * 4,
+                        x: -progress * window.innerWidth * 7,
                     });
 
                     if (progress > 0 && progress < 1) {
