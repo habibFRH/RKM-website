@@ -2333,6 +2333,89 @@ body[data-theme="light"] .service-cards .service-card {
 }
 
 
+
+/* ===== PRACTICE CERTIFICATION (S9) ===== */
+.practice-certification {
+    max-width: 900px;
+    margin: 6rem auto;
+    padding: 4rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 3.5rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.practice-certification::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(252, 65, 3, 0.03));
+    pointer-events: none;
+}
+
+.cert-icon {
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+.cert-icon svg {
+    width: 64px;
+    height: 64px;
+    stroke-width: 1.5;
+}
+
+.cert-content p {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 500;
+}
+
+.cert-content p strong {
+    color: var(--accent);
+    font-weight: 800;
+}
+
+.cert-slogan {
+    font-family: 'iA Writer Duospace', monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    font-weight: 700;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .practice-certification {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+        padding: 3.5rem 2rem;
+        margin: 4rem 1.5rem;
+    }
+    .cert-icon svg {
+        width: 48px;
+        height: 48px;
+    }
+    .cert-content p {
+        font-size: 1.15rem;
+    }
+    .cert-slogan {
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+    }
+}
+
 /* ===== WORK SECTION (FROM TEMPLATE) ===== */
 .work-index {
    display: flex;
@@ -3260,7 +3343,7 @@ body[data-theme="light"] .service-cards .service-card {
 
 .studio-manifesto {
     max-width: 1200px;
-    margin: 2rem auto 2rem;
+    margin: 2rem auto 12rem;
     padding: 6rem;
     background: rgba(255, 255, 255, 0.015);
     border: 1px solid var(--border);
