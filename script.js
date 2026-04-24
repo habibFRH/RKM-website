@@ -210,24 +210,39 @@ if (hamburger && mobileMenuEl) {
     });
 }
 
-// ===== LOGO SCROLL ROTATION =====
-(function initLogoRotation() {
+// ===== NAVBAR STATE & LOGO SCROLL =====
+(function initNavbarState() {
+    const navEl = document.querySelector('.nav');
     const logoImg = document.getElementById('nav-logo-img');
-    if (!logoImg) return;
+    const logoLink = document.querySelector('.logo a');
+    if (!navEl || !logoImg) return;
 
     const heroSection = document.getElementById('home');
-    const getThreshold = () => heroSection ? heroSection.offsetHeight * 0.3 : window.innerHeight * 0.3;
+    const getThreshold = () => heroSection ? heroSection.offsetHeight * 0.15 : window.innerHeight * 0.15;
 
-    function onLogoScroll() {
-        if (window.scrollY > getThreshold()) {
-            logoImg.classList.add('logo-rotated');
-        } else {
-            logoImg.classList.remove('logo-rotated');
-        }
+    function syncNavbar() {
+        const scrolled = window.scrollY > getThreshold();
+        
+        // Toggle background/border
+        navEl.classList.toggle('nav-scrolled', scrolled);
+        
+        // Toggle logo rotation
+        logoImg.classList.toggle('logo-rotated', scrolled);
     }
 
-    window.addEventListener('scroll', onLogoScroll, { passive: true });
-    onLogoScroll();
+    // Smooth scroll to top on logo click
+    if (logoLink) {
+        logoLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    window.addEventListener('scroll', syncNavbar, { passive: true });
+    syncNavbar();
 })();
 
 // Theme toggle
@@ -673,14 +688,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Draw each path sequentially — main sweep then detail marks
         masterTl
-            .to(s1, { strokeDashoffset: 0, duration: 2.6, ease: "power1.inOut" })
-            .to(s2, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, "-=0.1")
-            .to(s3, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, "-=0.05")
-            .to(s4, { strokeDashoffset: 0, duration: 0.25, ease: "power2.out" }, "-=0.05")
+            .to(s1, { strokeDashoffset: 0, duration: 1.8, ease: "power2.inOut" })
+            .to(s2, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, "-=0.2")
+            .to(s3, { strokeDashoffset: 0, duration: 0.2, ease: "power2.out" }, "-=0.1")
+            .to(s4, { strokeDashoffset: 0, duration: 0.2, ease: "power2.out" }, "-=0.1")
             .to(s5, { strokeDashoffset: 0, duration: 0.2, ease: "power2.out" })
             .to(s6, { strokeDashoffset: 0, duration: 0.2, ease: "power2.out" }, "-=0.1")
             // Fill floods in, stroke fades simultaneously
-            .to('.brand-path', { fillOpacity: 1, duration: 0.6, ease: "power2.inOut" }, "+=0.15")
+            .to('.brand-path', { fillOpacity: 1, duration: 0.6, ease: "power2.inOut" }, "+=0.1")
             .to('.brand-path', { strokeOpacity: 0, duration: 0.4, ease: "power2.inOut" }, "<")
                 .to(".loader-content", {
                     y: -30,
