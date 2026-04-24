@@ -1377,3 +1377,79 @@ function initStatIconAnimations() {
         });
     });
 }
+
+// ===== TESTIMONIALS CAROUSEL =====
+function initTestimonialsCarousel() {
+    const track = document.querySelector('.testimonials-track');
+    const slides = Array.from(document.querySelectorAll('.testimonial-slide'));
+    const nextBtn = document.querySelector('.next-btn');
+    const prevBtn = document.querySelector('.prev-btn');
+    const dots = Array.from(document.querySelectorAll('.dot'));
+    
+    if (!track || slides.length === 0) return;
+    
+    let currentIndex = 0;
+    
+    function updateSlider(index) {
+        currentIndex = index;
+        const offset = -currentIndex * 100;
+        
+        // Use GSAP for smoother track movement
+        gsap.to(track, {
+            xPercent: -currentIndex * 100,
+            duration: 1.2,
+            ease: "expo.out"
+        });
+        
+        slides.forEach((slide, i) => {
+            if (i === currentIndex) {
+                slide.classList.add('active');
+                gsap.fromTo(slide.querySelector('.testimonial-text'), 
+                    { y: 20, opacity: 0 }, 
+                    { y: 0, opacity: 1, duration: 0.8, delay: 0.3 }
+                );
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+        
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            let index = currentIndex + 1;
+            if (index >= slides.length) index = 0;
+            updateSlider(index);
+        });
+    }
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            let index = currentIndex - 1;
+            if (index < 0) index = slides.length - 1;
+            updateSlider(index);
+        });
+    }
+    
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+            updateSlider(i);
+        });
+    });
+
+    // Optional: Auto play
+    // let autoPlay = setInterval(() => {
+    //     let index = currentIndex + 1;
+    //     if (index >= slides.length) index = 0;
+    //     updateSlider(index);
+    // }, 8000);
+}
+
+// Call all initializers
+document.addEventListener('DOMContentLoaded', () => {
+    initStatIconAnimations();
+    initTestimonialsCarousel();
+});
