@@ -1435,9 +1435,13 @@ body[data-theme="light"] .pain-point-card {
 }
 
 /* Cards 3 & 4 take full width (3 columns each) */
+.pain-point-card[data-card-index="0"],
+.pain-point-card[data-card-index="1"],
+.pain-point-card[data-card-index="2"],
 .pain-point-card[data-card-index="3"],
-.pain-point-card[data-card-index="4"] {
-    grid-column: span 3;
+.pain-point-card[data-card-index="4"],
+.pain-point-card[data-card-index="5"] {
+    grid-column: span 2;
 }
 
 /* Staggered animations for each card */
@@ -1447,6 +1451,7 @@ body[data-theme="light"] .pain-point-card {
 .pain-point-card[data-card-index="3"] { animation-delay: 4.6s; }
 .pain-point-card[data-card-index="4"] { animation-delay: 4.8s; }
 .pain-point-card[data-card-index="5"] { animation-delay: 5s; }
+.pain-point-card[data-card-index="6"] { animation-delay: 5.2s; }
 
 @keyframes cardSlideIn {
     from {
@@ -2108,22 +2113,17 @@ body[data-theme="light"] .service-cards .service-card {
     }
 
     .pain-points-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
     .pain-point-card {
-        grid-column: span 1;
-    }
-
-    .pain-point-card[data-card-index="3"],
-    .pain-point-card[data-card-index="4"] {
-        grid-column: span 1;
+        grid-column: 1 / -1;
     }
 
     .pain-point-card.solution-card {
-        grid-column: span 2;
         padding: 2.5rem;
+        grid-column: 1 / -1;
     }
 
     .solution-headline {
