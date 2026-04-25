@@ -251,7 +251,7 @@ function applyTheme(theme) {
     if (theme === 'light') {
         document.body.setAttribute('data-theme', 'light');
         if (themeToggleBtn) {
-            themeToggleBtn.textContent = '🌙';
+            themeToggleBtn.textContent = 'ðŸŒ™';
             themeToggleBtn.setAttribute('aria-label', 'Switch to dark theme');
         }
         if (signatureImage) {
@@ -260,7 +260,7 @@ function applyTheme(theme) {
     } else {
         document.body.removeAttribute('data-theme');
         if (themeToggleBtn) {
-            themeToggleBtn.textContent = '☀️';
+            themeToggleBtn.textContent = 'â˜€ï¸';
             themeToggleBtn.setAttribute('aria-label', 'Switch to light theme');
         }
         if (signatureImage) {
@@ -588,8 +588,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (rect.left < window.innerWidth * 0.85 && rect.right > window.innerWidth * 0.05) {
                                 if (!span.classList.contains('active')) {
                                     // Assign random flicker timing on first activation
-                                    const duration = (2.5 + Math.random() * 3).toFixed(2); // 2.5s – 5.5s
-                                    const delay    = (Math.random() * 2).toFixed(2);        // 0s – 2s
+                                    const duration = (2.5 + Math.random() * 3).toFixed(2); // 2.5s â€“ 5.5s
+                                    const delay    = (Math.random() * 2).toFixed(2);        // 0s â€“ 2s
                                     span.style.setProperty('--flicker-duration', `${duration}s`);
                                     span.style.setProperty('--flicker-delay',    `${delay}s`);
                                     span.classList.add('active');
@@ -670,7 +670,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // ===== CINEMATIC LOADER & HERO ENTRANCE =====
         const masterTl = gsap.timeline();
 
-        // ── Signature draw: measure every path, set dasharray = dashoffset = length ──
+        // â”€â”€ Signature draw: measure every path, set dasharray = dashoffset = length â”€â”€
         const sigPaths = document.querySelectorAll('.brand-path');
         sigPaths.forEach(path => {
             const len = path.getTotalLength();
@@ -686,7 +686,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         gsap.set(".loader-svg", { opacity: 1 });
 
-        // Draw each path sequentially — main sweep then detail marks
+        // Draw each path sequentially â€” main sweep then detail marks
         masterTl
             .to(s1, { strokeDashoffset: 0, duration: 1.8, ease: "power2.inOut" })
             .to(s2, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, "-=0.2")
@@ -1022,7 +1022,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // ===== SCROLL HIGHLIGHT ANIMATION (inside DOMContentLoaded so ScrollTrigger is registered) =====
         gsap.utils.toArray('.scroll-highlight').forEach((span) => {
-            // Skip spans inside .service-cards — those are handled by the horizontal scroll onUpdate
+            // Skip spans inside .service-cards â€” those are handled by the horizontal scroll onUpdate
             if (span.closest('.service-cards')) return;
 
             ScrollTrigger.create({
@@ -1224,7 +1224,7 @@ function initScrollHighlight() {
 
 // Call it
 // (scroll highlights for non-service-card sections are now handled inside DOMContentLoaded)
-// initScrollHighlight() — moved inside DOMContentLoaded
+// initScrollHighlight() â€” moved inside DOMContentLoaded
 
 // ===== WORK SECTION ANIMATIONS =====
 document.addEventListener("DOMContentLoaded", () => {
@@ -1452,6 +1452,7 @@ function initTestimonialsCarousel() {
 document.addEventListener('DOMContentLoaded', () => {
     initStatIconAnimations();
     initTestimonialsCarousel();
+    initTeamCarousel();
 });
 
 function toggleBio(id, btn) {
@@ -1464,4 +1465,51 @@ function toggleBio(id, btn) {
     } else {
         btn.innerHTML = 'Read Story <span>+</span>';
     }
+}
+
+function initTeamCarousel() {
+    const track = document.querySelector('.team-carousel-track');
+    const slides = document.querySelectorAll('.team-carousel-track .member-card');
+    const nextBtn = document.querySelector('.next-team');
+    const prevBtn = document.querySelector('.prev-team');
+    const dotsContainer = document.querySelector('.team-dots');
+    
+    if (!track || slides.length === 0) return;
+
+    let currentIndex = 0;
+
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.classList.add('team-dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => updateCarousel(i));
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.team-dot');
+
+    function updateCarousel(index) {
+        currentIndex = index;
+        const offset = -currentIndex * 100;
+        gsap.to(track, {
+            xPercent: offset,
+            duration: 1.2,
+            ease: 'expo.out'
+        });
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+
+    nextBtn.addEventListener('click', () => {
+        let index = currentIndex + 1;
+        if (index >= slides.length) index = 0;
+        updateCarousel(index);
+    });
+
+    prevBtn.addEventListener('click', () => {
+        let index = currentIndex - 1;
+        if (index < 0) index = slides.length - 1;
+        updateCarousel(index);
+    });
 }
