@@ -678,7 +678,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const updateSlider = (index) => {
             if (!track) return;
-            track.style.transform = `translateX(-${index * 100}%)`;
+            track.style.transform = `translateX(-${index * 70}vw)`;
             
             slides.forEach((slide, i) => {
                 slide.classList.toggle('active', i === index);

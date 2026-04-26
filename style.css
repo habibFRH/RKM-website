@@ -4467,17 +4467,18 @@ body:hover .custom-cursor-outline {
 .testimonials-track {
     display: flex;
     transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-    width: 100%;
+    width: fit-content;
+    padding: 0 15vw; /* Initial offset to center the first slide */
 }
 
 .testimonial-slide {
-    flex: 0 0 100%;
-    width: 100%;
+    flex: 0 0 70vw;
+    width: 70vw;
     opacity: 0.15;
     filter: blur(4px);
     transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
     box-sizing: border-box;
-    padding: 2rem 10vw;
+    padding: 2rem 5vw;
     text-align: center;
 }
 
