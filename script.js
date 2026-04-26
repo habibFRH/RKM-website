@@ -781,7 +781,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // ===== RKM MODULAR CAROUSEL =====
         let rkmsCurrentIndex = 1;
-        let rkmsTotalSlides = 7;
+        let rkmsTotalSlides = 6;
 
         const updateRkmsActiveSlide = () => {
             document.querySelectorAll(".rkms-title").forEach((el, index) => {
@@ -794,7 +794,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         const updateRkmsImages = (imageNumber) => {
-            const imgSrc = `./assets/assets/img${imageNumber}.jpg`;
+            const imgSrc = `./assets/new assets/carousel/${imageNumber}.png`;
             const imgTop = document.createElement("img");
             const imgBottom = document.createElement("img");
 
@@ -1377,3 +1377,20 @@ function initStatIconAnimations() {
         });
     });
 }
+
+// Team Bio Toggle
+function toggleBio(id, btn) {
+    const content = document.getElementById(id);
+    const isExpanded = content.classList.contains('active');
+    const originalText = btn.textContent.replace(/[+-]/, '').trim();
+    
+    if (isExpanded) {
+        content.classList.remove('active');
+        btn.innerHTML = `${originalText} <span>+</span>`;
+    } else {
+        content.classList.add('active');
+        btn.innerHTML = `CLOSE ${originalText.replace('READ ', '')} <span>-</span>`;
+    }
+}
+
+window.toggleBio = toggleBio;
