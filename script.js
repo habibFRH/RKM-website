@@ -667,6 +667,56 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
+        // ===== TESTIMONIALS SLIDER LOGIC (PORTED) =====
+        const track = document.querySelector('.testimonials-track');
+        const slides = Array.from(document.querySelectorAll('.testimonial-slide'));
+        const nextBtn = document.querySelector('.nav-btn.next');
+        const prevBtn = document.querySelector('.nav-btn.prev');
+        const dots = Array.from(document.querySelectorAll('.dot'));
+        
+        let currentSlide = 0;
+
+        const updateSlider = (index) => {
+            if (!track) return;
+            track.style.transform = `translateX(-${index * 100}%)`;
+            
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            
+            currentSlide = index;
+        };
+
+        if (nextBtn && prevBtn && track) {
+            nextBtn.addEventListener('click', () => {
+                let index = (currentSlide + 1) % slides.length;
+                updateSlider(index);
+            });
+
+            prevBtn.addEventListener('click', () => {
+                let index = (currentSlide - 1 + slides.length) % slides.length;
+                updateSlider(index);
+            });
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    updateSlider(index);
+                });
+            });
+
+            // Auto-play
+            let autoPlay = setInterval(() => {
+                let index = (currentSlide + 1) % slides.length;
+                updateSlider(index);
+            }, 6000);
+
+            track.addEventListener('mouseenter', () => clearInterval(autoPlay));
+        }
+
         // ===== CINEMATIC LOADER & HERO ENTRANCE =====
         const masterTl = gsap.timeline();
 

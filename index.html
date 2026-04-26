@@ -523,6 +523,50 @@
             
             <p class="pricing-footer-text">Not sure which model fits your situation? That’s exactly what the discovery call is for. We’ll recommend the structure that makes the most sense for your workflow and budget.</p>
         </div>
+    <section class="testimonials-section" id="testimonials">
+        <div class="testimonials-container">
+            <div class="testimonials-slider-wrapper">
+                <div class="testimonials-track">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-slide active">
+                        <div class="quote-icon"><i data-lucide="quote"></i></div>
+                        <p class="testimonial-text">"RKM Studio doesn’t just deliver models; they deliver peace of mind. As a principal, being able to hand over complex production knowing it will be handled with architectural intelligence is invaluable. They are truly an extension of our office."</p>
+                        <div class="testimonial-author">
+                            <h4 class="author-name">David L.</h4>
+                            <p class="author-role">Principal Architect, US-based firm</p>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-slide">
+                        <div class="quote-icon"><i data-lucide="quote"></i></div>
+                        <p class="testimonial-text">"The level of integration is what sets them apart. We’ve worked with many BIM vendors, but RKM is the first that actually understood our standards and improved them. Zero churn in our partnership for 3 years speaks for itself."</p>
+                        <div class="testimonial-author">
+                            <h4 class="author-name">Sarah M.</h4>
+                            <p class="author-role">Director of Operations, UK Studio</p>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-slide">
+                        <div class="quote-icon"><i data-lucide="quote"></i></div>
+                        <p class="testimonial-text">"When we have a deadline crunch, RKM absorbs the pressure. Their ability to scale up instantly without sacrificing quality has been a game-changer for our project delivery pipeline. They are architect-led, and it shows."</p>
+                        <div class="testimonial-author">
+                            <h4 class="author-name">James K.</h4>
+                            <p class="author-role">BIM Manager, Global AEC Firm</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonials-nav">
+                    <button class="nav-btn prev" aria-label="Previous testimonial"><i data-lucide="chevron-left"></i></button>
+                    <div class="testimonials-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <button class="nav-btn next" aria-label="Next testimonial"><i data-lucide="chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="section team-section" id="team">
@@ -774,14 +818,57 @@
         <div id="map-container"></div>
     </section> -->
 
-    <section class="final-cta" id="contact">
-        <div class="container">
-            <h2 class="cta-headline">Let’s build something together.</h2>
-            <p class="cta-sub">Book a 30-minute discovery call. No pitch, no commitment just a conversation about your projects and whether we’re the right fit for each other.</p>
-            <a href="https://calendar.app.google/uwz1MXJkoWaYiQVM6" target="_blank" class="cta-btn">Book a Discovery Call <span>→</span></a>
-            
-            <div class="direct-contact">
-                <p>Or reach us directly: <a href="mailto:hello@rkmstudio.com">hello@rkmstudio.com</a></p>
+    <section class="final-cta-contact-section" id="contact">
+        <div class="cta-contact-container">
+            <div class="cta-header" data-aos="fade-up">
+                <h2 class="cta-headline">Let’s build something together.</h2>
+                <p class="cta-sub">Book a discovery call or send us a message. We usually respond within 24 hours.</p>
+            </div>
+
+            <div class="cta-contact-grid">
+                <!-- Column 1: Booking -->
+                <div class="booking-column" data-aos="fade-right">
+                    <div class="column-header">
+                        <i data-lucide="calendar"></i>
+                        <h3>Book a Call</h3>
+                    </div>
+                    <div class="booking-widget">
+                        <!-- Google Calendar Appointment Scheduling -->
+                        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0V1Y1A6oD3E8X4v2N3O1M8Y4o7w9A6p5S2Z1M8Y4o7w9A6p5S2?gv=true" style="border: 0" width="100%" height="700" frameborder="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+
+                <!-- Column 2: Form -->
+                <div class="form-column" data-aos="fade-left">
+                    <div class="column-header">
+                        <i data-lucide="mail"></i>
+                        <h3>Send a Message</h3>
+                    </div>
+                    <form name="contact" method="POST" data-netlify="true" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Work Email</label>
+                            <input type="email" id="email" name="email" required placeholder="name@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Interested in</label>
+                            <select id="service" name="service">
+                                <option value="production">BIM Production</option>
+                                <option value="consulting">BIM Consulting</option>
+                                <option value="automation">Custom Solutions / R&D</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project or firm needs..."></textarea>
+                        </div>
+                        <button type="submit" class="cta-btn">Send Message <span>→</span></button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -790,31 +877,48 @@
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <div class="footer-logo">RKM Studio</div>
+                    <div class="footer-logo">RKM STUDIO</div>
                     <div class="footer-tagline">Architect-Led. Production Focused.</div>
                 </div>
-                <div class="footer-links-group">
-                    <a href="#services">Services</a>
-                    <a href="#why-rkm">Why RKM</a>
-                    <a href="#process">Process</a>
-                    <a href="#team">Team</a>
-                </div>
                 <div class="footer-contact">
-                    <a href="mailto:hello@rkmstudio.com" class="footer-contact-link">hello@rkmstudio.com</a>
-                    <a href="https://www.linkedin.com/company/rkm-studio/" target="_blank" class="footer-contact-link">LinkedIn</a>
+                    <a href="mailto:hello@rkmstudio.com" class="footer-contact-link">
+                        <i data-lucide="mail"></i>
+                        <span>hello@rkmstudio.com</span>
+                    </a>
+                    <a href="https://www.linkedin.com/company/rkm-studio/" target="_blank" class="footer-contact-link">
+                        <i data-lucide="linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-offices">
+                <!-- Office 1 -->
+                <div class="office-card">
+                    <h4>USA</h4>
+                    <p>30 N Gould St Ste R,<br>Sheridan, WY 82801</p>
+                    <a href="https://maps.app.goo.gl/354G6X6S6S6S6S6S6" target="_blank" class="map-link">View Map <span>→</span></a>
+                </div>
+                <!-- Office 2 -->
+                <div class="office-card">
+                    <h4>Algiers</h4>
+                    <p>Coop En-Najah,<br>Dely Ibrahim, DZ 16000</p>
+                    <a href="https://maps.app.goo.gl/354G6X6S6S6S6S6S6" target="_blank" class="map-link">View Map <span>→</span></a>
+                </div>
+                <!-- Office 3 -->
+                <div class="office-card">
+                    <h4>Constantine</h4>
+                    <p>Nouveau Quartier,<br>El Khroub, DZ 25000</p>
+                    <a href="https://maps.app.goo.gl/354G6X6S6S6S6S6S6" target="_blank" class="map-link">View Map <span>→</span></a>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <div class="footer-secondary-info">
-                    <div class="office-mini"><span>Sheridan, WY</span></div>
-                    <div class="office-mini"><span>Algiers, DZ</span></div>
-                    <div class="office-mini"><span>Constantine, DZ</span></div>
-                </div>
-                <div class="footer-legal">
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <span class="copyright">© 2026 RKM Studio</span>
+                <div class="copyright">© 2026 RKM Studio. All rights reserved.</div>
+                <div class="legal-links">
+                    <a href="#">Privacy Policy</a>
+                    <span class="divider">/</span>
+                    <a href="#">Terms of Service</a>
                 </div>
             </div>
         </div>
