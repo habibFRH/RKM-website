@@ -4454,9 +4454,9 @@ body:hover .custom-cursor-outline {
 }
 
 .testimonials-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 4rem;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .testimonials-slider-wrapper {
@@ -4476,10 +4476,8 @@ body:hover .custom-cursor-outline {
     opacity: 0.15;
     filter: blur(4px);
     transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-    padding: 2rem 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    box-sizing: border-box;
+    padding: 2rem 10vw;
     text-align: center;
 }
 
@@ -4612,10 +4610,14 @@ body:hover .custom-cursor-outline {
 }
 
 .cta-contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
+    display: flex;
+    justify-content: center;
     align-items: flex-start;
+}
+
+.form-column {
+    width: 100%;
+    max-width: 800px;
 }
 
 .column-header {

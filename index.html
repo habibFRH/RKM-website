@@ -822,31 +822,18 @@
         <div class="cta-contact-container">
             <div class="cta-header" data-aos="fade-up">
                 <h2 class="cta-headline">Let’s build something together.</h2>
-                <p class="cta-sub">Book a discovery call or send us a message. We usually respond within 24 hours.</p>
+                <p class="cta-sub">Prefer to write first? Send us a message and we'll get back to you within 24 hours.</p>
             </div>
 
             <div class="cta-contact-grid">
-                <!-- Column 1: Booking -->
-                <div class="booking-column" data-aos="fade-right">
-                    <div class="column-header">
-                        <i data-lucide="calendar"></i>
-                        <h3>Book a Call</h3>
-                    </div>
-                    <div class="booking-widget">
-                        <!-- Google Calendar Appointment Scheduling -->
-                        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0V1Y1A6oD3E8X4v2N3O1M8Y4o7w9A6p5S2Z1M8Y4o7w9A6p5S2?gv=true" style="border: 0" width="100%" height="700" frameborder="0" scrolling="no"></iframe>
-                    </div>
-                </div>
-
-                <!-- Column 2: Form -->
-                <div class="form-column" data-aos="fade-left">
+                <div class="form-column" data-aos="fade-up">
                     <div class="column-header">
                         <i data-lucide="mail"></i>
                         <h3>Send a Message</h3>
                     </div>
                     <form name="contact" method="POST" data-netlify="true" class="contact-form">
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name">Full Name</label>
                             <input type="text" id="name" name="name" required placeholder="Your full name">
                         </div>
                         <div class="form-group">
@@ -854,17 +841,22 @@
                             <input type="email" id="email" name="email" required placeholder="name@company.com">
                         </div>
                         <div class="form-group">
-                            <label for="service">Interested in</label>
-                            <select id="service" name="service">
-                                <option value="production">BIM Production</option>
-                                <option value="consulting">BIM Consulting</option>
-                                <option value="automation">Custom Solutions / R&D</option>
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company" required placeholder="Your company or firm name">
+                        </div>
+                        <div class="form-group">
+                            <label for="referral">How did you hear about us?</label>
+                            <select id="referral" name="referral">
+                                <option value="" disabled selected>Select an option</option>
+                                <option value="linkedin">LinkedIn</option>
+                                <option value="referral">Referral</option>
+                                <option value="search">Web Search</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project or firm needs..."></textarea>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tell us briefly about your project or what you're looking for"></textarea>
                         </div>
                         <button type="submit" class="cta-btn">Send Message <span>→</span></button>
                     </form>
