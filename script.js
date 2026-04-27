@@ -572,7 +572,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const cards = document.querySelector(".service-cards");
                     const progress = Math.min(self.progress / 0.654, 1);
                     gsap.set(cards, {
-                        x: -progress * window.innerWidth * 4,
+                        x: -progress * window.innerWidth * 2.8,
                     });
 
                     if (progress > 0 && progress < 1) {
@@ -793,36 +793,36 @@ document.addEventListener("DOMContentLoaded", () => {
         // Hero entrance linked to loader
         masterTl.fromTo(".hero-image", 
             { y: 100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 2, ease: "power4.out" }, 
+            { y: 0, opacity: 1, duration: 1.2, ease: "power4.out" }, 
             "-=0.8"
         )
         .fromTo(".scroll-text", 
             { y: 50, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1, ease: "power4.out" }, 
-            "-=1.5"
+            { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" }, 
+            "-=1.2"
         )
         .to(".hero-description", {
             onStart: () => {
                 const el = document.getElementById('hero-subline');
                 if (el) el.classList.add('revealed');
             },
-            duration: 0.8,
+            duration: 0.6,
             ease: "power4.out"
-        }, "-=1.2")
+        }, "-=1.0")
         .fromTo(".stats-flipper", 
             { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, ease: "power4.out" }, 
-            "-=1.4"
+            { y: 0, opacity: 1, duration: 0.6, ease: "power4.out" }, 
+            "-=1.2"
         )
         .fromTo(".nav", 
             { y: -20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8 }, 
-            "-=1.0"
+            { y: 0, opacity: 1, duration: 0.6 }, 
+            "-=0.8"
         )
         .fromTo(".hero .cta-btn", 
             { scale: 0.8, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.6 }, 
-            "-=0.8"
+            { scale: 1, opacity: 1, duration: 0.4 }, 
+            "-=0.6"
         );
 
         // Existing animations triggered after intro
@@ -830,7 +830,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         // ===== RKM MODULAR CAROUSEL =====
-        let rkmsCurrentIndex = 1;
+        let rkmsCurrentIndex = 0;
         let rkmsTotalSlides = 6;
 
         const updateRkmsActiveSlide = () => {
@@ -878,27 +878,23 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         const handleRkmsSlider = () => {
-            if (rkmsCurrentIndex < rkmsTotalSlides) {
-                rkmsCurrentIndex++;
-            } else {
-                rkmsCurrentIndex = 1;
-            }
+            rkmsCurrentIndex = (rkmsCurrentIndex + 1) % rkmsTotalSlides;
 
             gsap.to(".rkms-slide-titles", {
                 onStart: () => {
                     setTimeout(updateRkmsActiveSlide, 100);
                     updateRkmsImages(rkmsCurrentIndex + 1);
                 },
-                x: `-${(rkmsCurrentIndex - 1) * 11.1111}%`,
-                duration: 2,
-                ease: "power4.out",
+                x: `-${rkmsCurrentIndex * 16.666}%`,
+                duration: 0.2,
+                ease: "power3.inOut",
             });
         };
 
         const sliderEl = document.querySelector('.rkms-slider');
         if (sliderEl) {
             sliderEl.addEventListener("click", handleRkmsSlider);
-            updateRkmsImages(2);
+            updateRkmsImages(1);
             updateRkmsActiveSlide();
         }
 
@@ -958,16 +954,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // ===== PAIN POINTS SECTION ANIMATION =====
-        gsap.from(".pain-point-card", {  
-            scrollTrigger: {
-                trigger: ".pain-points-grid",
-                start: "top 80%",
-            },
-            y: 100,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.15,
-            ease: "power3.out"
+        gsap.set(".pain-point-card", { opacity: 0, y: 30 });
+        ScrollTrigger.batch(".pain-point-card", {
+            onEnter: batch => gsap.to(batch, { 
+                opacity: 1, 
+                y: 0, 
+                stagger: 0.1, 
+                duration: 0.8, 
+                ease: "power2.out",
+                overwrite: true 
+            }),
+            start: "top 90%"
         });
 
         // ===== RKM 3D STACK SLIDER =====

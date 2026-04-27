@@ -121,6 +121,7 @@ body[data-theme="light"] {
     background: transparent;
     backdrop-filter: blur(0px);
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    font-family: 'iA Writer Duospace', monospace;
 }
 
 .nav.nav-scrolled {
@@ -135,7 +136,21 @@ body[data-theme="light"] {
 
 @media (max-width: 768px) {
     .nav.nav-scrolled {
-        padding: 1rem 2rem;
+        padding: 0.8rem 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        border-radius: 50px;
+        margin-top: 10px;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+    .nav.nav-scrolled .nav-links,
+    .nav.nav-scrolled .nav-cta-wrapper {
+        display: none;
+    }
+    .nav.nav-scrolled .logo {
+        margin-right: 0;
     }
 }
 
@@ -320,10 +335,27 @@ body:not([data-theme="light"]) .theme-toggle i {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: visible;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-image: url('./assets/new assets/bg image.png');
     background-size: cover;
     background-position: center;
+    opacity: 0.2;
+    z-index: 0;
+}
+
+/* Make sure content stays above */
+.hero > * {
+    position: relative;
+    z-index: 1;
 }
 
 .service-outline-layer,
@@ -824,30 +856,33 @@ body[data-theme="light"] .stat-complex-item {
     z-index: 5;
 }
 
+/* STATS SECTION UPDATES */
+.stat-square-wrapper {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 2.5rem;
+    perspective: 1000px;
+}
+
+.stat-square {
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.stat-complex-item:hover .stat-square {
+    transform: rotate(15deg) scale(1.1);
+    background: #ffffff;
+}
+
+body[data-theme="light"] .stat-complex-item:hover .stat-square {
+    background: var(--accent);
+}
+
 .stat-icon {
-    width: auto;
-    height: auto;
-    background: none;
-    border: none;
-    border-radius: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 2rem;
-    font-size: 2.2rem;
-    color: var(--accent);
-    transition: all 0.5s ease;
-    filter: drop-shadow(0 0 10px rgba(252, 65, 3, 0.2));
-}
-
-.stat-icon svg {
-    width: 48px;
-    height: 48px;
-}
-
-.stat-complex-item:hover .stat-icon {
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 20px rgba(252, 65, 3, 0.5));
+    display: none;
 }
 
 .stat-big-number {
@@ -1198,10 +1233,50 @@ body[data-theme="light"] .stat-complex-item {
 
 
 .footer {
-    padding: 4rem;
+    padding: 3rem 2rem;
     text-align: center;
     border-top: 1px solid var(--border);
-    color: #666;
+    color: var(--muted);
+    font-size: 0.9rem;
+    background: var(--bg);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-brand {
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    color: var(--text);
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--accent);
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
 }
 
 .marquee {
@@ -1297,9 +1372,9 @@ body[data-theme="light"] .marquee-item {
     flex-shrink: 0;
 }
 
-/* SECTION 2 — PAIN POINT HOOK (SWISS DESIGN) */
+/* SECTION 2 — PAIN POINT HOOK */
 .pain-point-section {
-    padding: 10rem 4rem;
+    padding: 6rem 4rem 0rem;
     background: var(--bg);
     position: relative;
 }
@@ -1309,161 +1384,83 @@ body[data-theme="light"] .marquee-item {
     margin: 0 auto;
 }
 
-/* SECTION HEADER */
-.section-header {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 3rem;
-    align-items: flex-start;
-    margin-bottom: 6rem;
-    position: relative;
-}
-
-.section-number {
-    font-size: clamp(4rem, 8vw, 6rem);
-    font-weight: 900;
-    color: transparent;
-    -webkit-text-stroke: 2px var(--accent);
-    line-height: 0.9;
-    font-family: 'Instrument Sans', sans-serif;
-    letter-spacing: -0.02em;
-}
-
-.section-main-title {
-    font-size: clamp(2.2rem, 4vw, 3.2rem);
-    font-weight: 900;
-    color: var(--text);
-    line-height: 1.2;
-    font-family: 'Instrument Sans', sans-serif;
-    letter-spacing: 0.02em;
-    margin-bottom: 1rem;
-    animation: fadeInUpHeader 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 3.5s both;
-}
-
-.section-subheading {
-    font-size: clamp(0.9rem, 1.3vw, 1rem);
-    color: var(--muted);
-    font-family: 'iA Writer Duospace', monospace;
-    font-weight: 400;
-    line-height: 1.6;
-    max-width: 600px;
-}
-
-@keyframes fadeInUpHeader {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* HOOK TEXT */
 .pain-point-hook-text {
     font-size: clamp(2rem, 4.5vw, 3.2rem);
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 6rem;
-    margin-top: 3rem;
+    margin-bottom: 3rem;
     font-family: 'Instrument Sans', sans-serif;
     line-height: 1.2;
     letter-spacing: 0.15em;
     display: block;
     text-transform: uppercase;
-    animation: fadeInUpHook 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 3.7s both;
 }
 
-@keyframes fadeInUpHook {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* GRID LAYOUT - SWISS STYLE */
 .pain-points-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 2.5rem;
-    margin-bottom: 0;
 }
 
-/* PAIN POINT CARDS */
 .pain-point-card {
     padding: 3rem 2.5rem;
     border: 1px solid var(--border);
-    border-radius: 0;
     background: var(--panel);
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     position: relative;
     display: flex;
     flex-direction: column;
-    opacity: 0;
-    transform: translateY(40px);
-    animation: cardSlideIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     grid-column: span 2;
     overflow: hidden;
 }
 
-.pain-point-card .pain-point-question,
-.pain-point-card .pain-point-description {
-    color: var(--text);
+.pain-point-card:hover {
+    border-color: var(--accent);
+    background: rgba(252, 65, 3, 0.03);
+    transform: translateX(10px);
+    box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-body[data-theme="light"] .service-card,
-body[data-theme="light"] .pain-point-card {
-    color: var(--text);
-}
-
-.pain-point-card::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 3px;
-    height: 0;
-    background: var(--accent);
+.pain-point-card .card-number {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--border);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    font-family: 'Instrument Sans', sans-serif;
     transition: all 0.5s ease;
-    transform: translateY(-50%);
 }
 
-.pain-point-card:hover::after {
-    height: 60%;
+.pain-point-card:hover .card-number {
+    -webkit-text-stroke: 2px var(--accent);
+    color: var(--accent);
+    opacity: 0.5;
+    transform: scale(1.1);
 }
 
-.pain-point-card {
-    padding: 3rem 2.5rem;
-    border: 1px solid var(--border);
-    border-radius: 0;
-    background: var(--panel);
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-    transform: translateY(40px);
-    animation: cardSlideIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    grid-column: span 2;
-    overflow: hidden;
+.pain-point-question {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+    font-family: 'Instrument Sans', sans-serif;
+    line-height: 1.35;
 }
 
-/* All cards uniform span */
-.pain-point-card[data-card-index="3"],
-.pain-point-card[data-card-index="4"] {
-    grid-column: span 2;
+.pain-point-description {
+    font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+    color: var(--muted);
+    line-height: 1.7;
+    font-family: 'iA Writer Duospace', monospace;
+    flex-grow: 1;
 }
 
 .pain-point-card.solution-card {
     grid-column: 1 / -1;
     background: var(--accent);
     border: none;
-    padding: 5rem 4rem;
+    padding: 4rem 4rem 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1476,7 +1473,6 @@ body[data-theme="light"] .pain-point-card {
     font-size: 3rem;
     font-weight: 900;
     margin-bottom: 2rem;
-    letter-spacing: -0.02em;
 }
 
 .solution-description {
@@ -1486,110 +1482,25 @@ body[data-theme="light"] .pain-point-card {
     line-height: 1.6;
 }
 
-.solution-card .card-accent-line {
-    background: #ffffff;
-}
-
-@keyframes cardSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
+@media (max-width: 1024px) {
+    .pain-points-grid {
+        grid-template-columns: repeat(4, 1fr);
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .pain-point-card {
+        grid-column: span 2;
+    }
+    .pain-point-card.solution-card {
+        grid-column: span 4;
     }
 }
 
-.pain-point-card:hover {
-    border-color: var(--accent);
-    background: rgba(252, 65, 3, 0.03);
-    transform: translateX(10px);
-    box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.pain-point-card:hover .card-number {
-    -webkit-text-stroke: 2px var(--accent);
-    color: var(--accent);
-    opacity: 0.5;
-    transform: scale(1.1);
-}
-
-.card-number {
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: transparent;
-    -webkit-text-stroke: 2px var(--border);
-    line-height: 1;
-    margin-bottom: 1.5rem;
-    font-family: 'Instrument Sans', sans-serif;
-    transition: all 0.5s ease;
-}
-
-/* QUESTION TEXT */
-.pain-point-question {
-    font-size: clamp(1.1rem, 2vw, 1.3rem);
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 1.2rem;
-    font-family: 'Instrument Sans', sans-serif;
-    line-height: 1.35;
-    letter-spacing: 0.01em;
-}
-
-/* DESCRIPTION TEXT */
-.pain-point-description {
-    font-size: clamp(0.85rem, 1.3vw, 0.95rem);
-    color: var(--muted);
-    line-height: 1.7;
-    font-family: 'iA Writer Duospace', monospace;
-    flex-grow: 1;
-}
-
-/* SOLUTION CARD */
-.pain-point-card.solution-card {
-    grid-column: 1 / -1;
-    background: var(--accent);
-    border: none;
-    border-radius: 0;
-    padding: 4rem;
-    color: var(--bg);
-    text-align: left;
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: center;
-}
-
-.pain-point-card.solution-card:hover {
-    background: #e63a02;
-    transform: scale(1.02);
-    box-shadow: 0 40px 80px rgba(252, 65, 3, 0.4);
-}
-
-.card-accent-line {
-    width: 60px;
-    height: 4px;
-    background: var(--bg);
-    margin-bottom: 2rem;
-}
-
-.solution-headline {
-    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-    font-weight: 900;
-    color: var(--bg);
-    margin-bottom: 1.5rem;
-    font-family: 'Instrument Sans', sans-serif;
-    line-height: 1.3;
-    letter-spacing: 0.01em;
-}
-
-.solution-description {
-    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-    color: rgba(10, 10, 10, 0.9);
-    line-height: 1.8;
-    max-width: none;
-    margin: 0;
-    font-family: 'iA Writer Duospace', monospace;
+@media (max-width: 768px) {
+    .pain-points-grid {
+        grid-template-columns: 1fr;
+    }
+    .pain-point-card {
+        grid-column: span 1;
+    }
 }
 
 /* KINETIC TYPOGRAPHY ANIMATION */
@@ -1683,7 +1594,7 @@ canvas.service-fill-layer {
 
 .service-cards .service-card {
     position: relative;
-    width: 22%;
+    width: 24%;
     height: 88%;
     background: var(--panel);
     border: 1px solid var(--border);
@@ -3343,20 +3254,27 @@ body[data-theme="light"] .marquees-section .marquee-item h1 {
     position: absolute;
     top: 0;
     left: 0;
-    width: 300vw;
+    width: 600%; /* For 6 slides */
     height: 100vh;
     display: flex;
     pointer-events: none;
     z-index: 2;
+    transition: transform 2s cubic-bezier(0.83, 0, 0.17, 1);
 }
 
 .rkms-title {
     flex: 1;
-    width: 100%;
+    width: 16.666%; /* 1/6 */
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0.1;
+    transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.rkms-title.active {
+    opacity: 1;
 }
 
 .rkms-title h1 {
@@ -4165,73 +4083,104 @@ body:hover .custom-cursor-outline {
     background: var(--accent);
 }
 
-.why-rkm-card {
-    flex: 0 0 650px;
+/* WHY RKM SWISS GALLERY */
+.why-rkm-section {
+    padding: 10rem 4rem;
+    background: var(--bg);
+}
+
+.why-rkm-gallery {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.gallery-item {
     background: var(--panel);
     border: 1px solid var(--border);
-    padding: 3rem 4rem;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    position: relative;
+    padding: 2.5rem;
     display: flex;
     flex-direction: column;
-    scroll-snap-align: start;
-    min-height: 380px;
-    justify-content: center;
+    justify-content: flex-end;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Middle card highlight */
-.why-rkm-cards-grid .why-rkm-card:nth-child(4) {
-    background: var(--accent);
+.gallery-item:hover {
     border-color: var(--accent);
+    transform: translateY(-5px);
+    background: rgba(252, 65, 3, 0.03);
 }
 
-.why-rkm-cards-grid .why-rkm-card:nth-child(4) .card-title,
-.why-rkm-cards-grid .why-rkm-card:nth-child(4) .card-text {
-    color: #ffffff;
-}
-
-.why-rkm-cards-grid .why-rkm-card:nth-child(4) .card-number {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
-}
-
-.why-rkm-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-20px);
-    background: rgba(252, 65, 3, 0.05);
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
-}
-
-.why-rkm-card .card-number {
-    font-size: 4rem;
+.gallery-item .item-num {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 3rem;
     font-weight: 900;
     color: transparent;
-    -webkit-text-stroke: 1px var(--accent);
-    margin-bottom: 2rem;
-    opacity: 0.3;
-    font-family: 'Instrument Sans', sans-serif;
+    -webkit-text-stroke: 1px var(--border);
+    opacity: 0.5;
+    transition: all 0.5s ease;
 }
 
-.why-rkm-card .card-title {
-    font-size: 2.2rem;
-    font-weight: 900;
-    margin-bottom: 2rem;
+.gallery-item:hover .item-num {
+    color: var(--accent);
+    opacity: 0.2;
+    -webkit-text-stroke: 0;
+}
+
+.gallery-item h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
     color: var(--text);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
 }
 
-.why-rkm-card .card-text {
-    font-size: 1rem;
+.gallery-item p {
+    font-size: 0.9rem;
     color: var(--muted);
-    line-height: 1.8;
-    font-family: 'iA Writer Duospace', monospace;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Swiss Layout Logic */
+.item-1 { grid-column: span 8; grid-row: span 3; min-height: 400px; }
+.item-2 { grid-column: span 4; grid-row: span 2; }
+.item-3 { grid-column: span 4; grid-row: span 3; }
+.item-4 { grid-column: span 4; grid-row: span 2; }
+.item-5 { grid-column: span 4; grid-row: span 2; }
+.item-6 { grid-column: span 4; grid-row: span 2; }
+.item-7 { grid-column: span 12; background: var(--accent); border: none; padding: 4rem; }
+
+.item-7 h3, .item-7 p { color: #ffffff; }
+.item-7 .item-num { -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3); }
+
+@media (max-width: 1024px) {
+    .why-rkm-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .gallery-item {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
+        min-height: 300px !important;
+    }
+    .item-7 {
+        grid-column: span 2 !important;
+    }
 }
 
 @media (max-width: 768px) {
-    .why-rkm-card {
-        flex: 0 0 85vw;
-        padding: 3rem;
-        min-height: 400px;
+    .why-rkm-gallery {
+        grid-template-columns: 1fr;
+    }
+    .item-7 {
+        grid-column: span 1 !important;
     }
 }
 
@@ -4302,14 +4251,39 @@ body:hover .custom-cursor-outline {
     letter-spacing: -0.02em;
 }
 
-.best-when {
-    font-size: 0.8rem;
-    font-weight: 700;
+.best-when-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+}
+
+.best-when-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.85rem;
     color: var(--accent);
-    margin-bottom: 2rem;
+    font-family: 'iA Writer Duospace', monospace;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    line-height: 1.4;
+}
+
+.best-when-item i, .best-when-item svg {
+    width: 14px;
+    height: 14px;
+    color: var(--accent);
+    stroke-width: 3;
+}
+
+.pricing-grid .pricing-card:nth-child(3) .best-when-item {
+    color: #ffffff;
+}
+
+.pricing-grid .pricing-card:nth-child(3) .best-when-item i,
+.pricing-grid .pricing-card:nth-child(3) .best-when-item svg {
+    color: #ffffff;
 }
 
 .model-desc {
@@ -4329,7 +4303,16 @@ body:hover .custom-cursor-outline {
     border-color: var(--accent);
 }
 
+.pricing-footer-text{
+    text-align: center;
+    margin: 30px 0px;
+}
 
+.btn-wrapper {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
 /* TEAM IMAGE SIZE */
 .member-image-box {
     width: 100%;
@@ -4726,12 +4709,83 @@ body:hover .custom-cursor-outline {
 }
 
 /* ===== REVISED FOOTER (PORTED) ===== */
-.main-footer {
-    padding: 10rem 0 4rem;
-    background: #0a0a0a;
-    color: #ffffff;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    position: relative;
+/* FOOTER UPDATES */
+.footer {
+    padding: 6rem 2rem 4rem;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+}
+
+.footer-container-full {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-row {
+    margin-bottom: 2rem;
+    color: var(--muted);
+    font-family: 'iA Writer Duospace', monospace;
+    font-size: 0.8rem;
+    line-height: 1.8;
+}
+
+.footer-row.main-tagline {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.footer-row a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-row a:hover {
+    color: var(--accent);
+}
+
+.footer-divider {
+    margin: 0 1rem;
+    opacity: 0.3;
+}
+
+.footer-row.locations {
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.05em;
+}
+
+.footer-row.addresses {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    opacity: 0.8;
+}
+
+.address-item {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.map-link-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    color: var(--accent) !important;
+}
+
+.footer-row.legal {
+    margin-top: 4rem;
+    margin-bottom: 0;
+    opacity: 0.6;
 }
 
 .footer-container {
