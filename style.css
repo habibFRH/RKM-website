@@ -868,13 +868,15 @@ body[data-theme="light"] .stat-complex-item {
     width: 100%;
     height: 100%;
     background: var(--accent);
+    opacity: 0.5;
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .stat-complex-item:hover .stat-square {
     transform: rotate(15deg) scale(1.1);
-    background: #ffffff;
+    opacity: 1;
+    background: var(--accent);
 }
 
 body[data-theme="light"] .stat-complex-item:hover .stat-square {
@@ -1454,6 +1456,43 @@ body[data-theme="light"] .marquee-item {
     line-height: 1.7;
     font-family: 'iA Writer Duospace', monospace;
     flex-grow: 1;
+}
+
+/* 6th Card Special Scroll Logic & Designed Scrollbar */
+.pain-point-card[data-card-index="5"] .pain-point-description {
+    max-height: 100px;
+    overflow-y: auto;
+    padding-right: 1.5rem;
+    position: relative;
+}
+
+/* Custom Scrollbar Styling */
+.pain-point-card[data-card-index="5"] .pain-point-description::-webkit-scrollbar {
+    width: 3px;
+}
+
+.pain-point-card[data-card-index="5"] .pain-point-description::-webkit-scrollbar-track {
+    background: rgba(var(--text-rgb), 0.05);
+    border-radius: 10px;
+}
+
+.pain-point-card[data-card-index="5"] .pain-point-description::-webkit-scrollbar-thumb {
+    background: rgba(252, 65, 3, 0.2);
+    border-radius: 10px;
+}
+
+.pain-point-card[data-card-index="5"]:hover .pain-point-description::-webkit-scrollbar-thumb {
+    background: var(--accent);
+}
+
+/* Firefox Support */
+.pain-point-card[data-card-index="5"] .pain-point-description {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(252, 65, 3, 0.2) transparent;
+}
+
+.pain-point-card[data-card-index="5"]:hover .pain-point-description {
+    scrollbar-color: var(--accent) transparent;
 }
 
 .pain-point-card.solution-card {
@@ -4090,7 +4129,7 @@ body:hover .custom-cursor-outline {
 }
 
 .why-rkm-gallery {
-    margin-top: 30px;
+    margin-top: 6rem;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: minmax(100px, auto);
@@ -4149,14 +4188,14 @@ body:hover .custom-cursor-outline {
     margin: 0;
 }
 
-/* Swiss Layout Logic */
-.item-1 { grid-column: span 8; grid-row: span 3; min-height: 400px; }
-.item-2 { grid-column: span 4; grid-row: span 2; }
-.item-3 { grid-column: span 4; grid-row: span 3; }
-.item-4 { grid-column: span 4; grid-row: span 2; }
-.item-5 { grid-column: span 4; grid-row: span 2; }
-.item-6 { grid-column: span 4; grid-row: span 2; }
-.item-7 { grid-column: span 12; background: var(--accent); border: none; padding: 4rem; }
+/* Swiss Layout Logic - Custom Asymmetric Grid */
+.item-1 { grid-column: span 7; grid-row: span 2; min-height: 280px; }
+.item-2 { grid-column: span 5; grid-row: span 1; }
+.item-3 { grid-column: span 5; grid-row: span 1; }
+.item-4 { grid-column: span 12; grid-row: span 2; min-height: 350px; } /* BIG */
+.item-5 { grid-column: span 4; grid-row: span 1; } /* SMALL */
+.item-6 { grid-column: span 8; grid-row: span 1; }
+.item-7 { grid-column: span 12; grid-row: span 3; min-height: 480px; background: var(--accent); border: none; padding: 4rem; } /* BIG */
 
 .item-7 h3, .item-7 p { color: #ffffff; }
 .item-7 .item-num { -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3); }

@@ -967,6 +967,31 @@ document.addEventListener("DOMContentLoaded", () => {
             start: "top 90%"
         });
 
+        // 6th Pain Point Card Auto-Scroll Loop
+        const card6Para = document.querySelector('.pain-point-card[data-card-index="5"] .pain-point-description');
+        if (card6Para) {
+            // Wait a bit for layout to settle
+            setTimeout(() => {
+                const scrollDistance = card6Para.scrollHeight - card6Para.clientHeight;
+                if (scrollDistance > 0) {
+                    const autoScroll = gsap.to(card6Para, {
+                        scrollTop: scrollDistance,
+                        duration: 12,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: "linear",
+                        paused: false
+                    });
+
+                    card6Para.addEventListener('mouseenter', () => autoScroll.pause());
+                    card6Para.addEventListener('mouseleave', () => autoScroll.play());
+                    
+                    // Allow manual scroll to override
+                    card6Para.addEventListener('wheel', () => autoScroll.pause());
+                }
+            }, 1000);
+        }
+
         // ===== RKM 3D STACK SLIDER =====
         CustomEase.create("rkms-cubic", "0.83, 0, 0.17, 1");
         let stackIsAnimating = false;
