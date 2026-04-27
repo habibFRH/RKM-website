@@ -489,7 +489,7 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
     position: absolute;
     bottom: 0px;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: auto;
     opacity: 0;
     z-index: 1;
@@ -578,7 +578,9 @@ body[data-theme="light"] .hero-bg-svg svg polygon {
 
 .section {
     padding: 8rem 4rem;
+    width: 100%;
     position: relative;
+    overflow-x: hidden;
 }
 
 .section-title {
@@ -1213,7 +1215,7 @@ body[data-theme="light"] .stat-complex-item:hover .stat-square {
 }
 
 .full-width-image {
-    width: 100vw;
+    width: 100%;
     /* take full viewport width */
     height: 50vh;
     /* or use a smaller height like 80vh if you prefer */
@@ -1378,7 +1380,9 @@ body[data-theme="light"] .marquee-item {
 .pain-point-section {
     padding: 6rem 4rem 0rem;
     background: var(--bg);
+    width: 100%;
     position: relative;
+    overflow-x: hidden;
 }
 
 .pain-point-container {
@@ -1574,7 +1578,7 @@ body[data-theme="light"] .marquee-item {
 
 .service-sticky {
     position: relative;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     overflow: hidden;
 }
@@ -2411,7 +2415,7 @@ body[data-theme="light"] .service-cards .service-card {
     }
 
     .hero-image {
-        width: 100vw;
+        width: 100%;
         height: auto;
         max-height: 60vh;
         object-fit: contain;
@@ -2658,6 +2662,8 @@ body[data-theme="light"] .service-cards .service-card {
 .team-section {
     padding: 10rem 4rem;
     background: var(--bg);
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .team-header {
@@ -2957,7 +2963,7 @@ body[data-theme="light"] .service-cards .service-card {
 }
 
 #map-container { 
-    width: 100vw; 
+    width: 100%; 
     height: 70vh; 
     margin: 4rem 0 0; 
     background-color: var(--bg);
@@ -3280,7 +3286,7 @@ body[data-theme="light"] .marquees-section .marquee-item h1 {
 
 /* RKM MODULAR CAROUSEL */
 .rkms-slider {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     position: relative;
     background: var(--bg);
@@ -3407,7 +3413,7 @@ body[data-theme="light"] .rkms-title h1 {
 /* RKM 3D STACK SLIDER */
 .rkm-stack-section {
     position: relative;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     overflow: hidden;
     background: var(--bg);
@@ -3418,7 +3424,7 @@ body[data-theme="light"] .rkms-title h1 {
 .rkm-stack-slider {
     position: absolute;
     top: 5vh;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     overflow: hidden;
     perspective: 800px;
@@ -3579,7 +3585,7 @@ body.is-loading {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     z-index: 10000;
     display: flex;
@@ -4126,6 +4132,8 @@ body:hover .custom-cursor-outline {
 .why-rkm-section {
     padding: 10rem 4rem;
     background: var(--bg);
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .why-rkm-gallery {
@@ -4777,264 +4785,180 @@ body:hover .custom-cursor-outline {
     letter-spacing: 0.1em;
 }
 
-.footer-row a {
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.3s;
+.footer {
+    position: relative;
+    padding: 10rem 0 0;
+    background: var(--bg);
+    overflow: hidden;
 }
 
-.footer-row a:hover {
-    color: var(--accent);
+.footer-bg-marquee {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.05;
+    white-space: nowrap;
 }
 
-.footer-divider {
-    margin: 0 1rem;
-    opacity: 0.3;
+.footer-bg-marquee .marquee-track {
+    display: inline-block;
+    animation: footerMarquee 30s linear infinite;
 }
 
-.footer-row.locations {
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: 0.05em;
+.footer-bg-marquee span {
+    font-size: clamp(10rem, 20vw, 25rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--text);
+    padding-right: 2rem;
 }
 
-.footer-row.addresses {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    opacity: 0.8;
-}
-
-.address-item {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.map-link-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    margin-left: 0.5rem;
-    vertical-align: middle;
-    color: var(--accent) !important;
-}
-
-.footer-row.legal {
-    margin-top: 4rem;
-    margin-bottom: 0;
-    opacity: 0.6;
+@keyframes footerMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 .footer-container {
+    position: relative;
+    z-index: 2;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 5vw;
+    padding: 0 4rem;
 }
 
-.footer-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 8rem;
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
     gap: 4rem;
+    margin-bottom: 8rem;
+}
+
+.footer-col h4 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.footer-col p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+    max-width: 250px;
 }
 
 .footer-logo {
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    margin-bottom: 1.2rem;
-    line-height: 1;
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    color: var(--text);
 }
 
 .footer-tagline {
-    font-family: "iA Writer Duospace", monospace;
-    font-size: 0.85rem;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 2rem;
+    opacity: 0.8;
 }
 
 .footer-contact {
     display: flex;
-    flex-direction: row;
-    gap: 4rem;
-    margin-bottom: 0.5rem;
-}
-
-.footer-contact-link {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    font-family: "Instrument Sans", sans-serif;
-    opacity: 0.7;
-}
-
-.footer-contact-link i {
-    color: var(--accent);
-    width: 20px;
-    height: 20px;
-}
-
-.footer-contact-link:hover {
-    color: var(--accent);
-    opacity: 1;
-    transform: translateY(-3px);
-}
-
-.footer-offices {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6rem;
-    padding-bottom: 8rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    margin-bottom: 4rem;
-}
-
-.office-card {
-    display: flex;
     flex-direction: column;
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    gap: 0.8rem;
 }
 
-.office-card:hover {
-    transform: translateX(10px);
+.contact-link {
+    font-size: 1.1rem;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.office-card h4 {
-    font-size: 0.85rem;
-    font-weight: 700;
-    margin-bottom: 2.5rem;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-family: "iA Writer Duospace", monospace;
-    opacity: 0.3;
-}
-
-.office-card p {
-    font-size: 1.15rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 2.5rem;
-    font-weight: 400;
-    max-width: 320px;
+.contact-link:hover {
+    color: var(--accent);
 }
 
 .map-link {
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-family: "iA Writer Duospace", monospace;
-    transition: all 0.3s ease;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .map-link span {
-    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.map-link:hover {
-    color: #ffffff;
+    transition: transform 0.3s ease;
 }
 
 .map-link:hover span {
-    transform: translateX(8px);
+    transform: translate(3px, -3px);
 }
 
 .footer-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.25);
-    font-family: "iA Writer Duospace", monospace;
-    letter-spacing: 0.08em;
+    padding: 3rem 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--muted);
 }
 
 .legal-links {
     display: flex;
-    gap: 3rem;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .legal-links a {
-    color: inherit;
+    color: var(--muted);
     text-decoration: none;
-    transition: color 0.4s ease;
+    transition: color 0.3s ease;
 }
 
 .legal-links a:hover {
-    color: #ffffff;
+    color: var(--text);
 }
 
 .divider {
-    opacity: 0.2;
-}
-
-@media (max-width: 1200px) {
-    .footer-offices {
-        gap: 4rem;
-    }
+    opacity: 0.3;
 }
 
 @media (max-width: 1024px) {
-    .footer-top {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5rem;
-        margin-bottom: 8rem;
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem 2rem;
     }
-    
-    .footer-contact {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    
-    .footer-offices {
-        grid-template-columns: 1fr;
-        gap: 5rem;
-        padding-bottom: 8rem;
-    }
-    
-    .office-card p {
-        max-width: 100%;
+    .footer-col.brand-col {
+        grid-column: span 2;
+        margin-bottom: 2rem;
     }
 }
 
-@media (max-width: 768px) {
-    .main-footer {
-        padding: 8rem 0 4rem;
+@media (max-width: 600px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
     }
-    
-    .footer-container {
-        padding: 0 2rem;
+    .footer-col.brand-col {
+        grid-column: span 1;
     }
-    
     .footer-bottom {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 4rem;
-    }
-    
-    .legal-links {
-        flex-direction: column;
         gap: 1.5rem;
-    }
-    
-    .footer-logo {
-        font-size: 2.5rem;
+        text-align: center;
     }
 }
 
