@@ -255,16 +255,16 @@ function applyTheme(theme) {
             themeToggleBtn.setAttribute('aria-label', 'Switch to dark theme');
         }
         if (signatureImage) {
-            signatureImage.src = './RKM Signature Grey.svg';
+            signatureImage.src = './RKM Signature Final copy.svg';
         }
     } else {
         document.body.removeAttribute('data-theme');
         if (themeToggleBtn) {
             themeToggleBtn.textContent = '☀️';
-            themeToggleBtn.setAttribute('aria-label', 'Switch to light theme');
+            themeToggleBtn.setAttribute('aria-label', 'Switch to dark theme');
         }
         if (signatureImage) {
-            signatureImage.src = './RKM Signature White.svg';
+            signatureImage.src = './RKM Signature Final copy.svg';
         }
     }
 }
