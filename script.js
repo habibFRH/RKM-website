@@ -845,71 +845,36 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         };
 
-        const updateRkmsImages = (imageNumber) => {
-            const imgSrc = `./assets/new assets/carousel 2/${imageNumber}.svg`;
-            const imgTop = document.createElement("img");
-            const imgBottom = document.createElement("img");
-
-            imgTop.src = imgSrc;
-            imgBottom.src = imgSrc;
-
-            // Initial state: hidden via clipPath and scaled up
-            imgTop.style.clipPath = "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)";
-            imgBottom.style.clipPath = "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)";
-            imgTop.style.transform = "scale(2)";
-            imgBottom.style.transform = "scale(2)";
-            imgTop.style.animation = "bounceRight 2s infinite";
-            imgBottom.style.animation = "bounceRight 2s infinite";
-
-            const containerTop = document.querySelector(".rkms-img-top");
-            const containerBottom = document.querySelector(".rkms-img-bottom");
-
-            if (!containerTop || !containerBottom) return;
-
-            containerTop.appendChild(imgTop);
-            containerBottom.appendChild(imgBottom);
-
-            gsap.to([imgTop, imgBottom], {
-                clipPath: "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)",
-                transform: "scale(1)",
-                duration: 1.5,
-                ease: "power4.out",
-                stagger: 0.1,
-                onComplete: () => {
-                    // Clean up: remove all images except the one we just animated in
-                    [containerTop, containerBottom].forEach(container => {
-                        const allImgs = container.querySelectorAll("img");
-                        allImgs.forEach(img => {
-                            if (img !== imgTop && img !== imgBottom) {
-                                container.removeChild(img);
-                            }
-                        });
-                    });
-                    rkmsIsAnimating = false;
-                }
-            });
-        };
-
         const handleRkmsSlider = () => {
             if (rkmsIsAnimating) return;
             rkmsIsAnimating = true;
             rkmsCurrentIndex++;
 
+            const targetX = `-${rkmsCurrentIndex * 14.2857}%`; // 100 / 7
+
+            // Move titles
             gsap.to(".rkms-slide-titles", {
                 onStart: () => {
                     setTimeout(updateRkmsActiveSlide, 100);
-                    const imageNum = (rkmsCurrentIndex % rkmsTotalSlides) + 1;
-                    updateRkmsImages(imageNum);
                 },
-                x: `-${rkmsCurrentIndex * 14.2857}%`, // 100 / 7
-                duration: 0.8, // Slightly longer for smoother feel
+                x: targetX,
+                duration: 0.8,
+                ease: "power3.inOut"
+            });
+
+            // Move image tracks in sync
+            gsap.to(".rkms-img-track", {
+                x: targetX,
+                duration: 0.8,
                 ease: "power3.inOut",
+                stagger: 0.05, // Subtle delay between top and bottom for more dynamic feel
                 onComplete: () => {
                     if (rkmsCurrentIndex >= rkmsTotalSlides) {
                         rkmsCurrentIndex = 0;
-                        gsap.set(".rkms-slide-titles", { x: "0%" });
+                        gsap.set([".rkms-slide-titles", ".rkms-img-track"], { x: "0%" });
                         updateRkmsActiveSlide();
                     }
+                    rkmsIsAnimating = false;
                 }
             });
         };
@@ -917,7 +882,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const sliderEl = document.querySelector('.rkms-slider');
         if (sliderEl) {
             sliderEl.addEventListener("click", handleRkmsSlider);
-            updateRkmsImages(1);
+            // No need to call updateRkmsImages(1) anymore
             updateRkmsActiveSlide();
         }
 
