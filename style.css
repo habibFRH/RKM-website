@@ -3349,7 +3349,7 @@ body[data-theme="light"] .rkms-title h1 {
     z-index: 3;
     opacity: 0.9;
     /* Light spotlight background for SVGs */
-   background-color: rgb(73, 73, 73, 0.9);
+   background-color: rgba(0, 0, 0, 0.9);
 }
 
 .rkms-img-top, .rkms-img-bottom {
