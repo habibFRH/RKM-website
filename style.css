@@ -1245,15 +1245,7 @@ body[data-theme="light"] .stat-complex-item:hover .stat-square {
     background: var(--bg);
 }
 
-.footer-container {
-    max-width: 1200px;
-    margin: 0px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-}
+
 
 .footer-brand {
     font-weight: 900;
@@ -2664,7 +2656,12 @@ body[data-theme="light"] .service-cards .service-card {
     padding: 10rem 4rem 2rem;
     background: var(--bg);
     width: 100%;
-    overflow-x: hidden;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.team-section::-webkit-scrollbar {
+  display: none;            /* Chrome, Safari */
 }
 
 .team-header {
@@ -5050,6 +5047,7 @@ body:hover .custom-cursor-outline {
     border-top: 1px solid var(--border);
     font-size: 0.85rem;
     color: var(--muted);
+    width: 100%;
 }
 
 .legal-links {
