@@ -1466,3 +1466,31 @@ function toggleBio(id, btn) {
 }
 
 window.toggleBio = toggleBio;
+
+// Custom Address Tooltip Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const tooltipTriggers = document.querySelectorAll('.tooltip-trigger');
+    const tooltip = document.getElementById('address-tooltip');
+
+    if (!tooltip) return;
+
+    tooltipTriggers.forEach(trigger => {
+        trigger.addEventListener('mouseenter', (e) => {
+            const address = trigger.getAttribute('data-address');
+            if (address) {
+                tooltip.textContent = address;
+                tooltip.classList.add('visible');
+            }
+        });
+
+        trigger.addEventListener('mousemove', (e) => {
+            // Position tooltip slightly below and centered on the cursor
+            tooltip.style.left = `${e.clientX}px`;
+            tooltip.style.top = `${e.clientY + 20}px`;
+        });
+
+        trigger.addEventListener('mouseleave', () => {
+            tooltip.classList.remove('visible');
+        });
+    });
+});

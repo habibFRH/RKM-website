@@ -1217,8 +1217,8 @@ body[data-theme="light"] .stat-complex-item:hover .stat-square {
 .full-width-image {
     width: 100%;
     /* take full viewport width */
-    height: 50vh;
-    /* or use a smaller height like 80vh if you prefer */
+    height: 30vh;
+    /* reduced to pull it closer to the team section */
     overflow: hidden;
     position: relative;
     display: flex;
@@ -1599,7 +1599,7 @@ body[data-theme="light"] .marquee-item {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.3;
+    opacity: 0.1;
 }
 
 canvas.service-outline-layer {
@@ -2660,7 +2660,7 @@ body[data-theme="light"] .service-cards .service-card {
 
 /* TEAM SECTION */
 .team-section {
-    padding: 10rem 4rem;
+    padding: 10rem 4rem 2rem;
     background: var(--bg);
     width: 100%;
     overflow-x: hidden;
@@ -2685,7 +2685,7 @@ body[data-theme="light"] .service-cards .service-card {
     flex-direction: column;
     gap: 4rem;
     max-width: 1200px;
-    margin: 0 auto 8rem;
+    margin: 0 auto 2rem;
 }
 
 .member-card {
@@ -2808,7 +2808,7 @@ body[data-theme="light"] .service-cards .service-card {
     max-width: 1200px;
     margin: 2rem auto 2rem;
     padding: 6rem;
-    background: rgba(255, 255, 255, 0.015);
+    background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 0px;
     position: relative;
@@ -3326,7 +3326,7 @@ body[data-theme="light"] .marquees-section .marquee-item h1 {
     text-align: center;
     font-size: clamp(2rem, 10vw, 15rem);
     font-weight: 900;
-    color: var(--text);
+    color: gray;
     transition: color 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     font-family: 'Instrument Sans', sans-serif;
     text-transform: uppercase;
@@ -4136,6 +4136,15 @@ body:hover .custom-cursor-outline {
     overflow-x: hidden;
 }
 
+.why-rkm-section .section-intro {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 800px;
+    margin: 1rem auto 6rem auto;
+    text-align: center;
+}
+
 .why-rkm-gallery {
     margin-top: 6rem;
     display: grid;
@@ -4421,6 +4430,14 @@ body:hover .custom-cursor-outline {
     pointer-events: none;
 }
 
+.bio-extended-content p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--muted);
+    font-family: 'iA Writer Duospace', monospace;
+    margin-bottom: 1.5rem;
+}
+
 .bio-extended-content.active {
     max-height: 3000px;
     opacity: 1;
@@ -4672,6 +4689,20 @@ body:hover .custom-cursor-outline {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-family: "iA Writer Duospace", monospace;
+    margin: 0;
+}
+
+.header-text-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.pre-form-text {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-family: "iA Writer Duospace", monospace;
+    margin: 0;
 }
 
 /* Form Styling */
@@ -4887,25 +4918,54 @@ body:hover .custom-cursor-outline {
     color: var(--accent);
 }
 
-.map-link {
-    font-size: 0.85rem;
+.location-link {
+    font-size: 1.1rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--text);
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+    transition: color 0.3s ease;
+    display: inline-block;
+    cursor: pointer;
 }
 
-.map-link span {
-    transition: transform 0.3s ease;
+.location-link h4 {
+    margin-bottom: 0;
+    transition: color 0.3s ease;
 }
 
-.map-link:hover span {
-    transform: translate(3px, -3px);
+.location-link:hover h4 {
+    color: var(--accent);
 }
+
+/* Custom Tooltip */
+.address-tooltip {
+    position: fixed;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px) translateX(-50%);
+    z-index: 10000;
+    max-width: 280px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    font-family: 'iA Writer Duospace', monospace;
+}
+
+.address-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0) translateX(-50%);
+}
+
 
 .footer-bottom {
     display: flex;
