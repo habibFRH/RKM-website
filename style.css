@@ -4202,7 +4202,7 @@ body:hover .custom-cursor-outline {
 }
 
 .gallery-item:hover::before {
-    opacity: 0.15;
+    opacity: 1;
     transform: scale(1.1);
 }
 
