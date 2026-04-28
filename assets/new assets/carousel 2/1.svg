@@ -1,0 +1,30 @@
+<svg width="400" height="340" viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
+<style>
+@keyframes nodePulse{0%,100%{r:4;opacity:.8}50%{r:6;opacity:1}}
+@keyframes nodeGlow{0%,100%{r:10;opacity:.05}50%{r:14;opacity:.12}}
+@keyframes lineDraw{0%{stroke-dashoffset:200}100%{stroke-dashoffset:0}}
+.bn{animation:nodePulse 2.5s ease-in-out infinite}
+.bn2{animation:nodePulse 2.5s ease-in-out infinite .4s}
+.bg{animation:nodeGlow 2.5s ease-in-out infinite}
+.bg2{animation:nodeGlow 2.5s ease-in-out infinite .4s}
+.bl{stroke-dasharray:200;animation:lineDraw 2s ease-out forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.3s}.d3{animation-delay:.5s}.d4{animation-delay:.7s}
+</style>
+<g stroke="#FE701D" stroke-width="0.5" fill="none" opacity=".25">
+<line x1="30" y1="80" x2="90" y2="50" class="bl d1"/><line x1="90" y1="50" x2="150" y2="80" class="bl d1"/>
+<line x1="150" y1="80" x2="90" y2="110" class="bl d2"/><line x1="90" y1="110" x2="30" y2="80" class="bl d2"/>
+<line x1="30" y1="80" x2="30" y2="105" class="bl d3"/><line x1="90" y1="110" x2="90" y2="135" class="bl d3"/>
+<line x1="150" y1="80" x2="150" y2="105" class="bl d3"/><line x1="30" y1="105" x2="90" y2="135" class="bl d4"/>
+<line x1="90" y1="135" x2="150" y2="105" class="bl d4"/>
+<line x1="45" y1="65" x2="90" y2="45" class="bl d2"/><line x1="90" y1="45" x2="135" y2="65" class="bl d2"/>
+<line x1="45" y1="65" x2="90" y2="85" class="bl d3"/><line x1="90" y1="85" x2="135" y2="65" class="bl d3"/>
+<line x1="45" y1="65" x2="45" y2="90" class="bl d4"/><line x1="135" y1="65" x2="135" y2="90" class="bl d4"/>
+<line x1="90" y1="85" x2="90" y2="110" class="bl d4"/>
+</g>
+<circle cx="90" cy="50" class="bn" fill="#FE701D"/><circle cx="150" cy="80" class="bn2" fill="#FE701D"/>
+<circle cx="90" cy="110" r="3" fill="#FE701D" opacity=".7"/>
+<circle cx="45" cy="65" r="2.5" fill="#FE701D" opacity=".5"/>
+<circle cx="135" cy="65" r="2.5" fill="#FE701D" opacity=".5"/>
+<circle cx="90" cy="50" class="bg" fill="#FE701D"/>
+<circle cx="150" cy="80" class="bg2" fill="#FE701D"/>
+</svg>

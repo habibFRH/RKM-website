@@ -1,0 +1,29 @@
+<svg width="400" height="340" viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
+<style>
+@keyframes layerIn{0%{opacity:0;transform:translateY(15px)}100%{opacity:.55;transform:translateY(0)}}
+@keyframes dimGrow{0%{stroke-dashoffset:120}100%{stroke-dashoffset:0}}
+@keyframes annotPop{0%{r:0;opacity:0}50%{r:3;opacity:.8}100%{r:2.5;opacity:.7}}
+.do{opacity:0;animation:layerIn .8s ease-out forwards .2s}
+.di{opacity:0;animation:layerIn .8s ease-out forwards .5s}
+.dd{stroke-dasharray:120;animation:dimGrow 1s ease-out forwards 1s}
+.dt{opacity:0;animation:layerIn .6s ease-out forwards 1.3s}
+.da{animation:annotPop .5s ease-out forwards 1.5s;r:0;opacity:0}
+.da2{animation-delay:1.7s}
+</style>
+<g stroke="#FE701D" stroke-width=".5" fill="none" class="do"><rect x="35" y="25" width="110" height="80" rx="2"/></g>
+<g stroke="#FE701D" stroke-width=".5" fill="none" class="di">
+<rect x="40" y="30" width="100" height="70" rx="1"/>
+<line x1="40" y1="58" x2="85" y2="58"/><line x1="85" y1="30" x2="85" y2="68"/>
+<line x1="60" y1="58" x2="60" y2="100"/><line x1="40" y1="75" x2="68" y2="75"/>
+<rect x="100" y="35" width="35" height="22" rx="1"/>
+</g>
+<g stroke="#FE701D" stroke-width=".35" opacity=".7">
+<line x1="35" y1="115" x2="145" y2="115" class="dd"/>
+<line x1="35" y1="112" x2="35" y2="118" class="dd"/><line x1="145" y1="112" x2="145" y2="118" class="dd"/>
+<line x1="90" y1="112" x2="90" y2="118" class="dd"/>
+</g>
+<g class="dt"><rect x="100" y="120" width="45" height="16" rx="1" stroke="#FE701D" stroke-width=".5" fill="none" opacity=".45"/>
+<line x1="100" y1="128" x2="145" y2="128" stroke="#FE701D" stroke-width=".3" opacity=".35"/></g>
+<circle cx="60" cy="45" class="da" fill="#FE701D"/>
+<circle cx="110" cy="65" class="da da2" fill="#FE701D"/>
+</svg>

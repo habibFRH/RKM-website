@@ -832,10 +832,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // ===== RKM MODULAR CAROUSEL =====
         let rkmsCurrentIndex = 0;
         let rkmsTotalSlides = 6;
+        let rkmsIsAnimating = false;
 
         const updateRkmsActiveSlide = () => {
+            const activeIndex = rkmsCurrentIndex % rkmsTotalSlides;
             document.querySelectorAll(".rkms-title").forEach((el, index) => {
-                if (index === rkmsCurrentIndex) {
+                if (index % rkmsTotalSlides === activeIndex) {
                     el.classList.add("active");
                 } else {
                     el.classList.remove("active");
@@ -844,50 +846,71 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         const updateRkmsImages = (imageNumber) => {
-            const imgSrc = `./assets/new assets/carousel/${imageNumber}.png`;
+            const imgSrc = `./assets/new assets/carousel 2/${imageNumber}.svg`;
             const imgTop = document.createElement("img");
             const imgBottom = document.createElement("img");
 
             imgTop.src = imgSrc;
             imgBottom.src = imgSrc;
 
+            // Initial state: hidden via clipPath and scaled up
             imgTop.style.clipPath = "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)";
             imgBottom.style.clipPath = "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)";
             imgTop.style.transform = "scale(2)";
             imgBottom.style.transform = "scale(2)";
+            imgTop.style.animation = "bounceRight 2s infinite";
+            imgBottom.style.animation = "bounceRight 2s infinite";
 
-            document.querySelector(".rkms-img-top").appendChild(imgTop);
-            document.querySelector(".rkms-img-bottom").appendChild(imgBottom);
+            const containerTop = document.querySelector(".rkms-img-top");
+            const containerBottom = document.querySelector(".rkms-img-bottom");
+
+            if (!containerTop || !containerBottom) return;
+
+            containerTop.appendChild(imgTop);
+            containerBottom.appendChild(imgBottom);
 
             gsap.to([imgTop, imgBottom], {
                 clipPath: "polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)",
                 transform: "scale(1)",
-                duration: 2,
+                duration: 1.5,
                 ease: "power4.out",
-                stagger: 0.15,
+                stagger: 0.1,
                 onComplete: () => {
-                    [".rkms-img-top", ".rkms-img-bottom"].forEach((selector) => {
-                        const container = document.querySelector(selector);
-                        const images = Array.from(container.querySelectorAll("img"));
-                        if (images.length > 5) {
-                            images.slice(0, images.length - 5).forEach(img => container.removeChild(img));
-                        }
+                    // Clean up: remove all images except the one we just animated in
+                    [containerTop, containerBottom].forEach(container => {
+                        const allImgs = container.querySelectorAll("img");
+                        allImgs.forEach(img => {
+                            if (img !== imgTop && img !== imgBottom) {
+                                container.removeChild(img);
+                            }
+                        });
                     });
+                    rkmsIsAnimating = false;
                 }
             });
         };
 
         const handleRkmsSlider = () => {
-            rkmsCurrentIndex = (rkmsCurrentIndex + 1) % rkmsTotalSlides;
+            if (rkmsIsAnimating) return;
+            rkmsIsAnimating = true;
+            rkmsCurrentIndex++;
 
             gsap.to(".rkms-slide-titles", {
                 onStart: () => {
                     setTimeout(updateRkmsActiveSlide, 100);
-                    updateRkmsImages(rkmsCurrentIndex + 1);
+                    const imageNum = (rkmsCurrentIndex % rkmsTotalSlides) + 1;
+                    updateRkmsImages(imageNum);
                 },
-                x: `-${rkmsCurrentIndex * 16.666}%`,
-                duration: 0.2,
+                x: `-${rkmsCurrentIndex * 14.2857}%`, // 100 / 7
+                duration: 0.8, // Slightly longer for smoother feel
                 ease: "power3.inOut",
+                onComplete: () => {
+                    if (rkmsCurrentIndex >= rkmsTotalSlides) {
+                        rkmsCurrentIndex = 0;
+                        gsap.set(".rkms-slide-titles", { x: "0%" });
+                        updateRkmsActiveSlide();
+                    }
+                }
             });
         };
 

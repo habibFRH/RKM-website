@@ -1,0 +1,34 @@
+<svg width="400" height="340" viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
+<style>
+@keyframes cDraw{0%{stroke-dashoffset:400}100%{stroke-dashoffset:0}}
+@keyframes cPop{0%{r:0;opacity:0}100%{r:4;opacity:.8}}
+.cc{stroke-dasharray:400;stroke-dashoffset:400}
+.c1{animation:cDraw 2s ease-out forwards 0s}
+.c2{animation:cDraw 2s ease-out forwards .1s}
+.c3{animation:cDraw 2s ease-out forwards .2s}
+.c4{animation:cDraw 2s ease-out forwards .3s}
+.c5{animation:cDraw 2s ease-out forwards .4s}
+.c6{animation:cDraw 2s ease-out forwards .5s}
+.c7{animation:cDraw 2s ease-out forwards .6s}
+.c8{animation:cDraw 2s ease-out forwards .7s}
+.c9{animation:cDraw 2s ease-out forwards .8s}
+.c10{animation:cDraw 2s ease-out forwards .9s}
+.c11{animation:cDraw 2s ease-out forwards 1s}
+.cp{r:0;opacity:0;animation:cPop .4s ease-out forwards 1.5s}
+.cd{stroke-dasharray:4,4;opacity:0;animation:cDraw .6s ease-out forwards 1.8s}
+</style>
+<path d="M10,130 Q45,25 90,75 Q135,130 170,35" stroke="#FE701D" fill="none" opacity=".12" stroke-width=".5" class="cc c1"/>
+<path d="M10,125 Q47,27 92,73 Q137,125 170,40" stroke="#FE701D" fill="none" opacity=".12" stroke-width=".5" class="cc c2"/>
+<path d="M10,120 Q49,29 94,71 Q139,120 170,45" stroke="#FE701D" fill="none" opacity=".15" stroke-width=".5" class="cc c3"/>
+<path d="M10,115 Q51,31 96,69 Q141,115 170,50" stroke="#FE701D" fill="none" opacity=".15" stroke-width=".5" class="cc c4"/>
+<path d="M10,110 Q53,33 98,67 Q143,110 170,55" stroke="#FE701D" fill="none" opacity=".2" stroke-width=".5" class="cc c5"/>
+<path d="M10,105 Q55,35 100,65 Q145,105 170,60" stroke="#FE701D" fill="none" opacity=".3" stroke-width=".7" class="cc c6"/>
+<path d="M10,100 Q57,37 102,63 Q147,100 170,65" stroke="#FE701D" fill="none" opacity=".3" stroke-width=".7" class="cc c7"/>
+<path d="M10,95 Q59,39 104,61 Q149,95 170,70" stroke="#FE701D" fill="none" opacity=".35" stroke-width=".7" class="cc c8"/>
+<path d="M10,90 Q61,41 106,59 Q151,90 170,75" stroke="#FE701D" fill="none" opacity=".6" stroke-width=".9" class="cc c9"/>
+<path d="M10,85 Q63,43 108,57 Q153,85 170,80" stroke="#FE701D" fill="none" opacity=".6" stroke-width=".9" class="cc c10"/>
+<path d="M10,80 Q65,45 110,55 Q155,80 170,85" stroke="#FE701D" fill="none" stroke-width="1.2" class="cc c11"/>
+<circle cx="65" cy="45" class="cp" fill="#FE701D"/>
+<circle cx="110" cy="55" class="cp" fill="#FE701D"/>
+<line x1="65" y1="45" x2="110" y2="55" stroke="#FE701D" stroke-width=".5" class="cd" opacity=".35"/>
+</svg>

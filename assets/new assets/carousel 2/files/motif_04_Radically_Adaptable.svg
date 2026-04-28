@@ -1,0 +1,37 @@
+<svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+<g stroke="#FE701D" fill="none" opacity="0.06" stroke-width="0.6">
+<polyline points="80,30 160,90 120,150 200,130"/>
+<polyline points="200,130 270,60 340,100 310,170"/>
+<polyline points="310,170 380,120 430,160 400,230"/>
+<polyline points="120,150 180,200 240,170 310,170"/>
+<polyline points="400,230 450,190 490,240 470,280"/>
+<polyline points="180,200 160,260 220,280 310,250"/>
+<polyline points="310,250 400,230"/>
+<polyline points="50,100 80,30"/>
+<polyline points="160,90 220,40 270,60"/>
+</g>
+<g fill="#FE701D" opacity="0.04">
+<polygon points="200,130 270,60 310,170"/>
+<polygon points="310,170 380,120 400,230"/>
+<polygon points="120,150 180,200 200,130"/>
+<polygon points="180,200 240,170 310,250"/>
+</g>
+<g fill="#FE701D" opacity="0.1">
+<circle cx="200" cy="130" r="3"/>
+<circle cx="310" cy="170" r="3.5"/>
+<circle cx="400" cy="230" r="3"/>
+<circle cx="180" cy="200" r="2.5"/>
+<circle cx="270" cy="60" r="2.5"/>
+<circle cx="120" cy="150" r="2.5"/>
+<circle cx="380" cy="120" r="2.5"/>
+<circle cx="160" cy="90" r="2"/>
+<circle cx="310" cy="250" r="2"/>
+</g>
+<g stroke="#FE701D" opacity="0.04" stroke-width="0.3">
+<line x1="50" y1="100" x2="20" y2="120"/>
+<line x1="470" y1="280" x2="500" y2="300"/>
+<line x1="160" y1="260" x2="130" y2="290"/>
+<line x1="220" y1="40" x2="230" y2="10"/>
+<line x1="490" y1="240" x2="500" y2="230"/>
+</g>
+</svg>

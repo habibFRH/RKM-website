@@ -1,0 +1,15 @@
+<svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+<g stroke="#FE701D" fill="none" opacity="0.05" stroke-width="0.8">
+<circle cx="300" cy="150" r="30"/>
+<circle cx="300" cy="150" r="55"/>
+<circle cx="300" cy="150" r="80"/>
+<circle cx="300" cy="150" r="105"/>
+<circle cx="300" cy="150" r="130"/>
+<circle cx="300" cy="150" r="155"/>
+<circle cx="300" cy="150" r="180"/>
+</g>
+<path d="M300,150 Q330,120 300,90 Q260,90 240,120 Q220,160 250,190 Q290,220 340,190 Q380,150 340,100 Q290,60 220,90 Q160,130 200,200 Q250,260 350,230 Q430,190 400,110 Q360,30 250,30 Q150,40 120,130 Q100,230 180,280"
+  stroke="#FE701D" fill="none" opacity="0.08" stroke-width="0.8"/>
+<circle cx="300" cy="150" r="5" fill="#FE701D" opacity="0.12"/>
+<circle cx="300" cy="150" r="10" fill="#FE701D" opacity="0.04"/>
+</svg>

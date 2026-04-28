@@ -1,0 +1,29 @@
+<svg width="400" height="340" viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
+<style>
+@keyframes bDraw{0%{stroke-dashoffset:300}100%{stroke-dashoffset:0}}
+@keyframes sAppear{0%{opacity:0;stroke-dashoffset:200}100%{opacity:.25;stroke-dashoffset:0}}
+@keyframes cDot{0%{r:0;opacity:0}100%{r:2.5;opacity:.6}}
+.db{stroke-dasharray:300;animation:bDraw 1.5s ease-out forwards .2s}
+.ds{stroke-dasharray:200;opacity:0;animation:sAppear 1.2s ease-out forwards 1.5s}
+.dd{r:0;opacity:0;animation:cDot .3s ease-out forwards}
+.dd1{animation-delay:1.2s}.dd2{animation-delay:1.4s}.dd3{animation-delay:2.2s}
+</style>
+<g stroke="#030F60" stroke-width="1" fill="none" opacity=".8">
+<polyline points="35,120 35,55 55,40 90,40 110,55 110,120" class="db"/>
+<rect x="45" y="60" width="17" height="14" rx="1" class="db"/>
+<rect x="72" y="60" width="17" height="14" rx="1" class="db"/>
+<rect x="45" y="82" width="17" height="14" rx="1" class="db"/>
+<rect x="72" y="82" width="17" height="14" rx="1" class="db"/>
+<rect x="62" y="103" width="14" height="17" rx="1" class="db"/>
+</g>
+<g stroke="#030F60" fill="none">
+<path d="M120,120 Q126,88 132,68 Q138,50 148,40" class="ds" stroke-width=".4"/>
+<path d="M122,120 Q129,82 136,60 Q142,45 152,35" class="ds" stroke-width=".4"/>
+<line x1="120" y1="120" x2="155" y2="120" class="ds" stroke-width=".4"/>
+<line x1="115" y1="55" x2="128" y2="60" class="ds" stroke-width=".4"/>
+<line x1="115" y1="82" x2="128" y2="85" class="ds" stroke-width=".4"/>
+</g>
+<circle cx="55" cy="40" class="dd dd1" fill="#030F60"/>
+<circle cx="90" cy="40" class="dd dd2" fill="#030F60"/>
+<circle cx="148" cy="40" class="dd dd3" fill="#030F60" opacity=".4"/>
+</svg>

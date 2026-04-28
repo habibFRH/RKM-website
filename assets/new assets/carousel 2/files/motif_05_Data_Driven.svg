@@ -1,0 +1,24 @@
+<svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+<g fill="#FE701D" opacity="0.035">
+<circle cx="80" cy="30" r="1.5"/><circle cx="110" cy="30" r="1.5"/><circle cx="140" cy="30" r="1.5"/><circle cx="170" cy="30" r="1.5"/><circle cx="200" cy="30" r="1.5"/><circle cx="230" cy="30" r="1.5"/><circle cx="260" cy="30" r="1.5"/><circle cx="290" cy="30" r="1.5"/><circle cx="320" cy="30" r="1.5"/><circle cx="350" cy="30" r="1.5"/><circle cx="380" cy="30" r="1.5"/><circle cx="410" cy="30" r="1.5"/><circle cx="440" cy="30" r="1.5"/>
+<circle cx="80" cy="60" r="1.5"/><circle cx="110" cy="60" r="1.5"/><circle cx="140" cy="60" r="1.5"/><circle cx="170" cy="60" r="1.5"/><circle cx="200" cy="60" r="1.5"/><circle cx="230" cy="60" r="1.5"/><circle cx="260" cy="60" r="1.5"/><circle cx="290" cy="60" r="1.5"/><circle cx="320" cy="60" r="1.5"/><circle cx="350" cy="60" r="1.5"/><circle cx="380" cy="60" r="1.5"/><circle cx="410" cy="60" r="1.5"/><circle cx="440" cy="60" r="1.5"/>
+<circle cx="80" cy="90" r="1.5"/><circle cx="110" cy="90" r="1.5"/><circle cx="140" cy="90" r="1.5"/><circle cx="170" cy="90" r="1.5"/><circle cx="200" cy="90" r="1.5"/><circle cx="230" cy="90" r="1.5"/><circle cx="260" cy="90" r="1.5"/><circle cx="290" cy="90" r="1.5"/><circle cx="320" cy="90" r="1.5"/><circle cx="350" cy="90" r="1.5"/><circle cx="380" cy="90" r="1.5"/><circle cx="410" cy="90" r="1.5"/><circle cx="440" cy="90" r="1.5"/>
+<circle cx="80" cy="120" r="1.5"/><circle cx="110" cy="120" r="1.5"/><circle cx="140" cy="120" r="1.5"/><circle cx="170" cy="120" r="1.5"/><circle cx="200" cy="120" r="1.5"/><circle cx="230" cy="120" r="1.5"/><circle cx="260" cy="120" r="1.5"/><circle cx="290" cy="120" r="1.5"/><circle cx="320" cy="120" r="1.5"/><circle cx="350" cy="120" r="1.5"/><circle cx="380" cy="120" r="1.5"/><circle cx="410" cy="120" r="1.5"/><circle cx="440" cy="120" r="1.5"/>
+<circle cx="80" cy="150" r="1.5"/><circle cx="110" cy="150" r="1.5"/><circle cx="140" cy="150" r="1.5"/><circle cx="170" cy="150" r="1.5"/><circle cx="200" cy="150" r="1.5"/><circle cx="230" cy="150" r="1.5"/><circle cx="260" cy="150" r="1.5"/><circle cx="290" cy="150" r="1.5"/><circle cx="320" cy="150" r="1.5"/><circle cx="350" cy="150" r="1.5"/><circle cx="380" cy="150" r="1.5"/><circle cx="410" cy="150" r="1.5"/><circle cx="440" cy="150" r="1.5"/>
+<circle cx="80" cy="180" r="1.5"/><circle cx="110" cy="180" r="1.5"/><circle cx="140" cy="180" r="1.5"/><circle cx="170" cy="180" r="1.5"/><circle cx="200" cy="180" r="1.5"/><circle cx="230" cy="180" r="1.5"/><circle cx="260" cy="180" r="1.5"/><circle cx="290" cy="180" r="1.5"/><circle cx="320" cy="180" r="1.5"/><circle cx="350" cy="180" r="1.5"/><circle cx="380" cy="180" r="1.5"/><circle cx="410" cy="180" r="1.5"/><circle cx="440" cy="180" r="1.5"/>
+<circle cx="80" cy="210" r="1.5"/><circle cx="110" cy="210" r="1.5"/><circle cx="140" cy="210" r="1.5"/><circle cx="170" cy="210" r="1.5"/><circle cx="200" cy="210" r="1.5"/><circle cx="230" cy="210" r="1.5"/><circle cx="260" cy="210" r="1.5"/><circle cx="290" cy="210" r="1.5"/><circle cx="320" cy="210" r="1.5"/><circle cx="350" cy="210" r="1.5"/><circle cx="380" cy="210" r="1.5"/><circle cx="410" cy="210" r="1.5"/><circle cx="440" cy="210" r="1.5"/>
+<circle cx="80" cy="240" r="1.5"/><circle cx="110" cy="240" r="1.5"/><circle cx="140" cy="240" r="1.5"/><circle cx="170" cy="240" r="1.5"/><circle cx="200" cy="240" r="1.5"/><circle cx="230" cy="240" r="1.5"/><circle cx="260" cy="240" r="1.5"/><circle cx="290" cy="240" r="1.5"/><circle cx="320" cy="240" r="1.5"/><circle cx="350" cy="240" r="1.5"/><circle cx="380" cy="240" r="1.5"/><circle cx="410" cy="240" r="1.5"/><circle cx="440" cy="240" r="1.5"/>
+<circle cx="80" cy="270" r="1.5"/><circle cx="110" cy="270" r="1.5"/><circle cx="140" cy="270" r="1.5"/><circle cx="170" cy="270" r="1.5"/><circle cx="200" cy="270" r="1.5"/><circle cx="230" cy="270" r="1.5"/><circle cx="260" cy="270" r="1.5"/><circle cx="290" cy="270" r="1.5"/><circle cx="320" cy="270" r="1.5"/><circle cx="350" cy="270" r="1.5"/><circle cx="380" cy="270" r="1.5"/><circle cx="410" cy="270" r="1.5"/><circle cx="440" cy="270" r="1.5"/>
+</g>
+<g fill="#FE701D" opacity="0.12">
+<circle cx="140" cy="240" r="3.5"/>
+<circle cx="200" cy="210" r="3.5"/>
+<circle cx="260" cy="180" r="4"/>
+<circle cx="320" cy="150" r="4"/>
+<circle cx="350" cy="120" r="4"/>
+<circle cx="380" cy="90" r="4.5"/>
+<circle cx="410" cy="60" r="4.5"/>
+<circle cx="440" cy="30" r="5"/>
+</g>
+<polyline points="140,240 200,210 260,180 320,150 350,120 380,90 410,60 440,30" stroke="#FE701D" fill="none" opacity="0.08" stroke-width="1.2"/>
+</svg>

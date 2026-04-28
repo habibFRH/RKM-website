@@ -1,0 +1,22 @@
+<svg width="400" height="340" viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg">
+<style>
+@keyframes cExp{0%{r:0;opacity:0}100%{r:40;opacity:1}}
+@keyframes iGlow{0%,100%{r:10;opacity:.15}50%{r:13;opacity:.3}}
+@keyframes iCore{0%,100%{r:4;opacity:.7}50%{r:5;opacity:1}}
+@keyframes lFade{0%{opacity:0}100%{opacity:.45}}
+.cc1{r:0;animation:cExp 1s ease-out forwards .2s}
+.cc2{r:0;animation:cExp 1s ease-out forwards .5s}
+.cc3{r:0;animation:cExp 1s ease-out forwards .8s}
+.cg{animation:iGlow 2s ease-in-out infinite 1.2s;r:10;opacity:0}
+.ck{animation:iCore 2s ease-in-out infinite 1.2s;r:0;opacity:0}
+.cl{opacity:0;animation:lFade .5s ease-out forwards 1.5s}
+</style>
+<circle cx="72" cy="65" class="cc1" stroke="#FE701D" stroke-width=".8" fill="#FE701D" fill-opacity=".04"/>
+<circle cx="108" cy="65" class="cc2" stroke="#FE701D" stroke-width=".8" fill="#FE701D" fill-opacity=".04"/>
+<circle cx="90" cy="95" class="cc3" stroke="#FE701D" stroke-width=".8" fill="#FE701D" fill-opacity=".04"/>
+<circle cx="90" cy="72" class="cg" fill="#FE701D"/>
+<circle cx="90" cy="72" class="ck" fill="#FE701D"/>
+<text x="52" y="50" fill="#FE701D" class="cl" font-size="9" font-family="sans-serif">ARCH</text>
+<text x="112" y="50" fill="#FE701D" class="cl" font-size="9" font-family="sans-serif">STR</text>
+<text x="80" y="122" fill="#FE701D" class="cl" font-size="9" font-family="sans-serif">MEP</text>
+</svg>
