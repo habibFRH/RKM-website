@@ -4813,11 +4813,18 @@ body:hover .custom-cursor-outline {
 }
 
 .form-group input:focus,
-.form-group select:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--accent);
     background: transparent;
+    color: #ffffff;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #f9f9f9;
+    color: #111111;
 }
 
 .contact-form .cta-btn {
