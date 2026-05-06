@@ -2361,13 +2361,21 @@ body[data-theme="light"] .service-cards .service-card {
         padding: 6rem 1.5rem;
     }
 
+    .hero {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 80px;
+    }
+
     .hero-content {
+        position: relative;
         width: 100%;
         max-width: 100%;
         padding: 0 1.5rem;
         align-items: center;
-        margin-bottom: 260px;
-        margin-top: 150px;
+        margin-bottom: -10rem;
+        margin-top: 0;
     }
 
     .stats-flipper {
@@ -2387,7 +2395,7 @@ body[data-theme="light"] .service-cards .service-card {
         font-size: clamp(1.8rem, 4vw, 4rem);
         text-align: center;
         margin-bottom: 1rem;
-        margin-top: 2rem;
+        margin-top: 0;
     }
 
     .hero-description {
@@ -2395,16 +2403,18 @@ body[data-theme="light"] .service-cards .service-card {
         bottom: auto;
         left: auto;
         max-width: 100%;
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
         text-align: center;
-        margin-top: 151px;
+        margin-top: 0;
+        padding: 0 1.5rem;
     }
 
-    .hero-cta {
+    .hero-cta-positioner {
         position: relative;
         bottom: auto;
         right: auto;
-        margin-top: 0.2rem;
+        margin-top: 0;
+        z-index: 30;
     }
 
     .hero-image {
@@ -3681,6 +3691,7 @@ body.is-loading {
     text-transform: uppercase;
     letter-spacing: 0.15em;
     opacity: 0;
+    margin-bottom: 150px;
 }
 
 .stat-flip-item {
